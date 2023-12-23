@@ -219,8 +219,8 @@ npm run test:coverage
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/adtruth-sdk.git
-cd adtruth-sdk
+git clone https://github.com/papa-torb/adtruth.git
+cd adtruth
 
 # Install dependencies
 npm install
@@ -258,7 +258,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Email: support@adtruth.io
 - Discord: [Join our community](https://discord.gg/adtruth)
-- Issues: [GitHub Issues](https://github.com/yourusername/adtruth-sdk/issues)
+- Issues: [GitHub Issues](https://github.com/papa-torb/adtruth/issues)
 
 ## Acknowledgments
 
