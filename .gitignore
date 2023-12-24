@@ -45,3 +45,9 @@ docs/_build/
 *.temp
 .tmp/
 .temp/
+# Credentials files - NEVER COMMIT
+adtruth-credentials.txt
+*-credentials.txt
+
+# Claude configuration
+.claude/
