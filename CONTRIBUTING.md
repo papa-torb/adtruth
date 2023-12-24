@@ -47,8 +47,8 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 
 1. **Fork and clone the repository**
 ```bash
-git clone https://github.com/your-username/adtruth-sdk.git
-cd adtruth-sdk
+git clone https://github.com/your-username/adtruth.git
+cd adtruth
 ```
 
 2. **Install dependencies**
