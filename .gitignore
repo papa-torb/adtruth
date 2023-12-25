@@ -1,0 +1,47 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Build output
+dist/
+build/
+*.min.js
+*.min.css
+
+# Testing
+coverage/
+*.lcov
+.nyc_output
+
+# Development
+.env
+.env.local
+.env.*.local
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+.DS_Store
+.DS_Store?
+._*
+
+# Documentation builds
+docs/_build/
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
