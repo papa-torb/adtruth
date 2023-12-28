@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdTruth Phase 1 Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        h1 { color: #1E3A8A; }
+        .test-area {
+            border: 2px solid #1E3A8A;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        button {
+            background: #1E3A8A;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #2563EB; }
+        #status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            background: #f0f0f0;
+        }
+        .success { background: #d4edda !important; color: #155724; }
+        .error { background: #f8d7da !important; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>AdTruth Phase 1 Enhancement Test</h1>
+
+    <div id="status">
+        Initializing AdTruth...
+    </div>
+
+    <div class="test-area">
+        <h2>Phase 1 Features</h2>
+        <ul>
+            <li>Enhanced User Agent & Browser Info</li>
+            <li>Time-based Behavioral Metrics</li>
+            <li>Basic Device Fingerprinting</li>
+            <li>Input Method Detection</li>
+        </ul>
+    </div>
+
+    <div class="test-area">
+        <h2>Interaction Test</h2>
+        <p>Click these buttons to generate behavioral data:</p>
+        <button onclick="testClick(1)">Click 1</button>
+        <button onclick="testClick(2)">Click 2</button>
+        <button onclick="testClick(3)">Click 3</button>
+        <button onclick="testClick(4)">Click 4</button>
+        <button onclick="testClick(5)">Click 5</button>
+
+        <div id="click-log" style="margin-top: 10px; font-size: 14px;"></div>
+    </div>
+
+    <div class="test-area">
+        <h2>Expected New Data Fields</h2>
+        <ul>
+            <li><strong>browser</strong>: Enhanced with platform, vendor, cookieEnabled, doNotTrack, maxTouchPoints, hardwareConcurrency, deviceMemory</li>
+            <li><strong>fingerprint</strong>: hash, timezone, timezoneOffset</li>
+            <li><strong>input</strong>: hasTouch, hasMouse, hasHover, inputInconsistency</li>
+            <li><strong>behavior</strong>: timeOnPage, timeToFirstInteraction, clickCount, avgClickInterval</li>
+        </ul>
+    </div>
+
+    <!-- Load AdTruth SDK -->
+    <script src="./dist/adtruth.min.js"></script>
+
+    <script>
+        let clickCount = 0;
+        let lastClickTime = Date.now();
+
+        // Initialize AdTruth with test API key and localhost endpoint
+        AdTruth.init('test_api_key_12345', {
+            endpoint: 'http://localhost:8000/track/',
+            debug: true
+        });
+
+        // Update status
+        document.getElementById('status').className = 'success';
+        document.getElementById('status').textContent = 'AdTruth initialized! Behavioral tracking is active. Interact with the page to generate data.';
+
+        // Test click handler
+        function testClick(num) {
+            const now = Date.now();
+            const interval = now - lastClickTime;
+            clickCount++;
+
+            const log = document.getElementById('click-log');
+            log.innerHTML += `<div>Click ${clickCount}: Button ${num} (${interval}ms since last click)</div>`;
+
+            lastClickTime = now;
+        }
+
+        // Send final tracking data when page unloads
+        window.addEventListener('beforeunload', function() {
+            // AdTruth will automatically send data with sendBeacon
+            console.log('Page unloading - sending final tracking data');
+        });
+
+        // Log fingerprint info to console
+        console.log('=== AdTruth Phase 1 Test ===');
+        console.log('User Agent:', navigator.userAgent);
+        console.log('Platform:', navigator.platform);
+        console.log('Language:', navigator.language);
+        console.log('Hardware Concurrency:', navigator.hardwareConcurrency);
+        console.log('Device Memory:', navigator.deviceMemory);
+        console.log('Max Touch Points:', navigator.maxTouchPoints);
+        console.log('Timezone:', Intl.DateTimeFormat().resolvedOptions().timeZone);
+        console.log('Timezone Offset:', new Date().getTimezoneOffset());
+    </script>
+</body>
+</html>
