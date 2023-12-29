@@ -7,10 +7,8 @@ lerna-debug.log*
 .pnpm-debug.log*
 
 # Build output
-dist/
+# We commit dist/ for CDN access
 build/
-*.min.js
-*.min.css
 
 # Testing
 coverage/

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdTruth Integration Example</title>
+</head>
+<body>
+    <h1>AdTruth Integration Example</h1>
+    <p>This page demonstrates how to integrate AdTruth SDK into your website.</p>
+
+    <!-- Method 1: Using CDN (Recommended for most users) -->
+    <script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@latest/dist/adtruth.min.js';
+        js.onload = function() {
+            // Initialize with your API key
+            AdTruth.init('YOUR_API_KEY_HERE');
+        };
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'adtruth-js'));
+    </script>
+
+    <!-- Method 2: Using data attributes (Alternative) -->
+    <!--
+    <script
+        src="https://cdn.jsdelivr.net/gh/papa-torb/adtruth@latest/dist/adtruth.min.js"
+        data-adtruth-api-key="YOUR_API_KEY_HERE"
+        data-adtruth-debug="false">
+    </script>
+    -->
+
+    <!-- Method 3: Local file (For testing) -->
+    <!--
+    <script src="../dist/adtruth.min.js"></script>
+    <script>
+        AdTruth.init('YOUR_API_KEY_HERE', {
+            debug: true // Enable debug mode for testing
+        });
+    </script>
+    -->
+</body>
+</html>

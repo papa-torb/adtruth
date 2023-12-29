@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdTruth SDK - Manual Test</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1E3A8A;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9fafb;
+            border-radius: 4px;
+            border-left: 4px solid #1E3A8A;
+        }
+        button {
+            background: #1E3A8A;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #1e40af;
+        }
+        .code {
+            background: #f3f4f6;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .log-output {
+            background: #1f2937;
+            color: #10b981;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        .log-entry {
+            margin: 5px 0;
+            padding: 5px;
+            border-bottom: 1px solid #374151;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AdTruth SDK - Manual Test Page</h1>
+
+        <div class="test-section">
+            <h2>Test Configuration</h2>
+            <p>This page loads the AdTruth SDK and allows you to test its functionality.</p>
+            <div class="code">
+                API Key: TEST_API_KEY_12345<br>
+                Endpoint: https://api.adtruth.io/track (will fail - backend not built yet)<br>
+                Debug Mode: Enabled
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>Test Controls</h2>
+            <button onclick="testInitialization()">Test Initialization</button>
+            <button onclick="testManualPageview()">Track Manual Pageview</button>
+            <button onclick="testWithUTMParams()">Test with UTM Parameters</button>
+            <button onclick="clearLogs()">Clear Logs</button>
+        </div>
+
+        <div class="test-section">
+            <h2>Test URLs with Parameters</h2>
+            <p>Click these links to test UTM parameter tracking:</p>
+            <a href="?utm_source=google&utm_medium=cpc&utm_campaign=test&gclid=123456">Test with Google Ads params</a><br>
+            <a href="?utm_source=facebook&utm_medium=social&fbclid=789012">Test with Facebook params</a><br>
+            <a href="?">Reset (no params)</a>
+        </div>
+
+        <div id="status"></div>
+
+        <div class="log-output" id="logOutput">
+            <strong>Console Output:</strong><br>
+            <div id="logs"></div>
+        </div>
+    </div>
+
+    <!-- Load the built AdTruth SDK -->
+    <script src="../dist/adtruth.js"></script>
+
+    <!-- Test Script -->
+    <script>
+        // Override console.log to capture output
+        const originalLog = console.log;
+        const logContainer = document.getElementById('logs');
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.textContent = new Date().toLocaleTimeString() + ' - ' + args.join(' ');
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        };
+
+        // Initialize AdTruth on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, initializing AdTruth...');
+
+            // Use local endpoint for testing (will fail but we can see the attempt)
+            AdTruth.init('TEST_API_KEY_12345', {
+                debug: true,
+                endpoint: 'http://localhost:8000/track' // For local testing
+            });
+
+            updateStatus('AdTruth SDK loaded and initialized', 'success');
+        });
+
+        function updateStatus(message, type) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = `<div class="status ${type}">${message}</div>`;
+        }
+
+        function testInitialization() {
+            console.log('Testing initialization...');
+            console.log('AdTruth version:', AdTruth.version);
+            updateStatus('Initialization test complete - check console', 'success');
+        }
+
+        function testManualPageview() {
+            console.log('Tracking manual pageview...');
+            AdTruth.trackPageview();
+            updateStatus('Manual pageview tracked - check Network tab', 'success');
+        }
+
+        function testWithUTMParams() {
+            console.log('Testing with UTM parameters...');
+            // Navigate to URL with UTM params
+            window.location.href = '?utm_source=test&utm_medium=manual&utm_campaign=sdk_test';
+        }
+
+        function clearLogs() {
+            logContainer.innerHTML = '';
+            updateStatus('Logs cleared', 'success');
+        }
+
+        // Test network requests interception
+        const originalFetch = window.fetch;
+        window.fetch = function(...args) {
+            console.log('Fetch request:', args[0], args[1]);
+            return originalFetch.apply(this, args).catch(err => {
+                console.log('Fetch failed (expected - backend not built):', err.message);
+                throw err;
+            });
+        };
+
+        // Test sendBeacon interception
+        const originalSendBeacon = navigator.sendBeacon;
+        if (originalSendBeacon) {
+            navigator.sendBeacon = function(...args) {
+                console.log('SendBeacon request:', args[0]);
+                return originalSendBeacon.apply(this, args);
+            };
+        }
+    </script>
+</body>
+</html>

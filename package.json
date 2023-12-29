@@ -1,0 +1,36 @@
+{
+  "name": "@adtruth/sdk",
+  "version": "0.1.0",
+  "description": "Open-source fraud detection SDK for identifying invalid traffic in paid advertising",
+  "main": "dist/adtruth.js",
+  "module": "dist/adtruth.esm.js",
+  "unpkg": "dist/adtruth.min.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "fraud-detection",
+    "analytics",
+    "advertising",
+    "tracking"
+  ],
+  "author": "AdTruth",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/papa-torb/adtruth.git"
+  },
+  "bugs": {
+    "url": "https://github.com/papa-torb/adtruth/issues"
+  },
+  "homepage": "https://github.com/papa-torb/adtruth#readme",
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.9.6"
+  }
+}
