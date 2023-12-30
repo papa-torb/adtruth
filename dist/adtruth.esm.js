@@ -40,6 +40,38 @@ function getSessionId() {
 }
 
 /**
+ * Get or create a visitor ID, stored in localStorage (persistent)
+ */
+function getVisitorId() {
+  const VISITOR_KEY = '_adtruth_visitor';
+
+  try {
+    // Try to get existing visitor ID
+    let visitorId = localStorage.getItem(VISITOR_KEY);
+
+    if (!visitorId) {
+      visitorId = generateSessionId();
+      localStorage.setItem(VISITOR_KEY, visitorId);
+    }
+
+    return visitorId;
+  } catch (e) {
+    // If localStorage is not available, use sessionStorage as fallback
+    try {
+      let visitorId = sessionStorage.getItem(VISITOR_KEY);
+      if (!visitorId) {
+        visitorId = generateSessionId();
+        sessionStorage.setItem(VISITOR_KEY, visitorId);
+      }
+      return visitorId;
+    } catch (e2) {
+      // Generate a new ID each time as last resort
+      return generateSessionId();
+    }
+  }
+}
+
+/**
  * Parse URL parameters including UTM parameters
  */
 function parseUrlParams(url) {
@@ -92,12 +124,212 @@ function getReferrer() {
   return document.referrer || '';
 }
 
+/**
+ * Browser fingerprinting utilities for fraud detection
+ * Phase 1: Basic fingerprinting
+ */
+
+/**
+ * Generate a basic device fingerprint
+ * @returns {object} Basic fingerprint data
+ */
+function getBasicFingerprint() {
+  const fingerprint = {
+    screen: `${screen.width}x${screen.height}x${screen.colorDepth}`,
+    timezone: getTimezone(),
+    timezoneOffset: new Date().getTimezoneOffset(),
+    hardwareConcurrency: navigator.hardwareConcurrency || 0,
+    deviceMemory: navigator.deviceMemory || 0
+  };
+
+  // Create simple hash from fingerprint data
+  const hash = hashFingerprint(fingerprint);
+
+  return {
+    hash,
+    details: fingerprint
+  };
+}
+
+/**
+ * Get timezone information
+ */
+function getTimezone() {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone;
+  } catch (e) {
+    return 'unknown';
+  }
+}
+
+/**
+ * Get enhanced browser information
+ * @returns {object} Enhanced browser data
+ */
+function getEnhancedBrowserInfo() {
+  return {
+    user_agent: navigator.userAgent,
+    language: navigator.language,
+    languages: navigator.languages ? Array.from(navigator.languages).join(',') : '',
+    platform: navigator.platform,
+    vendor: navigator.vendor || '',
+    cookieEnabled: navigator.cookieEnabled,
+    doNotTrack: navigator.doNotTrack || 'unknown',
+    maxTouchPoints: navigator.maxTouchPoints || 0,
+    hardwareConcurrency: navigator.hardwareConcurrency || 0,
+    deviceMemory: navigator.deviceMemory || 0
+  };
+}
+
+/**
+ * Simple hash function for fingerprint data
+ * @param {object} data - Data to hash
+ * @returns {string} Hash string
+ */
+function hashFingerprint(data) {
+  const str = JSON.stringify(data);
+  let hash = 0;
+
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+    hash = hash & hash; // Convert to 32-bit integer
+  }
+
+  return Math.abs(hash).toString(36);
+}
+
+/**
+ * Get input method detection data
+ * @returns {object} Input method information
+ */
+function getInputMethod() {
+  const hasTouch = 'ontouchstart' in window;
+  const hasMouse = typeof matchMedia !== 'undefined' ? matchMedia('(pointer: fine)').matches : false;
+  const hasHover = typeof matchMedia !== 'undefined' ? matchMedia('(hover: hover)').matches : false;
+
+  return {
+    hasTouch,
+    hasMouse,
+    hasHover,
+    maxTouchPoints: navigator.maxTouchPoints || 0,
+    inputInconsistency: hasTouch && hasMouse && hasHover // Potential fraud signal
+  };
+}
+
+/**
+ * Behavioral tracking utilities for fraud detection
+ * Phase 1: Time-based metrics
+ */
+
+/**
+ * BehaviorTracker class - Tracks user behavior on the page
+ */
+class BehaviorTracker {
+  constructor() {
+    this.pageLoadTime = Date.now();
+    this.firstInteractionTime = null;
+    this.lastInteractionTime = null;
+    this.clickCount = 0;
+    this.clickTimes = [];
+
+    // Set up event listeners
+    this.setupListeners();
+  }
+
+  /**
+   * Set up event listeners for behavior tracking
+   */
+  setupListeners() {
+    // Track clicks
+    document.addEventListener('click', this.handleClick.bind(this), { passive: true });
+
+    // Track first user interaction
+    const interactionEvents = ['click', 'keydown', 'touchstart', 'mousemove'];
+    const recordFirstInteraction = () => {
+      if (!this.firstInteractionTime) {
+        this.firstInteractionTime = Date.now();
+      }
+    };
+
+    interactionEvents.forEach(eventType => {
+      document.addEventListener(eventType, recordFirstInteraction, {
+        passive: true,
+        once: true
+      });
+    });
+  }
+
+  /**
+   * Handle click events
+   */
+  handleClick(e) {
+    const now = Date.now();
+    this.clickCount++;
+    this.clickTimes.push(now);
+    this.lastInteractionTime = now;
+
+    // Keep only last 20 clicks to limit memory usage
+    if (this.clickTimes.length > 20) {
+      this.clickTimes.shift();
+    }
+  }
+
+  /**
+   * Calculate average interval between clicks
+   * @returns {number|null} Average interval in milliseconds
+   */
+  calculateAvgInterval() {
+    if (this.clickTimes.length < 2) {
+      return null;
+    }
+
+    let totalInterval = 0;
+    for (let i = 1; i < this.clickTimes.length; i++) {
+      totalInterval += this.clickTimes[i] - this.clickTimes[i - 1];
+    }
+
+    return Math.round(totalInterval / (this.clickTimes.length - 1));
+  }
+
+  /**
+   * Get all behavioral metrics
+   * @returns {object} Behavioral metrics
+   */
+  getMetrics() {
+    const now = Date.now();
+    const timeOnPage = now - this.pageLoadTime;
+
+    return {
+      timeOnPage,
+      timeToFirstInteraction: this.firstInteractionTime
+        ? this.firstInteractionTime - this.pageLoadTime
+        : null,
+      timeToFirstClick: this.clickTimes.length > 0
+        ? this.clickTimes[0] - this.pageLoadTime
+        : null,
+      clickCount: this.clickCount,
+      avgClickInterval: this.calculateAvgInterval(),
+      hasInteracted: this.firstInteractionTime !== null
+    };
+  }
+
+  /**
+   * Clean up event listeners
+   */
+  cleanup() {
+    // Remove listeners if needed
+    // For now, we'll let them stay as they're passive
+  }
+}
+
 class Tracker {
   constructor() {
     this.apiKey = null;
-    this.apiEndpoint = 'https://api.adtruth.io/track';
+    this.apiEndpoint = 'https://api.adtruth.io/track/';
     this.initialized = false;
     this.debug = false;
+    this.behaviorTracker = null;
+    this.fingerprint = null;
   }
 
   /**
@@ -126,6 +358,10 @@ class Tracker {
     this.initialized = true;
     this.log('AdTruth: Initialized');
 
+    // Initialize behavior tracker and generate fingerprint
+    this.behaviorTracker = new BehaviorTracker();
+    this.fingerprint = getBasicFingerprint();
+
     // Track the initial pageview
     this.track();
   }
@@ -150,10 +386,16 @@ class Tracker {
     const url = getCurrentUrl();
     const params = parseUrlParams(url);
 
+    // Collect enhanced browser info and behavior metrics
+    const enhancedBrowser = getEnhancedBrowserInfo();
+    const inputMethod = getInputMethod();
+    const behaviorMetrics = this.behaviorTracker ? this.behaviorTracker.getMetrics() : {};
+
     const data = {
       event_type: eventType,
       timestamp: new Date().toISOString(),
       session_id: getSessionId(),
+      visitor_id: getVisitorId(),
       page: {
         url: url,
         title: document.title || '',
@@ -171,17 +413,24 @@ class Tracker {
         fbclid: params.fbclid || null
       },
       browser: {
-        user_agent: navigator.userAgent,
-        language: navigator.language || navigator.userLanguage || '',
+        ...enhancedBrowser,
         screen: {
           width: screen.width,
-          height: screen.height
+          height: screen.height,
+          colorDepth: screen.colorDepth
         },
         viewport: {
           width: window.innerWidth,
           height: window.innerHeight
         }
-      }
+      },
+      fingerprint: {
+        hash: this.fingerprint ? this.fingerprint.hash : null,
+        timezone: this.fingerprint ? this.fingerprint.details.timezone : null,
+        timezoneOffset: this.fingerprint ? this.fingerprint.details.timezoneOffset : null
+      },
+      input: inputMethod,
+      behavior: behaviorMetrics
     };
 
     return data;
@@ -191,23 +440,9 @@ class Tracker {
    * Send data to the API endpoint
    */
   sendData(data) {
-    // Use sendBeacon if available for better reliability
+    // Always use fetch for better header support
+    // sendBeacon doesn't support custom headers well
     const payload = JSON.stringify(data);
-
-    if (navigator.sendBeacon) {
-      const blob = new Blob([payload], { type: 'application/json' });
-      const sent = navigator.sendBeacon(
-        this.apiEndpoint,
-        blob
-      );
-
-      if (sent) {
-        this.log('AdTruth: Data sent via sendBeacon');
-        return;
-      }
-    }
-
-    // Fallback to fetch
     this.sendViaFetch(payload);
   }
 

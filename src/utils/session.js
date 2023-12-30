@@ -37,3 +37,35 @@ export function getSessionId() {
     return generateSessionId();
   }
 }
+
+/**
+ * Get or create a visitor ID, stored in localStorage (persistent)
+ */
+export function getVisitorId() {
+  const VISITOR_KEY = '_adtruth_visitor';
+
+  try {
+    // Try to get existing visitor ID
+    let visitorId = localStorage.getItem(VISITOR_KEY);
+
+    if (!visitorId) {
+      visitorId = generateSessionId();
+      localStorage.setItem(VISITOR_KEY, visitorId);
+    }
+
+    return visitorId;
+  } catch (e) {
+    // If localStorage is not available, use sessionStorage as fallback
+    try {
+      let visitorId = sessionStorage.getItem(VISITOR_KEY);
+      if (!visitorId) {
+        visitorId = generateSessionId();
+        sessionStorage.setItem(VISITOR_KEY, visitorId);
+      }
+      return visitorId;
+    } catch (e2) {
+      // Generate a new ID each time as last resort
+      return generateSessionId();
+    }
+  }
+}

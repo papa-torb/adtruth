@@ -1,12 +1,16 @@
-import { getSessionId } from '../utils/session.js';
+import { getSessionId, getVisitorId } from '../utils/session.js';
 import { parseUrlParams, getCurrentUrl, getReferrer } from '../utils/url.js';
+import { getBasicFingerprint, getEnhancedBrowserInfo, getInputMethod } from '../utils/fingerprint.js';
+import { BehaviorTracker } from '../utils/behavior.js';
 
 class Tracker {
   constructor() {
     this.apiKey = null;
-    this.apiEndpoint = 'https://api.adtruth.io/track';
+    this.apiEndpoint = 'https://api.adtruth.io/track/';
     this.initialized = false;
     this.debug = false;
+    this.behaviorTracker = null;
+    this.fingerprint = null;
   }
 
   /**
@@ -35,6 +39,10 @@ class Tracker {
     this.initialized = true;
     this.log('AdTruth: Initialized');
 
+    // Initialize behavior tracker and generate fingerprint
+    this.behaviorTracker = new BehaviorTracker();
+    this.fingerprint = getBasicFingerprint();
+
     // Track the initial pageview
     this.track();
   }
@@ -59,10 +67,16 @@ class Tracker {
     const url = getCurrentUrl();
     const params = parseUrlParams(url);
 
+    // Collect enhanced browser info and behavior metrics
+    const enhancedBrowser = getEnhancedBrowserInfo();
+    const inputMethod = getInputMethod();
+    const behaviorMetrics = this.behaviorTracker ? this.behaviorTracker.getMetrics() : {};
+
     const data = {
       event_type: eventType,
       timestamp: new Date().toISOString(),
       session_id: getSessionId(),
+      visitor_id: getVisitorId(),
       page: {
         url: url,
         title: document.title || '',
@@ -80,17 +94,24 @@ class Tracker {
         fbclid: params.fbclid || null
       },
       browser: {
-        user_agent: navigator.userAgent,
-        language: navigator.language || navigator.userLanguage || '',
+        ...enhancedBrowser,
         screen: {
           width: screen.width,
-          height: screen.height
+          height: screen.height,
+          colorDepth: screen.colorDepth
         },
         viewport: {
           width: window.innerWidth,
           height: window.innerHeight
         }
-      }
+      },
+      fingerprint: {
+        hash: this.fingerprint ? this.fingerprint.hash : null,
+        timezone: this.fingerprint ? this.fingerprint.details.timezone : null,
+        timezoneOffset: this.fingerprint ? this.fingerprint.details.timezoneOffset : null
+      },
+      input: inputMethod,
+      behavior: behaviorMetrics
     };
 
     return data;
@@ -100,23 +121,9 @@ class Tracker {
    * Send data to the API endpoint
    */
   sendData(data) {
-    // Use sendBeacon if available for better reliability
+    // Always use fetch for better header support
+    // sendBeacon doesn't support custom headers well
     const payload = JSON.stringify(data);
-
-    if (navigator.sendBeacon) {
-      const blob = new Blob([payload], { type: 'application/json' });
-      const sent = navigator.sendBeacon(
-        this.apiEndpoint,
-        blob
-      );
-
-      if (sent) {
-        this.log('AdTruth: Data sent via sendBeacon');
-        return;
-      }
-    }
-
-    // Fallback to fetch
     this.sendViaFetch(payload);
   }
 
