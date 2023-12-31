@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdTruth Integration Test</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1E3A8A;
+        }
+        .status {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            background: #EFF6FF;
+            border-left: 4px solid #1E3A8A;
+        }
+        .success {
+            background: #D1FAE5;
+            border-color: #10B981;
+            color: #065F46;
+        }
+        .error {
+            background: #FEE2E2;
+            border-color: #EF4444;
+            color: #991B1B;
+        }
+        .test-info {
+            background: #F3F4F6;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .test-info dt {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .test-info dd {
+            margin: 5px 0 10px 20px;
+            font-family: 'Courier New', monospace;
+        }
+        .button {
+            background: #1E3A8A;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        .button:hover {
+            background: #1e3a8a;
+        }
+        .button:disabled {
+            background: #9CA3AF;
+            cursor: not-allowed;
+        }
+        .log {
+            background: #1F2937;
+            color: #F3F4F6;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        .log-entry {
+            margin: 5px 0;
+        }
+        .log-time {
+            color: #9CA3AF;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AdTruth Integration Test</h1>
+
+        <div class="test-info">
+            <h3>Test Configuration</h3>
+            <dl>
+                <dt>API Endpoint:</dt>
+                <dd id="endpoint">http://localhost:8000/track</dd>
+
+                <dt>API Key:</dt>
+                <dd id="apikey">test_api_key_12345</dd>
+
+                <dt>Test Page URL:</dt>
+                <dd id="pageurl"></dd>
+
+                <dt>Session ID:</dt>
+                <dd id="sessionid">-</dd>
+
+                <dt>Tracker Status:</dt>
+                <dd id="trackerstatus">Not Initialized</dd>
+            </dl>
+        </div>
+
+        <div class="status" id="status">
+            Waiting to start test...
+        </div>
+
+        <div>
+            <button id="initBtn" class="button" onclick="initializeTracker()">
+                1. Initialize Tracker
+            </button>
+            <button id="trackBtn" class="button" onclick="sendTrackingEvent()" disabled>
+                2. Send Test Event
+            </button>
+            <button id="multiBtn" class="button" onclick="sendMultipleEvents()" disabled>
+                3. Send Multiple Events
+            </button>
+            <button id="verifyBtn" class="button" onclick="verifyData()" disabled>
+                4. Verify Data Stored
+            </button>
+        </div>
+
+        <div class="log" id="log">
+            <div class="log-entry">
+                <span class="log-time">--:--:--</span>
+                Console log will appear here...
+            </div>
+        </div>
+    </div>
+
+    <!-- Load the AdTruth tracking script -->
+    <script>
+        // First, let's create a simple inline version that works
+        var AdTruth = {
+            apiKey: null,
+            endpoint: 'http://localhost:8000/track/',
+            sessionId: null,
+            visitorId: null,
+
+            init: function(apiKey, options) {
+                this.apiKey = apiKey;
+                if (options && options.endpoint) {
+                    this.endpoint = options.endpoint;
+                }
+                // Generate IDs
+                this.sessionId = 'session_' + Math.random().toString(36).substr(2, 9);
+                this.visitorId = 'visitor_' + Math.random().toString(36).substr(2, 9);
+                console.log('AdTruth initialized with key:', apiKey);
+
+                // Send initial pageview
+                this.track('pageview');
+            },
+
+            track: function(type) {
+                if (!this.apiKey) {
+                    console.error('AdTruth not initialized');
+                    return;
+                }
+
+                const data = {
+                    type: type || 'pageview',
+                    url: window.location.href,
+                    referrer: document.referrer || '',
+                    timestamp: new Date().toISOString(),
+                    sessionId: this.sessionId,
+                    visitorId: this.visitorId,
+                    utmParams: this.getUTMParams()
+                };
+
+                // Send via fetch
+                fetch(this.endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'X-API-Key': this.apiKey,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('AdTruth: Event tracked successfully');
+                        return response.json();
+                    }
+                    throw new Error('Failed to track: ' + response.status);
+                })
+                .then(result => {
+                    console.log('AdTruth: Response:', result);
+                })
+                .catch(error => {
+                    console.error('AdTruth: Error:', error);
+                });
+            },
+
+            getUTMParams: function() {
+                const params = new URLSearchParams(window.location.search);
+                return {
+                    source: params.get('utm_source'),
+                    medium: params.get('utm_medium'),
+                    campaign: params.get('utm_campaign'),
+                    term: params.get('utm_term'),
+                    content: params.get('utm_content')
+                };
+            }
+        };
+
+        window.AdTruth = AdTruth;
+    </script>
+
+    <script>
+        // Set current page URL
+        document.getElementById('pageurl').textContent = window.location.href;
+
+        // Logging function
+        function log(message, type = 'info') {
+            const logEl = document.getElementById('log');
+            const time = new Date().toLocaleTimeString();
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            entry.innerHTML = `<span class="log-time">${time}</span>${message}`;
+            logEl.appendChild(entry);
+            logEl.scrollTop = logEl.scrollHeight;
+
+            // Also log to console
+            console.log(`[${time}] ${message}`);
+        }
+
+        // Update status
+        function setStatus(message, type = 'info') {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = message;
+            statusEl.className = `status ${type}`;
+        }
+
+        // Initialize the tracker
+        function initializeTracker() {
+            try {
+                log('Initializing AdTruth tracker...');
+
+                // Initialize with local endpoint for testing
+                window.AdTruth.init('test_api_key_12345', {
+                    endpoint: 'http://localhost:8000/track/',
+                    debug: true  // Enable debug logging
+                });
+
+                // Update UI with session ID
+                document.getElementById('sessionid').textContent = window.AdTruth.sessionId;
+                document.getElementById('trackerstatus').textContent = 'Initialized';
+                document.getElementById('initBtn').disabled = true;
+                document.getElementById('trackBtn').disabled = false;
+                document.getElementById('multiBtn').disabled = false;
+
+                setStatus('Tracker initialized successfully!', 'success');
+                log('✓ Tracker initialized with test API key', 'success');
+                log('✓ Session ID: ' + window.AdTruth.sessionId, 'success');
+                log('✓ Visitor ID: ' + window.AdTruth.visitorId, 'success');
+
+                // The init() method automatically sends the first pageview
+                log('✓ Initial pageview event sent automatically', 'success');
+
+            } catch (error) {
+                setStatus('Failed to initialize tracker: ' + error.message, 'error');
+                log('✗ Initialization error: ' + error.message, 'error');
+            }
+        }
+
+        // Send a single tracking event
+        function sendTrackingEvent() {
+            try {
+                log('Sending pageview event...');
+
+                // Track a pageview event
+                window.AdTruth.track('pageview');
+
+                setStatus('Tracking event sent!', 'success');
+                log('✓ Pageview event sent', 'success');
+
+                // Enable verification after first event
+                document.getElementById('verifyBtn').disabled = false;
+
+            } catch (error) {
+                setStatus('Failed to send event: ' + error.message, 'error');
+                log('✗ Tracking error: ' + error.message, 'error');
+            }
+        }
+
+        // Send multiple events to test batching
+        function sendMultipleEvents() {
+            try {
+                log('Sending multiple events...');
+
+                // Simulate different page views
+                const pages = [
+                    { type: 'pageview', page: '/products' },
+                    { type: 'pageview', page: '/checkout' },
+                    { type: 'click', element: 'buy-button' },
+                    { type: 'pageview', page: '/thank-you' }
+                ];
+
+                pages.forEach((page, index) => {
+                    setTimeout(() => {
+                        // Change the document title to simulate different pages
+                        const originalTitle = document.title;
+                        document.title = `Test Page - ${page.page || page.element}`;
+
+                        window.AdTruth.track(page.type);
+
+                        log(`✓ Event ${index + 1}: ${page.type} - ${page.page || page.element}`, 'success');
+
+                        // Restore title
+                        document.title = originalTitle;
+                    }, index * 500);
+                });
+
+                setStatus('Multiple events sent!', 'success');
+
+                // Enable verification
+                document.getElementById('verifyBtn').disabled = false;
+
+            } catch (error) {
+                setStatus('Failed to send events: ' + error.message, 'error');
+                log('✗ Tracking error: ' + error.message, 'error');
+            }
+        }
+
+        // Verify data was stored (calls the Python verification script)
+        async function verifyData() {
+            try {
+                log('Verifying data storage...');
+                setStatus('Checking database for stored events...', 'info');
+
+                // Make a request to the backend to check if data was stored
+                const response = await fetch('http://localhost:8000/test/verify', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+
+                    if (data.success) {
+                        setStatus(`Verification successful! Found ${data.count} events in database.`, 'success');
+                        log(`✓ Database verification passed: ${data.count} events stored`, 'success');
+
+                        // Log some details
+                        if (data.latest_event) {
+                            log(`Latest event: ${data.latest_event.type} at ${data.latest_event.timestamp}`, 'info');
+                        }
+                    } else {
+                        setStatus('No events found in database yet', 'error');
+                        log('✗ No events found in database', 'error');
+                    }
+                } else {
+                    // If verification endpoint doesn't exist, provide manual instructions
+                    setStatus('Verification endpoint not available. Check the backend logs and database manually.', 'info');
+                    log('ℹ To verify manually:', 'info');
+                    log('  1. Check backend logs for incoming requests', 'info');
+                    log('  2. Query Supabase: SELECT * FROM page_views', 'info');
+                    log('  3. Run: python verify_integration.py', 'info');
+                }
+
+            } catch (error) {
+                setStatus('Verification failed: ' + error.message, 'error');
+                log('✗ Verification error: ' + error.message, 'error');
+                log('ℹ Run the Python verification script manually', 'info');
+            }
+        }
+
+        // Add console override to capture AdTruth debug logs
+        const originalLog = console.log;
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+
+            // If it's an AdTruth log, show it in our log area
+            if (args[0] && typeof args[0] === 'string' && args[0].includes('AdTruth')) {
+                log('AdTruth: ' + args.join(' '), 'info');
+            }
+        };
+
+        // Test UTM parameters
+        if (window.location.search.includes('utm_')) {
+            log('ℹ UTM parameters detected in URL', 'info');
+        } else {
+            log('ℹ Tip: Add ?utm_source=test&utm_medium=integration to URL for UTM tracking', 'info');
+        }
+    </script>
+</body>
+</html>

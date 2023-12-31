@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple AdTruth Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        #output {
+            background: #f0f0f0;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            min-height: 100px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple AdTruth Test</h1>
+    <p>Click the button below to test the tracking system:</p>
+
+    <button onclick="testTracking()">Test Tracking</button>
+    <button onclick="clearOutput()">Clear Output</button>
+
+    <div id="output"></div>
+
+    <script>
+        function log(message, type = '') {
+            const output = document.getElementById('output');
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type ? ` class="${type}"` : '';
+            output.innerHTML += `<div${className}>[${timestamp}] ${message}</div>`;
+        }
+
+        function clearOutput() {
+            document.getElementById('output').innerHTML = '';
+            log('Output cleared');
+        }
+
+        async function testTracking() {
+            log('Starting test...');
+
+            const testData = {
+                type: 'pageview',
+                url: window.location.href,
+                referrer: document.referrer || 'direct',
+                timestamp: new Date().toISOString(),
+                sessionId: 'test_session_' + Date.now(),
+                visitorId: 'test_visitor_' + Date.now(),
+                utmParams: {
+                    source: 'test',
+                    medium: 'manual',
+                    campaign: 'integration_test'
+                }
+            };
+
+            log('Sending data: ' + JSON.stringify(testData, null, 2));
+
+            try {
+                const response = await fetch('http://localhost:8000/track/', {
+                    method: 'POST',
+                    headers: {
+                        'X-API-Key': 'test_api_key_12345',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testData)
+                });
+
+                log(`Response status: ${response.status}`);
+
+                if (response.ok) {
+                    const result = await response.json();
+                    log('✅ SUCCESS! Event tracked', 'success');
+                    log('Event ID: ' + result.eventId, 'success');
+                    log('Response: ' + JSON.stringify(result, null, 2), 'success');
+                } else {
+                    const error = await response.text();
+                    log('❌ Failed with status: ' + response.status, 'error');
+                    log('Error: ' + error, 'error');
+                }
+            } catch (error) {
+                log('❌ Network error: ' + error.message, 'error');
+                log('Make sure the backend is running on localhost:8000', 'error');
+            }
+
+            log('Test complete!');
+        }
+
+        // Test on load
+        log('Simple AdTruth Test Page Ready');
+        log('Backend URL: http://localhost:8000');
+        log('API Key: test_api_key_12345');
+    </script>
+</body>
+</html>
