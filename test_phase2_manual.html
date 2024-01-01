@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phase 2 Manual Test</title>
+    <style>
+        body { 
+            font-family: Arial; 
+            padding: 40px; 
+            background: #667eea;
+            color: white;
+            min-height: 200vh;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        .box { background: rgba(255,255,255,0.1); padding: 30px; margin: 20px 0; border-radius: 10px; }
+        button { 
+            background: #ffd700; 
+            color: #333; 
+            border: none; 
+            padding: 15px 30px; 
+            font-size: 16px; 
+            border-radius: 8px; 
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover { background: #ffed4e; }
+        #sendBtn { background: #4CAF50; color: white; font-weight: bold; font-size: 18px; }
+        .mouse-area {
+            background: rgba(255,255,255,0.1);
+            border: 2px dashed yellow;
+            padding: 60px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .scroll-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-indicator" id="scrollInd">Scroll: 0%</div>
+    
+    <div class="container">
+        <h1>🔍 Phase 2 Manual Test</h1>
+        
+        <div class="box">
+            <h2>Instructions:</h2>
+            <ol>
+                <li><strong>Scroll</strong> up and down this page</li>
+                <li><strong>Move mouse</strong> in the area below</li>
+                <li><strong>Click</strong> the test buttons</li>
+                <li><strong>Click "SEND DATA NOW"</strong> to submit to database</li>
+            </ol>
+        </div>
+
+        <div class="box">
+            <h2>🖱️ Mouse Test Area</h2>
+            <div class="mouse-area">Move your mouse here in curves and circles!</div>
+        </div>
+
+        <div class="box">
+            <h2>🎯 Click Test</h2>
+            <button onclick="clicks++">Button 1</button>
+            <button onclick="clicks++">Button 2</button>
+            <button onclick="clicks++">Button 3</button>
+            <p id="clicks">Clicks: 0</p>
+        </div>
+
+        <div class="box" style="background: rgba(76, 175, 80, 0.2);">
+            <h2>📤 Send Tracking Data</h2>
+            <button id="sendBtn" onclick="sendData()">🚀 SEND DATA NOW</button>
+            <p id="status"></p>
+        </div>
+
+        <div style="height: 100vh; display: flex; align-items: center; justify-content: center;">
+            <div class="box">
+                <h2>Keep scrolling to test scroll depth...</h2>
+            </div>
+        </div>
+    </div>
+
+    <script src="http://localhost:8081/dist/adtruth.min.js"></script>
+    <script>
+        let clicks = 0;
+        
+        AdTruth.init('test_api_key_12345', {
+            endpoint: 'http://localhost:8000/track/',
+            debug: true
+        });
+
+        // Update scroll indicator
+        window.addEventListener('scroll', () => {
+            const pct = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+            document.getElementById('scrollInd').textContent = 'Scroll: ' + pct + '%';
+        });
+
+        // Update click count
+        setInterval(() => {
+            document.getElementById('clicks').textContent = 'Clicks: ' + clicks;
+        }, 100);
+
+        // Manual send function
+        function sendData() {
+            const status = document.getElementById('status');
+            status.innerHTML = '⏳ Sending data...';
+
+            // Show what we're about to send
+            const metrics = AdTruth.getMetrics();
+            console.log('📊 Sending metrics:', metrics);
+
+            // Trigger a new tracking event
+            AdTruth.track('manual_test');
+
+            status.innerHTML = '✅ Data sent! Check database with:<br><code>python3 verify_phase2.py</code>';
+        }
+    </script>
+</body>
+</html>

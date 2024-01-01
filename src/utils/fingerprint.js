@@ -1,6 +1,7 @@
 /**
  * Browser fingerprinting utilities for fraud detection
  * Phase 1: Basic fingerprinting
+ * Phase 2: Canvas fingerprinting
  */
 
 /**
@@ -88,4 +89,60 @@ export function getInputMethod() {
     maxTouchPoints: navigator.maxTouchPoints || 0,
     inputInconsistency: hasTouch && hasMouse && hasHover // Potential fraud signal
   };
+}
+
+/**
+ * Generate canvas fingerprint (Phase 2)
+ * Creates unique hash based on how browser renders canvas
+ * @returns {string|null} Canvas fingerprint hash
+ */
+export function getCanvasFingerprint() {
+  try {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    if (!ctx) {
+      return null;
+    }
+
+    // Set canvas size
+    canvas.width = 200;
+    canvas.height = 50;
+
+    // Draw text with specific styling
+    ctx.textBaseline = 'top';
+    ctx.font = '14px Arial';
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillStyle = '#f60';
+    ctx.fillRect(125, 1, 62, 20);
+
+    // Draw text
+    ctx.fillStyle = '#069';
+    ctx.font = '11pt no-real-font-123';
+    ctx.fillText('AdTruth🔒', 2, 15);
+    ctx.fillStyle = 'rgba(102, 204, 0, 0.7)';
+    ctx.font = '18pt Arial';
+    ctx.fillText('AdTruth', 4, 17);
+
+    // Get canvas data and create hash
+    const dataURL = canvas.toDataURL();
+
+    // Use last 50 characters as fingerprint (most variable part)
+    const canvasHash = dataURL.slice(-50);
+
+    // Also create a simple numeric hash for the full data
+    let numericHash = 0;
+    for (let i = 0; i < dataURL.length; i++) {
+      numericHash = ((numericHash << 5) - numericHash) + dataURL.charCodeAt(i);
+      numericHash = numericHash & numericHash;
+    }
+
+    return {
+      hash: Math.abs(numericHash).toString(36),
+      partial: canvasHash
+    };
+  } catch (e) {
+    // Canvas fingerprinting might be blocked or fail
+    return null;
+  }
 }

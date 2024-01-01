@@ -1,6 +1,6 @@
 import { getSessionId, getVisitorId } from '../utils/session.js';
 import { parseUrlParams, getCurrentUrl, getReferrer } from '../utils/url.js';
-import { getBasicFingerprint, getEnhancedBrowserInfo, getInputMethod } from '../utils/fingerprint.js';
+import { getBasicFingerprint, getEnhancedBrowserInfo, getInputMethod, getCanvasFingerprint } from '../utils/fingerprint.js';
 import { BehaviorTracker } from '../utils/behavior.js';
 
 class Tracker {
@@ -39,9 +39,10 @@ class Tracker {
     this.initialized = true;
     this.log('AdTruth: Initialized');
 
-    // Initialize behavior tracker and generate fingerprint
+    // Initialize behavior tracker and generate fingerprints
     this.behaviorTracker = new BehaviorTracker();
     this.fingerprint = getBasicFingerprint();
+    this.canvasFingerprint = getCanvasFingerprint(); // Phase 2
 
     // Track the initial pageview
     this.track();
@@ -108,7 +109,9 @@ class Tracker {
       fingerprint: {
         hash: this.fingerprint ? this.fingerprint.hash : null,
         timezone: this.fingerprint ? this.fingerprint.details.timezone : null,
-        timezoneOffset: this.fingerprint ? this.fingerprint.details.timezoneOffset : null
+        timezoneOffset: this.fingerprint ? this.fingerprint.details.timezoneOffset : null,
+        // Phase 2: Canvas fingerprint
+        canvas: this.canvasFingerprint ? this.canvasFingerprint.hash : null
       },
       input: inputMethod,
       behavior: behaviorMetrics
