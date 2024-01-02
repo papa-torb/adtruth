@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdTruth Phase 2 Test - Mobile & Desktop Tracking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            min-height: 300vh; /* Make page scrollable */
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .test-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        button {
+            background: #ffd700;
+            color: #333;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #ffed4e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .info-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .swipe-area {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            padding: 60px;
+            text-align: center;
+            margin: 20px 0;
+            touch-action: none;
+            user-select: none;
+        }
+
+        .mouse-area {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px dashed rgba(255, 215, 0, 0.5);
+            border-radius: 10px;
+            padding: 60px;
+            text-align: center;
+            margin: 20px 0;
+            cursor: crosshair;
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffd700;
+            z-index: 1000;
+        }
+
+        .stats-panel {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-label {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .stat-value {
+            font-family: 'Courier New', monospace;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-indicator" id="scrollIndicator">
+        Scroll: 0%
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>🔍 AdTruth Phase 2 Test</h1>
+            <p class="subtitle">Testing Mobile-Aware Fraud Detection</p>
+        </header>
+
+        <!-- Phase 2 Features Overview -->
+        <div class="test-section">
+            <h2>✨ Phase 2 Features</h2>
+            <div class="info-box">
+                ✅ Scroll Depth Tracking (Mobile + Desktop)<br>
+                ✅ Mouse Movement Analysis (Desktop)<br>
+                ✅ Touch Pattern Detection (Mobile)<br>
+                ✅ Canvas Fingerprinting (Unique Device ID)<br>
+                📦 Bundle Size: 9.6KB (65% under 15KB limit)
+            </div>
+        </div>
+
+        <!-- Mouse Tracking Test -->
+        <div class="test-section">
+            <h2>🖱️ Mouse Movement Test</h2>
+            <p>Move your mouse around this area to test velocity and pattern tracking:</p>
+            <div class="mouse-area" id="mouseArea">
+                <strong>Move your mouse here!</strong><br>
+                Drawing curves and circles tests bot detection
+            </div>
+            <div class="info-box" id="mouseStats">
+                Waiting for mouse movement...
+            </div>
+        </div>
+
+        <!-- Touch Tracking Test -->
+        <div class="test-section">
+            <h2>👆 Touch Interaction Test</h2>
+            <p>Tap and swipe on this area (works on mobile or touchscreen):</p>
+            <div class="swipe-area" id="swipeArea">
+                <strong>Tap or Swipe Here!</strong><br>
+                Try different gestures
+            </div>
+            <div class="info-box" id="touchStats">
+                Waiting for touch input...
+            </div>
+        </div>
+
+        <!-- Click Test -->
+        <div class="test-section">
+            <h2>🎯 Click Pattern Test</h2>
+            <p>Click these buttons to test click speed and patterns:</p>
+            <div class="button-group">
+                <button onclick="trackClick('Button 1')">Button 1</button>
+                <button onclick="trackClick('Button 2')">Button 2</button>
+                <button onclick="trackClick('Button 3')">Button 3</button>
+                <button onclick="trackClick('Button 4')">Button 4</button>
+            </div>
+            <div class="info-box" id="clickStats">
+                Click count: 0
+            </div>
+        </div>
+
+        <!-- Scroll Test -->
+        <div class="test-section">
+            <h2>📜 Scroll Depth Test</h2>
+            <p>Scroll down this long page to test scroll depth tracking.</p>
+            <div class="info-box">
+                Current scroll depth shown in top-right corner.<br>
+                Bot detection: Bots often scroll instantly to 100%<br>
+                Humans gradually scroll and pause at interesting content.
+            </div>
+        </div>
+
+        <!-- Live Data Preview -->
+        <div class="test-section">
+            <h2>📊 Live Tracking Data</h2>
+            <div class="stats-panel" id="liveStats">
+                <div class="stat-item">
+                    <span class="stat-label">Status:</span>
+                    <span class="stat-value">Initializing...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spacer for scrolling -->
+        <div style="height: 100vh; display: flex; align-items: center; justify-content: center;">
+            <div class="test-section" style="text-align: center;">
+                <h2>🎨 Keep Scrolling!</h2>
+                <p>Testing scroll depth tracking...</p>
+            </div>
+        </div>
+
+        <div style="height: 100vh; display: flex; align-items: center; justify-content: center;">
+            <div class="test-section" style="text-align: center;">
+                <h2>🚀 Almost There!</h2>
+                <p>Scroll to the bottom to reach 100%</p>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>AdTruth Phase 2 - Mobile-First Fraud Detection</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                Detection Capability: 75% (Target) | Bundle: 9.6KB
+            </p>
+        </footer>
+    </div>
+
+    <!-- AdTruth Tracking Script -->
+    <script src="http://localhost:8081/dist/adtruth.min.js"></script>
+
+    <script>
+        // Initialize AdTruth with debug mode
+        AdTruth.init('test_api_key_12345', {
+            endpoint: 'http://localhost:8000/track/',
+            debug: true
+        });
+
+        let clickCount = 0;
+
+        // Track button clicks
+        function trackClick(buttonName) {
+            clickCount++;
+            document.getElementById('clickStats').innerHTML =
+                `Click count: ${clickCount}<br>Last clicked: ${buttonName}`;
+        }
+
+        // Update scroll indicator
+        function updateScrollIndicator() {
+            const scrollPercentage = Math.round(
+                (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
+            );
+            document.getElementById('scrollIndicator').textContent =
+                `Scroll: ${scrollPercentage}%`;
+        }
+
+        window.addEventListener('scroll', updateScrollIndicator);
+
+        // Mouse movement tracking display
+        let mouseMovements = 0;
+        document.getElementById('mouseArea').addEventListener('mousemove', function(e) {
+            mouseMovements++;
+            if (mouseMovements % 10 === 0) {
+                document.getElementById('mouseStats').innerHTML =
+                    `Mouse movements: ${mouseMovements}<br>` +
+                    `Position: (${e.clientX}, ${e.clientY})<br>` +
+                    `AdTruth is sampling every 100ms for velocity analysis`;
+            }
+        });
+
+        // Touch tracking display
+        let touchCount = 0;
+        let swipeCount = 0;
+        const swipeArea = document.getElementById('swipeArea');
+
+        swipeArea.addEventListener('touchstart', function(e) {
+            touchCount++;
+            updateTouchStats();
+        });
+
+        swipeArea.addEventListener('touchmove', function(e) {
+            swipeCount++;
+            updateTouchStats();
+        });
+
+        function updateTouchStats() {
+            document.getElementById('touchStats').innerHTML =
+                `Taps detected: ${touchCount}<br>` +
+                `Swipe movements: ${swipeCount}<br>` +
+                `AdTruth is analyzing tap speed and gesture patterns`;
+        }
+
+        // Update live stats every 2 seconds
+        setInterval(function() {
+            if (window.AdTruth && window.AdTruth.tracker) {
+                const tracker = window.AdTruth.tracker;
+                if (tracker.behaviorTracker) {
+                    const metrics = tracker.behaviorTracker.getMetrics();
+                    const fingerprint = tracker.canvasFingerprint;
+
+                    let html = '';
+                    html += `<div class="stat-item"><span class="stat-label">Time on Page:</span><span class="stat-value">${Math.round(metrics.timeOnPage / 1000)}s</span></div>`;
+                    html += `<div class="stat-item"><span class="stat-label">Scroll Depth:</span><span class="stat-value">${Math.round(metrics.scrollDepth * 100)}%</span></div>`;
+                    html += `<div class="stat-item"><span class="stat-label">Scroll Events:</span><span class="stat-value">${metrics.scrollEvents}</span></div>`;
+                    html += `<div class="stat-item"><span class="stat-label">Clicks:</span><span class="stat-value">${metrics.clickCount}</span></div>`;
+                    html += `<div class="stat-item"><span class="stat-label">Mouse Detected:</span><span class="stat-value">${metrics.mouseMovementDetected ? 'Yes' : 'No'}</span></div>`;
+
+                    if (metrics.mousePatterns) {
+                        html += `<div class="stat-item"><span class="stat-label">Mouse Velocity:</span><span class="stat-value">${metrics.mousePatterns.avgVelocity} px/s</span></div>`;
+                        html += `<div class="stat-item"><span class="stat-label">Human Pattern:</span><span class="stat-value">${metrics.mousePatterns.hasHumanPatterns ? '✅ Yes' : '❌ No'}</span></div>`;
+                    }
+
+                    if (metrics.touchPatterns && metrics.touchPatterns.tapCount > 0) {
+                        html += `<div class="stat-item"><span class="stat-label">Touch Taps:</span><span class="stat-value">${metrics.touchPatterns.tapCount}</span></div>`;
+                        html += `<div class="stat-item"><span class="stat-label">Swipe Detected:</span><span class="stat-value">${metrics.touchPatterns.swipeDetected ? 'Yes' : 'No'}</span></div>`;
+                    }
+
+                    if (fingerprint) {
+                        html += `<div class="stat-item"><span class="stat-label">Canvas Hash:</span><span class="stat-value">${fingerprint.hash.substring(0, 12)}...</span></div>`;
+                    }
+
+                    document.getElementById('liveStats').innerHTML = html;
+                }
+            }
+        }, 2000);
+
+        console.log('🔍 Phase 2 Test Page Loaded!');
+        console.log('📊 Open browser console to see tracking data');
+    </script>
+</body>
+</html>

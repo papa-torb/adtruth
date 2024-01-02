@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>One-Liner Test</title>
+</head>
+<body>
+    <h1>One-Liner Integration Test</h1>
+    <p>This page uses ONLY the one-liner. No additional code.</p>
+    <p>Scroll, click, move mouse to test Phase 2 tracking!</p>
+    
+    <button>Click Me</button>
+    <button>Click Me Too</button>
+    
+    <div style="height: 200vh; background: linear-gradient(to bottom, #f0f0f0, #fff);">
+        <p style="padding: 50px;">Keep scrolling...</p>
+    </div>
+
+    <!-- THE ONE-LINER: This is ALL a website owner needs! -->
+    <script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'http://localhost:8081/dist/adtruth.min.js';
+        js.onload = function() {
+            AdTruth.init('test_api_key_12345', {
+                endpoint: 'http://localhost:8000/track/',
+                debug: true
+            });
+        };
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'adtruth-js'));
+    </script>
+</body>
+</html>
