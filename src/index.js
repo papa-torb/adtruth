@@ -36,9 +36,29 @@ const AdTruth = {
   },
 
   /**
+   * Get current metrics (debug only)
+   * @returns {object} Current tracking metrics
+   */
+  getMetrics: function() {
+    if (!tracker.behaviorTracker) {
+      return { error: 'Tracker not initialized. Call AdTruth.init() first.' };
+    }
+    return {
+      behavior: tracker.behaviorTracker.getMetrics(),
+      fingerprint: tracker.fingerprint,
+      canvasFingerprint: tracker.canvasFingerprint
+    };
+  },
+
+  /**
    * Version information
    */
-  version: '0.1.0'
+  version: '0.1.0',
+
+  // Expose tracker for debugging (only in debug mode)
+  get _debug() {
+    return tracker;
+  }
 };
 
 // Auto-initialize if script tag has data-api-key attribute
