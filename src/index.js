@@ -14,14 +14,22 @@ const AdTruth = {
    * @param {object} options - Optional configuration
    */
   init: function(apiKey, options) {
-    tracker.init(apiKey, options);
+    try {
+      tracker.init(apiKey, options);
+    } catch (error) {
+      console.error('AdTruth: Initialization failed', error);
+    }
   },
 
   /**
    * Manually track a pageview
    */
   trackPageview: function() {
-    tracker.track('pageview');
+    try {
+      tracker.track('pageview');
+    } catch (error) {
+      console.error('AdTruth: Tracking failed', error);
+    }
   },
 
   /**
@@ -30,9 +38,13 @@ const AdTruth = {
    * @param {object} data - Optional event data
    */
   track: function(eventName, data) {
-    // For MVP, just track as pageview
-    // Future versions will support custom events
-    tracker.track(eventName || 'pageview');
+    try {
+      // For MVP, just track as pageview
+      // Future versions will support custom events
+      tracker.track(eventName || 'pageview');
+    } catch (error) {
+      console.error('AdTruth: Tracking failed', error);
+    }
   },
 
   /**

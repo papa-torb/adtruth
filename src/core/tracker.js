@@ -19,46 +19,63 @@ class Tracker {
    * @param {object} options - Optional configuration
    */
   init(apiKey, options = {}) {
-    if (this.initialized) {
-      return;
+    try {
+      if (this.initialized) {
+        return;
+      }
+
+      if (!apiKey) {
+        this.log('AdTruth: API key is required');
+        return;
+      }
+
+      this.apiKey = apiKey;
+      this.debug = options.debug || false;
+
+      // Allow custom endpoint for testing
+      if (options.endpoint) {
+        this.apiEndpoint = options.endpoint;
+      }
+
+      this.initialized = true;
+      this.log('AdTruth: Initialized');
+
+      // Initialize behavior tracker and generate fingerprints
+      this.behaviorTracker = new BehaviorTracker();
+      this.fingerprint = getBasicFingerprint();
+
+      // Phase 2: Canvas fingerprinting with error handling
+      try {
+        this.canvasFingerprint = getCanvasFingerprint();
+      } catch (e) {
+        this.log('AdTruth: Canvas fingerprinting failed (browser restriction)', e);
+        this.canvasFingerprint = null;
+      }
+
+      // Track the initial pageview
+      this.track();
+    } catch (error) {
+      // Don't let initialization errors break client sites
+      this.log('AdTruth: Initialization error', error);
     }
-
-    if (!apiKey) {
-      this.log('AdTruth: API key is required');
-      return;
-    }
-
-    this.apiKey = apiKey;
-    this.debug = options.debug || false;
-
-    // Allow custom endpoint for testing
-    if (options.endpoint) {
-      this.apiEndpoint = options.endpoint;
-    }
-
-    this.initialized = true;
-    this.log('AdTruth: Initialized');
-
-    // Initialize behavior tracker and generate fingerprints
-    this.behaviorTracker = new BehaviorTracker();
-    this.fingerprint = getBasicFingerprint();
-    this.canvasFingerprint = getCanvasFingerprint(); // Phase 2
-
-    // Track the initial pageview
-    this.track();
   }
 
   /**
    * Track a pageview event
    */
   track(eventType = 'pageview') {
-    if (!this.initialized) {
-      this.log('AdTruth: Not initialized. Call init() first.');
-      return;
-    }
+    try {
+      if (!this.initialized) {
+        this.log('AdTruth: Not initialized. Call init() first.');
+        return;
+      }
 
-    const data = this.collectData(eventType);
-    this.sendData(data);
+      const data = this.collectData(eventType);
+      this.sendData(data);
+    } catch (error) {
+      // Don't let tracking errors break client sites
+      this.log('AdTruth: Tracking error', error);
+    }
   }
 
   /**
@@ -131,9 +148,13 @@ class Tracker {
   }
 
   /**
-   * Send data using fetch API
+   * Send data using fetch API with timeout
    */
   sendViaFetch(payload) {
+    // Create abort controller for timeout (5 seconds)
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
     fetch(this.apiEndpoint, {
       method: 'POST',
       headers: {
@@ -141,14 +162,21 @@ class Tracker {
         'X-API-Key': this.apiKey
       },
       body: payload,
-      keepalive: true
+      keepalive: true,
+      signal: controller.signal
     })
       .then(() => {
+        clearTimeout(timeoutId);
         this.log('AdTruth: Data sent via fetch');
       })
       .catch((error) => {
+        clearTimeout(timeoutId);
         // Fail silently in production
-        this.log('AdTruth: Failed to send data', error);
+        if (error.name === 'AbortError') {
+          this.log('AdTruth: Request timeout');
+        } else {
+          this.log('AdTruth: Failed to send data', error);
+        }
       });
   }
 
