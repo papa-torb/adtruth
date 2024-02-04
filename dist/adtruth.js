@@ -13,9 +13,9 @@ var AdTruth = (function () {
     }
 
     // Fallback for older browsers
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      const r = Math.random() * 16 | 0;
-      const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      const r = (Math.random() * 16) | 0;
+      const v = c === 'x' ? r : (r & 0x3) | 0x8;
       return v.toString(16);
     });
   }
@@ -106,7 +106,6 @@ var AdTruth = (function () {
       if (fbclid) {
         params.fbclid = fbclid;
       }
-
     } catch (e) {
       // Fail silently if URL parsing fails
     }
@@ -197,7 +196,7 @@ var AdTruth = (function () {
     let hash = 0;
 
     for (let i = 0; i < str.length; i++) {
-      hash = ((hash << 5) - hash) + str.charCodeAt(i);
+      hash = (hash << 5) - hash + str.charCodeAt(i);
       hash = hash & hash; // Convert to 32-bit integer
     }
 
@@ -210,7 +209,8 @@ var AdTruth = (function () {
    */
   function getInputMethod() {
     const hasTouch = 'ontouchstart' in window;
-    const hasMouse = typeof matchMedia !== 'undefined' ? matchMedia('(pointer: fine)').matches : false;
+    const hasMouse =
+      typeof matchMedia !== 'undefined' ? matchMedia('(pointer: fine)').matches : false;
     const hasHover = typeof matchMedia !== 'undefined' ? matchMedia('(hover: hover)').matches : false;
 
     return {
@@ -264,7 +264,7 @@ var AdTruth = (function () {
       // Also create a simple numeric hash for the full data
       let numericHash = 0;
       for (let i = 0; i < dataURL.length; i++) {
-        numericHash = ((numericHash << 5) - numericHash) + dataURL.charCodeAt(i);
+        numericHash = (numericHash << 5) - numericHash + dataURL.charCodeAt(i);
         numericHash = numericHash & numericHash;
       }
 
@@ -539,9 +539,8 @@ var AdTruth = (function () {
       // Calculate statistics
       const avgVelocity = velocities.reduce((a, b) => a + b, 0) / velocities.length;
       const velocityVariance = this.calculateVariance(velocities);
-      const avgAngleChange = angles.length > 0
-        ? angles.reduce((a, b) => a + b, 0) / angles.length
-        : 0;
+      const avgAngleChange =
+        angles.length > 0 ? angles.reduce((a, b) => a + b, 0) / angles.length : 0;
 
       return {
         avgVelocity: Math.round(avgVelocity),
@@ -619,9 +618,7 @@ var AdTruth = (function () {
         timeToFirstInteraction: this.firstInteractionTime
           ? this.firstInteractionTime - this.pageLoadTime
           : null,
-        timeToFirstClick: this.clickTimes.length > 0
-          ? this.clickTimes[0] - this.pageLoadTime
-          : null,
+        timeToFirstClick: this.clickTimes.length > 0 ? this.clickTimes[0] - this.pageLoadTime : null,
         clickCount: this.clickCount,
         avgClickInterval: this.calculateAvgInterval(),
         hasInteracted: this.firstInteractionTime !== null,
@@ -914,14 +911,14 @@ var AdTruth = (function () {
         },
         body: payload,
         keepalive: true,
-        credentials: 'omit',  // Don't send cookies (required for CORS wildcard origins)
+        credentials: 'omit', // Don't send cookies (required for CORS wildcard origins)
         signal: controller.signal
       })
         .then(() => {
           clearTimeout(timeoutId);
           this.log('AdTruth: Data sent via fetch');
         })
-        .catch((error) => {
+        .catch(error => {
           clearTimeout(timeoutId);
           // Fail silently in production
           if (error.name === 'AbortError') {
@@ -963,7 +960,7 @@ var AdTruth = (function () {
      * @param {string} apiKey - Your AdTruth API key
      * @param {object} options - Optional configuration
      */
-    init: function(apiKey, options) {
+    init: function (apiKey, options) {
       try {
         tracker.init(apiKey, options);
       } catch (error) {
@@ -974,7 +971,7 @@ var AdTruth = (function () {
     /**
      * Manually track a pageview
      */
-    trackPageview: function() {
+    trackPageview: function () {
       try {
         tracker.track('pageview');
       } catch (error) {
@@ -987,7 +984,7 @@ var AdTruth = (function () {
      * @param {string} eventName - The name of the event
      * @param {object} data - Optional event data
      */
-    track: function(eventName, _data) {
+    track: function (eventName, _data) {
       try {
         // For MVP, just track as pageview
         // Future versions will support custom events
@@ -1001,7 +998,7 @@ var AdTruth = (function () {
      * Get current metrics (debug only)
      * @returns {object} Current tracking metrics
      */
-    getMetrics: function() {
+    getMetrics: function () {
       if (!tracker.behaviorTracker) {
         return { error: 'Tracker not initialized. Call AdTruth.init() first.' };
       }
@@ -1025,7 +1022,7 @@ var AdTruth = (function () {
 
   // Auto-initialize if script tag has data-api-key attribute
   if (typeof document !== 'undefined') {
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const script = document.querySelector('script[data-adtruth-api-key]');
       if (script) {
         const apiKey = script.getAttribute('data-adtruth-api-key');
