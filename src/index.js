@@ -13,7 +13,7 @@ const AdTruth = {
    * @param {string} apiKey - Your AdTruth API key
    * @param {object} options - Optional configuration
    */
-  init: function(apiKey, options) {
+  init: function (apiKey, options) {
     try {
       tracker.init(apiKey, options);
     } catch (error) {
@@ -24,7 +24,7 @@ const AdTruth = {
   /**
    * Manually track a pageview
    */
-  trackPageview: function() {
+  trackPageview: function () {
     try {
       tracker.track('pageview');
     } catch (error) {
@@ -37,7 +37,7 @@ const AdTruth = {
    * @param {string} eventName - The name of the event
    * @param {object} data - Optional event data
    */
-  track: function(eventName, _data) {
+  track: function (eventName, _data) {
     try {
       // For MVP, just track as pageview
       // Future versions will support custom events
@@ -51,7 +51,7 @@ const AdTruth = {
    * Get current metrics (debug only)
    * @returns {object} Current tracking metrics
    */
-  getMetrics: function() {
+  getMetrics: function () {
     if (!tracker.behaviorTracker) {
       return { error: 'Tracker not initialized. Call AdTruth.init() first.' };
     }
@@ -75,7 +75,7 @@ const AdTruth = {
 
 // Auto-initialize if script tag has data-api-key attribute
 if (typeof document !== 'undefined') {
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     const script = document.querySelector('script[data-adtruth-api-key]');
     if (script) {
       const apiKey = script.getAttribute('data-adtruth-api-key');

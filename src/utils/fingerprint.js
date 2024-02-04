@@ -66,7 +66,7 @@ function hashFingerprint(data) {
   let hash = 0;
 
   for (let i = 0; i < str.length; i++) {
-    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+    hash = (hash << 5) - hash + str.charCodeAt(i);
     hash = hash & hash; // Convert to 32-bit integer
   }
 
@@ -79,7 +79,8 @@ function hashFingerprint(data) {
  */
 export function getInputMethod() {
   const hasTouch = 'ontouchstart' in window;
-  const hasMouse = typeof matchMedia !== 'undefined' ? matchMedia('(pointer: fine)').matches : false;
+  const hasMouse =
+    typeof matchMedia !== 'undefined' ? matchMedia('(pointer: fine)').matches : false;
   const hasHover = typeof matchMedia !== 'undefined' ? matchMedia('(hover: hover)').matches : false;
 
   return {
@@ -133,7 +134,7 @@ export function getCanvasFingerprint() {
     // Also create a simple numeric hash for the full data
     let numericHash = 0;
     for (let i = 0; i < dataURL.length; i++) {
-      numericHash = ((numericHash << 5) - numericHash) + dataURL.charCodeAt(i);
+      numericHash = (numericHash << 5) - numericHash + dataURL.charCodeAt(i);
       numericHash = numericHash & numericHash;
     }
 

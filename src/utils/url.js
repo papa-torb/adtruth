@@ -29,7 +29,6 @@ export function parseUrlParams(url) {
     if (fbclid) {
       params.fbclid = fbclid;
     }
-
   } catch (e) {
     // Fail silently if URL parsing fails
   }

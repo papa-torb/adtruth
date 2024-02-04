@@ -257,9 +257,8 @@ export class BehaviorTracker {
     // Calculate statistics
     const avgVelocity = velocities.reduce((a, b) => a + b, 0) / velocities.length;
     const velocityVariance = this.calculateVariance(velocities);
-    const avgAngleChange = angles.length > 0
-      ? angles.reduce((a, b) => a + b, 0) / angles.length
-      : 0;
+    const avgAngleChange =
+      angles.length > 0 ? angles.reduce((a, b) => a + b, 0) / angles.length : 0;
 
     return {
       avgVelocity: Math.round(avgVelocity),
@@ -337,9 +336,7 @@ export class BehaviorTracker {
       timeToFirstInteraction: this.firstInteractionTime
         ? this.firstInteractionTime - this.pageLoadTime
         : null,
-      timeToFirstClick: this.clickTimes.length > 0
-        ? this.clickTimes[0] - this.pageLoadTime
-        : null,
+      timeToFirstClick: this.clickTimes.length > 0 ? this.clickTimes[0] - this.pageLoadTime : null,
       clickCount: this.clickCount,
       avgClickInterval: this.calculateAvgInterval(),
       hasInteracted: this.firstInteractionTime !== null,

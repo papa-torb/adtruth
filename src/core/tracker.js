@@ -1,6 +1,11 @@
 import { getSessionId, getVisitorId } from '../utils/session.js';
 import { parseUrlParams, getCurrentUrl, getReferrer } from '../utils/url.js';
-import { getBasicFingerprint, getEnhancedBrowserInfo, getInputMethod, getCanvasFingerprint } from '../utils/fingerprint.js';
+import {
+  getBasicFingerprint,
+  getEnhancedBrowserInfo,
+  getInputMethod,
+  getCanvasFingerprint
+} from '../utils/fingerprint.js';
 import { BehaviorTracker } from '../utils/behavior.js';
 
 class Tracker {
@@ -271,14 +276,14 @@ class Tracker {
       },
       body: payload,
       keepalive: true,
-      credentials: 'omit',  // Don't send cookies (required for CORS wildcard origins)
+      credentials: 'omit', // Don't send cookies (required for CORS wildcard origins)
       signal: controller.signal
     })
       .then(() => {
         clearTimeout(timeoutId);
         this.log('AdTruth: Data sent via fetch');
       })
-      .catch((error) => {
+      .catch(error => {
         clearTimeout(timeoutId);
         // Fail silently in production
         if (error.name === 'AbortError') {
