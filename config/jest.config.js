@@ -4,14 +4,14 @@ module.exports = {
 
   // Test match patterns
   testMatch: [
-    '**/tests/unit/**/*.test.js',
-    '**/tests/integration/**/*.test.js'
+    '<rootDir>/../tests/unit/**/*.test.js',
+    '<rootDir>/../tests/integration/**/*.test.js'
   ],
 
   // Coverage configuration
   collectCoverageFrom: [
-    'src/**/*.js',
-    '!src/**/*.test.js',
+    '<rootDir>/../src/**/*.js',
+    '!<rootDir>/../src/**/*.test.js',
     '!**/node_modules/**',
     '!**/dist/**'
   ],
@@ -25,7 +25,7 @@ module.exports = {
   ],
 
   // Coverage thresholds
-  coverageThresholds: {
+  coverageThreshold: {
     global: {
       branches: 70,
       functions: 70,
@@ -43,7 +43,7 @@ module.exports = {
   },
 
   // Setup files
-  setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/../tests/setup.js'],
 
   // Ignore patterns
   testPathIgnorePatterns: [

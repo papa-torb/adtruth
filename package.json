@@ -21,7 +21,16 @@
   },
   "prettier": "./config/.prettierrc",
   "babel": {
-    "extends": "./config/.babelrc"
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
   },
   "keywords": [
     "fraud-detection",
