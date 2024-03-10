@@ -20,18 +20,6 @@
     "format:check": "prettier --check \"src/**/*.js\" --config config/.prettierrc"
   },
   "prettier": "./config/.prettierrc",
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "node": "current"
-          }
-        }
-      ]
-    ]
-  },
   "keywords": [
     "fraud-detection",
     "click-fraud",
