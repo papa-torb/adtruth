@@ -24,6 +24,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
+    - name: Upgrade npm
+      run: npm install -g npm@latest
+
     - name: Install dependencies
       run: npm ci
 
@@ -61,6 +64,9 @@ jobs:
       with:
         node-version: '18.x'
         cache: 'npm'
+
+    - name: Upgrade npm
+      run: npm install -g npm@latest
 
     - name: Install dependencies
       run: npm ci
