@@ -26,7 +26,7 @@ This integration guide is planned but requires testing before documentation.
 
 - Jekyll may process HTML/JS during build
 - Need to ensure CDN URL isn't modified
-- May need to use {% raw %} tags in Jekyll
+- May need to use `{% raw %}` and `{% endraw %}` tags in Jekyll to prevent Liquid processing
 - Build process might affect script loading
 
 ---
