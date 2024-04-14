@@ -32,11 +32,9 @@ jobs:
 
     - name: Run ESLint
       run: npm run lint
-      continue-on-error: true
 
     - name: Check code formatting
       run: npm run format:check
-      continue-on-error: true
 
     - name: Build project
       run: npm run build
@@ -50,7 +48,6 @@ jobs:
 
     - name: Run tests
       run: npm test
-      continue-on-error: true
 
   lint:
     runs-on: ubuntu-latest
