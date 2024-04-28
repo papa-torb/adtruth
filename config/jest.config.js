@@ -1,17 +1,20 @@
 module.exports = {
+  // Set root directory to project root (one level up from config/)
+  rootDir: '..',
+
   // Test environment
   testEnvironment: 'jsdom',
 
   // Test match patterns
   testMatch: [
-    '<rootDir>/../tests/unit/**/*.test.js',
-    '<rootDir>/../tests/integration/**/*.test.js'
+    '<rootDir>/tests/unit/**/*.test.js',
+    '<rootDir>/tests/integration/**/*.test.js'
   ],
 
   // Coverage configuration
   collectCoverageFrom: [
-    '<rootDir>/../src/**/*.js',
-    '!<rootDir>/../src/**/*.test.js',
+    '<rootDir>/src/**/*.js',
+    '!<rootDir>/src/**/*.test.js',
     '!**/node_modules/**',
     '!**/dist/**'
   ],
@@ -43,7 +46,7 @@ module.exports = {
   },
 
   // Setup files
-  setupFilesAfterEnv: ['<rootDir>/../tests/setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
 
   // Ignore patterns
   testPathIgnorePatterns: [
