@@ -7,7 +7,7 @@
   <a href="https://github.com/papa-torb/adtruth"><img src="https://img.shields.io/github/stars/papa-torb/adtruth?style=social" alt="GitHub Stars"></a>
   <a href="https://github.com/papa-torb/adtruth/commits/main"><img src="https://img.shields.io/github/last-commit/papa-torb/adtruth" alt="Last Commit"></a>
   <br>
-  <a href="https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.1.2/dist/adtruth.min.js"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange" alt="CDN"></a>
+  <a href="https://cdn.jsdelivr.net/gh/papa-torb/adtruth@latest/dist/adtruth.min.js"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange" alt="CDN"></a>
   <a href="https://adtruth.io"><img src="https://img.shields.io/badge/Demo-Live-green" alt="Live Demo"></a>
   <img src="https://img.shields.io/badge/Bundle%20Size-9.6KB-blue" alt="Bundle Size">
 </p>
@@ -154,7 +154,7 @@ Add this script to your website to start detecting fraud:
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
-    js.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.1.2/dist/adtruth.min.js';
+    js.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@latest/dist/adtruth.min.js';
     js.onload = function() {
         AdTruth.init('YOUR_API_KEY_HERE');
     };
@@ -253,7 +253,7 @@ Zero configuration. No maintenance. Just install and go.
 
 ### Via CDN (Recommended)
 ```html
-<script src="https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.1.2/dist/adtruth.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/papa-torb/adtruth@latest/dist/adtruth.min.js"></script>
 <script>
   AdTruth.init('YOUR_API_KEY_HERE');
 </script>
@@ -266,7 +266,7 @@ import { useEffect } from 'react';
 function App() {
     useEffect(() => {
         const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.1.2/dist/adtruth.min.js';
+        script.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@latest/dist/adtruth.min.js';
         script.onload = () => {
             window.AdTruth.init('YOUR_API_KEY_HERE');
         };
@@ -282,7 +282,7 @@ function App() {
 export default {
     mounted() {
         const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.1.2/dist/adtruth.min.js';
+        script.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@latest/dist/adtruth.min.js';
         script.onload = () => {
             window.AdTruth.init('YOUR_API_KEY_HERE');
         };
@@ -300,7 +300,7 @@ function add_adtruth_script() {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
-            js.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.1.2/dist/adtruth.min.js';
+            js.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@latest/dist/adtruth.min.js';
             js.onload = function() {
                 AdTruth.init('YOUR_API_KEY_HERE');
             };
