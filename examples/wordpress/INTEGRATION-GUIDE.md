@@ -3,7 +3,7 @@
 **Status**: ✅ TESTED & VERIFIED
 **Difficulty**: ⭐ Easy
 **Time Required**: 2 minutes
-**Test Date**: October 31, 2025
+**Test Date**: May 14, 2024
 **Test Environment**: TasteWP (disillusionedwing.s3-tastewp.com)
 
 This guide shows you how to add AdTruth tracking to your WordPress website. We've **personally tested** this integration and confirmed it works perfectly.
@@ -90,7 +90,7 @@ This is the method we personally tested and verified working.
 
 ## 📊 What We Observed in Testing
 
-During our October 31, 2025 test on TasteWP:
+During our May 14, 2024 test on TasteWP:
 
 ✅ **What Worked**:
 - Script loaded successfully without errors

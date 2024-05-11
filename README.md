@@ -274,9 +274,9 @@ Add this script before the closing `</body>` tag on your website:
 
 ---
 
-### WordPress - ✅ TESTED & VERIFIED
+### WordPress - ✅ TESTED
 
-**Time**: 2 minutes • **Difficulty**: Easy • **Tested**: Oct 31, 2025
+**Time**: 2 minutes • **Difficulty**: Easy • **Tested**: May 14, 2024
 
 WordPress is the most popular CMS (43% of all websites). We've tested and verified this integration works perfectly.
 
