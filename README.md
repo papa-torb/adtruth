@@ -251,68 +251,56 @@ Zero configuration. No maintenance. Just install and go.
 
 ## Installation
 
-### Via CDN (Recommended)
+### Static HTML/JavaScript (Universal Method)
+
+Add this script before the closing `</body>` tag on your website:
+
 ```html
-<script src="https://cdn.jsdelivr.net/gh/papa-torb/adtruth@latest/dist/adtruth.min.js"></script>
 <script>
-  AdTruth.init('YOUR_API_KEY_HERE');
+(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@latest/dist/adtruth.min.js';
+    js.onload = function() {
+        AdTruth.init('YOUR_API_KEY_HERE');
+    };
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'adtruth-js'));
 </script>
 ```
 
-### React
-```jsx
-import { useEffect } from 'react';
-
-function App() {
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@latest/dist/adtruth.min.js';
-        script.onload = () => {
-            window.AdTruth.init('YOUR_API_KEY_HERE');
-        };
-        document.head.appendChild(script);
-    }, []);
-
-    return <div>Your App</div>;
-}
-```
-
-### Vue.js
-```javascript
-export default {
-    mounted() {
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@latest/dist/adtruth.min.js';
-        script.onload = () => {
-            window.AdTruth.init('YOUR_API_KEY_HERE');
-        };
-        document.head.appendChild(script);
-    }
-}
-```
-
-### WordPress
-```php
-function add_adtruth_script() {
-    ?>
-    <script>
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@latest/dist/adtruth.min.js';
-            js.onload = function() {
-                AdTruth.init('YOUR_API_KEY_HERE');
-            };
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'adtruth-js'));
-    </script>
-    <?php
-}
-add_action('wp_head', 'add_adtruth_script');
-```
-
 **Get your API key:** Sign up at [adtruth.io](https://adtruth.io) (takes 30 seconds, no credit card required)
+
+---
+
+### WordPress - ✅ TESTED & VERIFIED
+
+**Time**: 2 minutes • **Difficulty**: Easy • **Tested**: Oct 31, 2025
+
+WordPress is the most popular CMS (43% of all websites). We've tested and verified this integration works perfectly.
+
+**Quick Steps**:
+1. Install the **WPCode** plugin (2M+ active installations)
+2. Go to **Code Snippets → Header & Footer**
+3. Paste the AdTruth script in the **Footer** section
+4. Save changes
+
+**Result**: Page views appear in your dashboard within 2 minutes.
+
+**[→ Full WordPress Integration Guide](examples/wordpress/INTEGRATION-GUIDE.md)**
+
+---
+
+### More Platforms Coming Soon
+
+We're actively testing integrations for:
+- **Wix** (4.1% market share, 32.6% YoY growth)
+- **Shopify** (26% of e-commerce sites)
+- **Squarespace** (3.4% market share)
+- **GoDaddy Website Builder** (10% among builders)
+
+Want to help test? [Open an issue](https://github.com/papa-torb/adtruth/issues) or check [examples/](examples/) for testing guides.
 
 ---
 

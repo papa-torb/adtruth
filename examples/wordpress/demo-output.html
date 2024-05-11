@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Small Business - WordPress Demo</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            background: #0073aa;
+            color: white;
+            padding: 1rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        h1 { color: #0073aa; }
+    </style>
+    <!-- WordPress wp_head() outputs styles, meta tags, etc here -->
+</head>
+<body class="home blog wp-embed-responsive">
+
+<header>
+    <div class="container">
+        <h1>My Small Business</h1>
+        <p>A typical WordPress site for a small business</p>
+    </div>
+</header>
+
+<main class="container">
+    <article>
+        <h2>Welcome to Our Business</h2>
+        <p>This is a demo of what a typical WordPress page looks like after AdTruth tracking is installed.</p>
+        <p>The tracking script is loaded in the footer, just before the closing &lt;/body&gt; tag.</p>
+    </article>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 My Small Business. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- WordPress wp_footer() hook outputs scripts here -->
+
+<!-- AdTruth Tracking Script - Installed via WPCode Plugin -->
+<script>
+(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@latest/dist/adtruth.min.js';
+    js.onload = function() {
+        // Replace with your actual API key from https://adtruth.io/dashboard
+        AdTruth.init('demo_api_key_wordpress_example');
+    };
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'adtruth-js'));
+</script>
+
+</body>
+</html>

@@ -34,16 +34,55 @@ A demo coffee shop website demonstrating:
 
 ---
 
-## Coming Soon
+## Platform Integrations (By Market Priority)
 
-### WordPress Integration
-Step-by-step guide for integrating AdTruth with WordPress sites (both WordPress.com and self-hosted).
+Based on 2025 small business website builder market research, we're testing and documenting integrations in priority order:
 
-### Webflow Integration
-Complete guide for adding AdTruth tracking to Webflow projects via Custom Code settings.
+### 🔴 HIGH PRIORITY - Testing In Progress
 
-### Shopify Integration
-E-commerce tracking setup for Shopify stores with cart and checkout monitoring.
+#### 1. WordPress (43% of all websites)
+- **Market Share**: 63% of CMS-powered sites
+- **Status**: 🚧 Testing required
+- **Versions**: WordPress.org (self-hosted) + WordPress.com (hosted)
+- [View Guide →](wordpress/)
+
+#### 2. Wix (4.1% market share, 45% among builders)
+- **Market Share**: 8M live sites, 32.6% YoY growth
+- **Status**: 🚧 Testing required
+- **Target**: Small businesses, fastest growing platform
+- [View Guide →](wix/)
+
+#### 3. Shopify (5.6% overall, 26% of e-commerce)
+- **Market Share**: 4M live sites, dominant in e-commerce
+- **Status**: 🚧 Testing required
+- **Target**: E-commerce businesses with high ad spend
+- [View Guide →](shopify/)
+
+### 🟡 MEDIUM PRIORITY - Planned
+
+#### 4. Squarespace (3.4% market share)
+- **Market Share**: 3M live sites, 9.7% YoY growth
+- **Status**: 🚧 Testing required
+- **Target**: Design-focused businesses (photographers, artists)
+- [View Guide →](squarespace/)
+
+#### 5. GoDaddy Website Builder (10% among builders)
+- **Market Share**: Popular with budget-conscious SMBs
+- **Status**: 🚧 Testing required
+- **Target**: First-time business owners
+- [View Guide →](godaddy/)
+
+### ⚪ LOW PRIORITY - Future Consideration
+
+#### Webflow
+- **Target**: Professional/agency sites, not SMB-focused
+- **Status**: Deferred
+- [View Guide →](webflow/)
+
+#### GitHub Pages
+- **Target**: Developer community, open source projects
+- **Status**: Deferred
+- [View Guide →](github-pages/)
 
 ---
 
@@ -56,13 +95,17 @@ E-commerce tracking setup for Shopify stores with cart and checkout monitoring.
 
 ## Platform Testing Matrix
 
-| Platform | Difficulty | Integration Method | Notes |
-|----------|-----------|-------------------|-------|
-| Static HTML | ⭐ Easy | Direct script tag | Full control, no restrictions |
-| WordPress.com | ⭐⭐ Medium | Custom HTML widget | Free plan has limitations |
-| Webflow | ⭐ Easy | Project Settings → Custom Code | Premium feature only |
-| Shopify | ⭐⭐ Medium | theme.liquid file | E-commerce specific tracking |
-| Next.js | ⭐⭐⭐ Advanced | Environment variables + Client Component | See [main docs](../../README.md) |
+| Platform | Priority | Market Share | Difficulty | Integration Method |
+|----------|----------|-------------|-----------|-------------------|
+| WordPress.org | 🔴 HIGH | 43% all sites | ⭐⭐ Medium | Theme footer / Plugin |
+| Wix | 🔴 HIGH | 4.1% (fastest growth) | ⭐⭐ Medium | Custom Code (paid plans) |
+| Shopify | 🔴 HIGH | 26% e-commerce | ⭐⭐ Medium | theme.liquid / Scripts |
+| Squarespace | 🟡 MEDIUM | 3.4% | ⭐ Easy | Code Injection settings |
+| GoDaddy | 🟡 MEDIUM | 10% builders | ⭐⭐ Medium | Header/Footer scripts |
+| Static HTML | ✅ DONE | - | ⭐ Easy | Direct script tag |
+| Webflow | ⚪ LOW | Professional | ⭐ Easy | Custom Code (paid only) |
+| GitHub Pages | ⚪ LOW | Developers | ⭐⭐ Medium | Jekyll includes |
+| Next.js | ✅ TESTED | Production | ⭐⭐⭐ Advanced | See [main docs](../../README.md) |
 
 ---
 
