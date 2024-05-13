@@ -873,6 +873,9 @@ var AdTruth = (function () {
         behavior: behaviorMetrics
       };
 
+      // Phase 0: Behavioral impossibilities are detected automatically by backend
+      // No SDK changes needed - backend analyzes behavioral data on every /track request
+
       return data;
     }
 
