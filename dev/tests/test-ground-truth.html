@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ground Truth Collection Test - Phase 0 MVP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .header {
+            background: #1E3A8A;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .status {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .status.success { background: #d4edda; border-left: 4px solid #28a745; }
+        .status.error { background: #f8d7da; border-left: 4px solid #dc3545; }
+        .status.info { background: #d1ecf1; border-left: 4px solid #17a2b8; }
+        .instructions {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        button {
+            background: #1E3A8A;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #2C4DA8;
+        }
+        #console {
+            background: #000;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        .log-line {
+            margin: 5px 0;
+            padding: 2px 0;
+        }
+        .log-success { color: #0f0; }
+        .log-error { color: #f00; }
+        .log-warn { color: #ff0; }
+        .log-info { color: #0ff; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔬 Phase 0 MVP Test: Ground Truth Collection</h1>
+        <p>Testing behavioral impossibilities detection + data submission</p>
+    </div>
+
+    <div class="instructions">
+        <h3>📋 Test Instructions:</h3>
+        <ol>
+            <li><strong>Enable ground truth collection</strong> - Click "Initialize with Ground Truth"</li>
+            <li><strong>Interact naturally</strong> - Move mouse, scroll, click around for 15 seconds</li>
+            <li><strong>Wait for auto-submission</strong> - Data will be sent automatically after 15s</li>
+            <li><strong>Check the console below</strong> - See behavioral data and impossibilities detected</li>
+        </ol>
+        <p><strong>Alternative tests:</strong> Try "Bot Test" to trigger fast-exit detection, or leave page before 15s to test unload handling</p>
+    </div>
+
+    <div>
+        <button onclick="initNormal()">Initialize with Ground Truth</button>
+        <button onclick="initBot()">Bot Test (Fast Exit)</button>
+        <button onclick="showStatus()">Check Status</button>
+        <button onclick="clearConsole()">Clear Console</button>
+    </div>
+
+    <div id="status" class="status info">
+        <strong>Status:</strong> Not initialized. Click "Initialize with Ground Truth" to start.
+    </div>
+
+    <div id="console"></div>
+
+    <!-- Scrollable content area for testing -->
+    <div style="margin-top: 40px; padding: 20px; background: #f9f9f9; border-radius: 8px;">
+        <h3>📜 Scroll Test Content (Scroll Down!)</h3>
+        <p>This section provides content to test scroll detection. Scroll down to increase scroll depth metrics.</p>
+
+        <div style="height: 400px; overflow: hidden;">
+            <h4>What is Ground Truth Labeling?</h4>
+            <p>Ground truth labeling is the process of creating accurately labeled training data for machine learning models. In fraud detection, this means identifying which traffic is definitely bot vs definitely human.</p>
+
+            <h4>Why Behavioral Impossibilities?</h4>
+            <p>Behavioral impossibilities are physics violations that prove bot behavior with near 100% confidence. For example:</p>
+            <ul>
+                <li>Exiting a page in under 1 second with zero interaction</li>
+                <li>Mouse moving faster than humanly possible (>5000 px/s)</li>
+                <li>Scrolling to bottom of page in under 100ms</li>
+                <li>Clicking before page content loads</li>
+            </ul>
+
+            <h4>Phase 0 MVP Goals</h4>
+            <p>The goal of Phase 0 is to validate that behavioral impossibilities can automatically label bot traffic with high confidence. We aim to collect 1,000+ baseline events in the first week.</p>
+
+            <h4>Keep Scrolling...</h4>
+            <p style="margin-bottom: 200px;">Scroll depth is measured as a percentage from 0% (top) to 100% (bottom). The more you scroll, the higher your scroll depth metric!</p>
+
+            <p style="font-size: 24px; text-align: center; padding: 40px; background: #1E3A8A; color: white; border-radius: 8px;">
+                🎉 You reached the bottom! Good scroll depth detected.
+            </p>
+        </div>
+    </div>
+
+    <!-- Load AdTruth SDK (local build) -->
+    <script src="dist/adtruth.js"></script>
+
+    <script>
+        const statusEl = document.getElementById('status');
+        const consoleEl = document.getElementById('console');
+
+        // Override console methods to display in page
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+
+        function addLogLine(message, type = 'info') {
+            const line = document.createElement('div');
+            line.className = `log-line log-${type}`;
+            line.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            consoleEl.appendChild(line);
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+        }
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addLogLine(args.join(' '), 'success');
+        };
+
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addLogLine(args.join(' '), 'error');
+        };
+
+        console.warn = function(...args) {
+            originalWarn.apply(console, args);
+            addLogLine(args.join(' '), 'warn');
+        };
+
+        // Test functions
+        function initNormal() {
+            statusEl.className = 'status info';
+            statusEl.innerHTML = '<strong>Status:</strong> Initializing with ground truth collection enabled...';
+
+            console.log('=== INITIALIZING ADTRUTH WITH GROUND TRUTH ===');
+            console.log('Collection time: 15 seconds');
+            console.log('Endpoint: http://localhost:8000/api/training-data/');
+
+            AdTruth.init('test_api_key_12345', {
+                debug: true,
+                endpoint: 'http://localhost:8000/track/',
+                enableGroundTruth: true,
+                gtEndpoint: 'http://localhost:8000/api/training-data/',
+                gtCollectionTime: 15000
+            });
+
+            statusEl.className = 'status success';
+            statusEl.innerHTML = '<strong>Status:</strong> ✅ Ground truth collection active! Interact naturally for 15 seconds...';
+        }
+
+        function initBot() {
+            statusEl.className = 'status info';
+            statusEl.innerHTML = '<strong>Status:</strong> Initializing BOT TEST (will trigger fast-exit detection)...';
+
+            console.warn('=== BOT TEST MODE ===');
+            console.warn('Will initialize but NOT interact (triggers fast_exit_no_interaction)');
+
+            AdTruth.init('test_api_key_12345', {
+                debug: true,
+                endpoint: 'http://localhost:8000/track/',
+                enableGroundTruth: true,
+                gtEndpoint: 'http://localhost:8000/api/training-data/',
+                gtCollectionTime: 3000  // 3 seconds for faster testing
+            });
+
+            statusEl.className = 'status error';
+            statusEl.innerHTML = '<strong>Status:</strong> ⚠️ Bot test active - DO NOT INTERACT! Will auto-submit in 3s...';
+        }
+
+        function showStatus() {
+            console.log('=== CURRENT STATUS ===');
+            if (window.AdTruth && window.AdTruth._instance) {
+                const tracker = window.AdTruth._instance;
+                console.log('Initialized:', tracker.initialized);
+                console.log('Ground truth enabled:', tracker.enableGroundTruth);
+
+                if (tracker.behaviorTracker) {
+                    const metrics = tracker.behaviorTracker.getMetrics();
+                    console.log('Time on page:', Math.round(metrics.timeOnPage / 1000) + 's');
+                    console.log('Click count:', metrics.clickCount);
+                    console.log('Mouse detected:', metrics.mouseMovementDetected);
+                    console.log('Scroll depth:', Math.round(metrics.scrollDepth * 100) + '%');
+                }
+            } else {
+                console.error('AdTruth not initialized');
+            }
+        }
+
+        function clearConsole() {
+            consoleEl.innerHTML = '';
+        }
+
+        // Show instructions
+        addLogLine('Ready to test Phase 0 MVP!', 'info');
+        addLogLine('Click "Initialize with Ground Truth" to start', 'info');
+    </script>
+</body>
+</html>

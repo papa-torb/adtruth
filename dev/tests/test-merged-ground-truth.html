@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Merged Ground Truth (Phase 0)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .header {
+            background: #1E3A8A;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .status {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .status.success { background: #d4edda; border-left: 4px solid #28a745; }
+        .status.info { background: #d1ecf1; border-left: 4px solid #17a2b8; }
+        button {
+            background: #1E3A8A;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #2C4DA8;
+        }
+        #console {
+            background: #000;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        .log-line {
+            margin: 5px 0;
+        }
+        .scroll-content {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            height: 600px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>✅ Phase 0 Complete: Merged Ground Truth</h1>
+        <p>Testing automatic impossibilities detection (no configuration required)</p>
+    </div>
+
+    <div class="status info">
+        <strong>What's different:</strong>
+        <ul>
+            <li>✅ No enableGroundTruth flag needed</li>
+            <li>✅ All traffic automatically analyzed</li>
+            <li>✅ Impossibilities detected by backend</li>
+            <li>✅ Ground truth labels stored in page_views table</li>
+            <li>✅ One-liner philosophy maintained</li>
+        </ul>
+    </div>
+
+    <div>
+        <button onclick="testHumanBehavior()">Test: Human Behavior</button>
+        <button onclick="testBotBehavior()">Test: Bot Behavior (Fast Exit)</button>
+        <button onclick="testInstantClick()">Test: Instant Click</button>
+    </div>
+
+    <div id="status" class="status info">
+        <strong>Status:</strong> Ready to test. Click a button above.
+    </div>
+
+    <div id="console"></div>
+
+    <div class="scroll-content">
+        <h3>📜 Scroll Test Content</h3>
+        <p>This content allows you to test natural scrolling behavior.</p>
+        <div style="margin-top: 20px;">
+            <h4>Phase 0 MVP Complete</h4>
+            <p>The ground truth collection system is now fully integrated into the standard tracking flow. Every page view automatically gets analyzed for behavioral impossibilities.</p>
+
+            <h4>How It Works</h4>
+            <ol>
+                <li>SDK collects behavioral data (clicks, mouse movement, scroll, time on page)</li>
+                <li>SDK sends data to /track endpoint (no special configuration)</li>
+                <li>Backend automatically detects impossibilities from behavioral data</li>
+                <li>Backend computes ground truth label (bot, human, suspicious, unknown)</li>
+                <li>Backend stores everything in page_views table with confidence scores</li>
+            </ol>
+
+            <h4>Benefits</h4>
+            <ul>
+                <li>Zero configuration - works automatically</li>
+                <li>Maintains one-liner philosophy</li>
+                <li>100% of traffic labeled (not just a sample)</li>
+                <li>High-quality training data for ML models</li>
+                <li>Physics-based ground truth (not subjective)</li>
+            </ul>
+
+            <h4>Keep scrolling...</h4>
+            <p style="margin-bottom: 300px;">The more you interact naturally, the more human-like behavioral signals you generate!</p>
+
+            <p style="font-size: 24px; text-align: center; padding: 40px; background: #1E3A8A; color: white; border-radius: 8px;">
+                🎉 You reached the bottom!
+            </p>
+        </div>
+    </div>
+
+    <!-- Load AdTruth SDK (local build) -->
+    <script src="dist/adtruth.js"></script>
+
+    <script>
+        const statusEl = document.getElementById('status');
+        const consoleEl = document.getElementById('console');
+
+        // Console logging
+        const originalLog = console.log;
+        const originalError = console.error;
+
+        function addLogLine(message, type = 'info') {
+            const line = document.createElement('div');
+            line.className = 'log-line';
+            line.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            consoleEl.appendChild(line);
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+        }
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addLogLine(args.join(' '));
+        };
+
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addLogLine(args.join(' '), 'error');
+        };
+
+        // Initialize AdTruth (ONE LINER - no ground truth config needed!)
+        AdTruth.init('test_api_key_12345', {
+            debug: true,
+            endpoint: 'http://localhost:8000/track/'
+        });
+
+        console.log('✅ AdTruth initialized (ground truth automatic)');
+
+        // Test functions
+        function testHumanBehavior() {
+            statusEl.className = 'status info';
+            statusEl.innerHTML = '<strong>Test:</strong> Simulating human behavior (scroll, wait, then check database)...';
+            console.log('=== HUMAN BEHAVIOR TEST ===');
+            console.log('Interact naturally for 10 seconds, then check database');
+        }
+
+        function testBotBehavior() {
+            statusEl.className = 'status info';
+            statusEl.innerHTML = '<strong>Test:</strong> Fast exit test - DO NOT INTERACT for 5 seconds...';
+            console.log('=== BOT BEHAVIOR TEST (Fast Exit) ===');
+            console.log('DO NOT click, scroll, or move mouse for 5 seconds');
+        }
+
+        function testInstantClick() {
+            statusEl.className = 'status success';
+            statusEl.innerHTML = '<strong>Test:</strong> Instant click detected! Check backend for impossibility.';
+            console.log('=== INSTANT CLICK TEST ===');
+            console.log('Clicked at ' + performance.now() + 'ms (should be <200ms)');
+            console.log('Backend should detect: instant_interaction impossibility');
+            console.log('Expected label: bot');
+        }
+
+        // Show ready message
+        addLogLine('Ready to test! SDK will send data automatically on page unload');
+        addLogLine('Or use Ctrl+Shift+I to see browser console logs');
+    </script>
+</body>
+</html>
