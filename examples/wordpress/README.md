@@ -1,83 +1,59 @@
-# WordPress Integration (Testing Required)
+# WordPress Integration
 
 **Priority**: 🔴 HIGH (43% of all websites, 63% of CMS market)
-**Status**: 🚧 Not yet tested
+**Status**: ✅ TESTED & VERIFIED (May 2024)
 **Market Data**: Most popular website platform, powers nearly half the internet
 
-This integration guide is planned but requires testing before documentation. WordPress is our #1 priority due to massive market share among small businesses.
+This integration has been tested on a live WordPress site and confirmed working. Integration takes approximately 2 minutes using the WPCode plugin method.
 
-## 📖 Integration Guide
+## Integration Guide
 
 **[→ Read the Full Integration Guide](INTEGRATION-GUIDE.md)**
 
 Our comprehensive guide covers:
-- ✅ **Method 1**: Using WPCode plugin (RECOMMENDED - 2M+ active installs)
-- ✅ **Method 2**: Theme Customizer (no plugin needed)
-- ✅ **Method 3**: Manual theme file editing (advanced)
-- ✅ **Method 4**: functions.php hook (for developers)
+- Method 1: Using WPCode plugin (RECOMMENDED - tested and verified)
+- Method 2: Theme functions (for developers)
+- Method 3: Direct theme edit (advanced users)
 
-**Ready to use!** This guide has been written based on WordPress best practices and user research.
+**Test Results**: Script loaded successfully, page views appeared in dashboard within 2 minutes.
 
-## 🧪 Testing Checklist
+## Quick Start
 
-**We need YOUR help to test!** If you have a WordPress site, please try our integration and report back:
+The fastest way to integrate AdTruth with WordPress:
 
-- [ ] Test on WordPress.com (Business plan $25/mo+)
-- [ ] Test on self-hosted WordPress (most common)
-- [ ] Test with WPCode plugin (Method 1)
-- [ ] Test with popular themes (Astra, GeneratePress, OceanWP)
-- [ ] Document any plugin conflicts
-- [ ] Verify tracking works across pages
-- [ ] Test with caching plugins (WP Super Cache, W3 Total Cache)
-- [ ] Verify script survives theme updates
+1. Install the **WPCode** plugin from WordPress admin (Plugins > Add New)
+2. Go to **Code Snippets > Header & Footer**
+3. Paste the AdTruth tracking code in the **Footer** section
+4. Save and verify
 
-**Found an issue?** [Report it on GitHub](https://github.com/papa-torb/adtruth/issues)
+See the [full guide](INTEGRATION-GUIDE.md) for detailed instructions.
 
-## ✅ Integration Methods (Documented)
+## Test Results (May 14, 2024)
 
-Based on research of 2M+ WordPress users, we've documented these methods:
+Tested on TasteWP test environment:
 
-1. **WPCode Plugin** (RECOMMENDED) - 2M+ active installations
-   - Easiest for non-technical users
-   - Survives theme updates
-   - One-click installation
+- ✅ Script loaded without errors
+- ✅ Page views tracked within 2 minutes
+- ✅ Traffic source correctly identified
+- ✅ All tracking data appeared in dashboard
+- ⚠️ Test environment traffic flagged as suspicious (expected behavior)
 
-2. **Theme Customizer** - Built into WordPress
-   - No plugin required
-   - Limited theme support
+## WordPress.com vs WordPress.org
 
-3. **Theme File Editor** (footer.php) - Advanced
-   - Requires file editing
-   - Lost on theme updates
-   - Higher risk of site breakage
+**WordPress.org (Self-Hosted)**: All methods work. This is what most small businesses use.
 
-4. **functions.php Hook** - For developers
-   - Most control and flexibility
-   - Requires PHP knowledge
+**WordPress.com (Hosted)**:
+- Free/Personal/Premium plans: Cannot add custom scripts
+- Business plan ($25/mo) or higher: Can use custom code
 
-**All methods documented** in [INTEGRATION-GUIDE.md](INTEGRATION-GUIDE.md)
+## Files in This Directory
 
-## Known Considerations
-
-- WordPress.com free plans have limitations on custom scripts
-- Some themes may strip custom JavaScript
-- Need to verify compatibility with popular plugins
-
----
-
-## 📁 Files in This Directory
-
-- **[INTEGRATION-GUIDE.md](INTEGRATION-GUIDE.md)** - Complete step-by-step integration instructions
-- **[demo-output.html](demo-output.html)** - Example of WordPress page with AdTruth installed
+- **[INTEGRATION-GUIDE.md](INTEGRATION-GUIDE.md)** - Complete step-by-step instructions
+- **[demo-output.html](demo-output.html)** - Example WordPress page with AdTruth installed
 - **README.md** - This file
 
-## 🤝 Want to Help?
+## Need Help?
 
-We need WordPress users to test our integration guide! If you have a WordPress site:
-
-1. Follow the [Integration Guide](INTEGRATION-GUIDE.md)
-2. Report what worked (or didn't) on [GitHub Issues](https://github.com/papa-torb/adtruth/issues)
-3. Share your WordPress setup (theme, plugins, hosting)
-4. Help us make this guide even better!
-
-**Your feedback makes AdTruth better for everyone.** 🙏
+- Check your API key: [AdTruth Dashboard](https://adtruth.io/dashboard)
+- Full documentation: [GitHub Repository](https://github.com/papa-torb/adtruth)
+- Report issues: [GitHub Issues](https://github.com/papa-torb/adtruth/issues)
