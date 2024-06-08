@@ -292,10 +292,30 @@ WordPress is the most popular CMS (43% of all websites). We've tested and verifi
 
 ---
 
+### Wix - ⏳ TEST PENDING
+
+**Time**: ~5 minutes • **Difficulty**: Easy • **Status**: Documentation ready, testing needed
+
+Wix is the fastest-growing website builder (32.6% YoY growth), popular with small businesses. Our integration guide is complete and ready to use.
+
+**Requirements**: Paid Wix plan (Light or higher, $17/mo), connected custom domain
+
+**Quick Steps**:
+1. Go to **Settings → Custom Code** in your Wix dashboard
+2. Click **+ Add Custom Code**
+3. Paste the AdTruth script
+4. Choose "All pages" and "Body - end"
+5. Click Apply
+
+**Note**: Custom code requires a paid Wix plan. We need users to test and verify this integration works as documented.
+
+**[→ Full Wix Integration Guide](examples/wix/INTEGRATION-GUIDE.md)**
+
+---
+
 ### More Platforms Coming Soon
 
 We're actively testing integrations for:
-- **Wix** (4.1% market share, 32.6% YoY growth)
 - **Shopify** (26% of e-commerce sites)
 - **Squarespace** (3.4% market share)
 - **GoDaddy Website Builder** (10% among builders)
