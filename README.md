@@ -30,19 +30,23 @@
 
 ---
 
-You're spending $3,000/month on paid traffic. Conversion rate: 5%.
+## Ad Fraud Detection for Small Businesses
+
+Detect click fraud, bot traffic, and fake conversions from Google Ads, Facebook Ads, Instagram, and TikTok. AdTruth is a free, open-source ad fraud detection tool that helps small businesses identify which advertising platforms waste their budget on fraudulent traffic.
+
+You're spending $3,000/month on paid ads. Conversion rate: 5%.
 
 **30% of those clicks might be fake.**
 
-Not obvious bots—AI-powered fraud that mimics human behavior perfectly. Natural mouse movement. Human-like scrolling. They visit your page, bounce after 8 seconds. You just paid $2.50 for nothing.
+Not obvious bots—AI-powered ad fraud that mimics human behavior perfectly. Natural mouse movement. Human-like scrolling. They visit your page, bounce after 8 seconds. You just paid $2.50 for nothing.
 
-Enterprise fraud tools (ClickCease, CHEQ, TrafficGuard) cost thousands per month.
+Enterprise fraud detection tools (ClickCease, CHEQ, TrafficGuard) cost thousands per month.
 
-We built AdTruth to give small businesses the same visibility, completely free. See which platforms waste your budget on bots. Shift spending to real customers.
+We built AdTruth to give small businesses the same ad fraud visibility, completely free. Detect bot traffic and fraudulent clicks across all your advertising platforms. See which channels waste your budget on fake traffic and shift spending to real customers.
 
 ---
 
-## The Reality of Ad Fraud
+## The Reality of Ad Fraud and Click Fraud
 
 <table>
 <tr>
