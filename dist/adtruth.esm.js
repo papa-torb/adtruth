@@ -948,7 +948,7 @@ const tracker = new Tracker();
 
 /**
  * AdTruth SDK - Open-source fraud detection for paid advertising
- * @version 0.2.1
+ * @version 0.3.2
  * @license MIT
  */
 
@@ -1012,7 +1012,7 @@ const AdTruth = {
   /**
    * Version information
    */
-  version: '0.2.1',
+  version: '0.3.2',
 
   // Expose tracker for debugging (only in debug mode)
   get _debug() {
