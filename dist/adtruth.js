@@ -654,6 +654,7 @@ var AdTruth = (function () {
       this.hasUnloadListener = false;
       this.periodicTimer = null;
       this.unloadEventSent = false;
+      this.honeypotTriggered = false;
     }
 
     /**
@@ -698,6 +699,9 @@ var AdTruth = (function () {
         // Set up page unload tracking for accurate behavior data
         this.setupUnloadTracking();
 
+        // Set up honeypot detection for ground truth labeling (Phase 1)
+        this.setupHoneypotDetection();
+
         // Optional: Enable periodic updates (default: disabled)
         // Users can enable with: AdTruth.init(apiKey, { periodicUpdates: true })
         if (options.periodicUpdates) {
@@ -706,6 +710,52 @@ var AdTruth = (function () {
       } catch (error) {
         // Don't let initialization errors break client sites
         this.log('AdTruth: Initialization error', error);
+      }
+    }
+
+    /**
+     * Set up honeypot detection for ground truth labeling
+     * Listens for interactions with invisible honeypot elements
+     * Phase 1: Honeypot detection for automatic bot labeling
+     */
+    setupHoneypotDetection() {
+      try {
+        // Look for honeypot element (users add this to their HTML)
+        const honeypot = document.getElementById('adtruth-hp');
+
+        if (!honeypot) {
+          this.log('AdTruth: No honeypot element found (optional)');
+          return;
+        }
+
+        this.log('AdTruth: Honeypot detection enabled');
+
+        // Track honeypot interactions (bots clicking invisible elements)
+        const honeypotEvents = ['click', 'focus', 'change', 'mousedown', 'touchstart'];
+
+        honeypotEvents.forEach(eventType => {
+          honeypot.addEventListener(eventType, () => {
+            if (!this.honeypotTriggered) {
+              this.honeypotTriggered = true;
+              this.log(`AdTruth: Honeypot triggered (${eventType})`);
+            }
+          });
+        });
+
+        // Also check for honeypot interactions on all child elements
+        const honeypotInputs = honeypot.querySelectorAll('input, a, button, select, textarea');
+        honeypotInputs.forEach(element => {
+          honeypotEvents.forEach(eventType => {
+            element.addEventListener(eventType, () => {
+              if (!this.honeypotTriggered) {
+                this.honeypotTriggered = true;
+                this.log(`AdTruth: Honeypot triggered on child element (${eventType})`);
+              }
+            });
+          });
+        });
+      } catch (error) {
+        this.log('AdTruth: Error setting up honeypot detection', error);
       }
     }
 
@@ -870,7 +920,9 @@ var AdTruth = (function () {
           canvas: this.canvasFingerprint ? this.canvasFingerprint.hash : null
         },
         input: inputMethod,
-        behavior: behaviorMetrics
+        behavior: behaviorMetrics,
+        // Phase 1: Honeypot detection for ground truth labeling
+        honeypot_triggered: this.honeypotTriggered
       };
 
       // Phase 0: Behavioral impossibilities are detected automatically by backend
@@ -951,7 +1003,7 @@ var AdTruth = (function () {
 
   /**
    * AdTruth SDK - Open-source fraud detection for paid advertising
-   * @version 0.2.1
+   * @version 0.3.1
    * @license MIT
    */
 
@@ -1015,7 +1067,7 @@ var AdTruth = (function () {
     /**
      * Version information
      */
-    version: '0.2.1',
+    version: '0.3.1',
 
     // Expose tracker for debugging (only in debug mode)
     get _debug() {
