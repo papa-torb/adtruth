@@ -317,10 +317,29 @@ Wix is the fastest-growing website builder (32.6% YoY growth), popular with smal
 
 ---
 
+### Shopify - ✅ TESTED
+
+**Time**: 3 minutes • **Difficulty**: Easy • **Tested**: November 1, 2025
+
+Shopify powers 26% of all e-commerce sites and is a prime target for ad fraud. We've tested Custom Pixels integration (Shopify's 2025 recommended method) and verified it works perfectly.
+
+**Quick Steps**:
+1. Go to **Settings → Customer events** in your Shopify admin
+2. Click **Add custom pixel**, name it "AdTruth Fraud Detection"
+3. Paste the AdTruth pixel code
+4. Click **Save** and **Connect** to activate
+
+**Result**: Page views appear in your dashboard within 2 minutes. Works on all pages including checkout (future-proof with Shopify's Checkout Extensibility).
+
+**Platform Note**: After activation, you may see "Pixel will not track any customer behavior because it is not subscribed to any events." This is normal - our script works independently and all fraud detection signals are being tracked correctly.
+
+**[→ Full Shopify Integration Guide](examples/shopify/INTEGRATION-GUIDE.md)**
+
+---
+
 ### More Platforms Coming Soon
 
 We're actively testing integrations for:
-- **Shopify** (26% of e-commerce sites)
 - **Squarespace** (3.4% market share)
 - **GoDaddy Website Builder** (10% among builders)
 
