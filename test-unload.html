@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdTruth Unload Tracking Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #0A2463;
+        }
+        .test-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .behavior-demo {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border: 2px dashed #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background: #0A2463;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0d3380;
+        }
+        .metrics {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .scroll-content {
+            height: 1000px;
+            background: linear-gradient(to bottom, #e3f2fd 0%, #f5f5f5 100%);
+            padding: 20px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 AdTruth Unload Tracking Test</h1>
+
+        <div class="test-info">
+            <strong>Test Instructions:</strong>
+            <ol>
+                <li>Interact with the page (click buttons, scroll, move mouse)</li>
+                <li>Open browser DevTools Console (F12)</li>
+                <li>Enable "Preserve log" in Console settings</li>
+                <li>Close this tab or navigate away</li>
+                <li>Check Console for "Sending final event on page unload" message</li>
+                <li>Check your database for the page view with rich behavior data</li>
+            </ol>
+        </div>
+
+        <div class="behavior-demo">
+            <h3>Behavior Data Collection</h3>
+            <p>Click these buttons, scroll the page, and move your mouse around to generate behavior data:</p>
+
+            <button onclick="alert('Button 1 clicked!')">Click Button 1</button>
+            <button onclick="alert('Button 2 clicked!')">Click Button 2</button>
+            <button onclick="alert('Button 3 clicked!')">Click Button 3</button>
+            <button onclick="window.scrollTo(0, 500)">Scroll Down</button>
+            <button onclick="window.scrollTo(0, 0)">Scroll Up</button>
+
+            <div class="metrics" id="metrics">
+                <div>Loading metrics...</div>
+            </div>
+        </div>
+
+        <div class="scroll-content">
+            <h3>Scroll Area</h3>
+            <p>Scroll down to increase scroll depth metric...</p>
+            <p style="margin-top: 400px;">Middle of scroll area</p>
+            <p style="margin-top: 400px;">Bottom of scroll area - You've scrolled 100%!</p>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <h3>Test Navigation</h3>
+            <button onclick="window.location.href='https://google.com'">Navigate Away (External)</button>
+            <button onclick="window.close()">Close Tab</button>
+            <button onclick="window.location.reload()">Reload Page</button>
+        </div>
+    </div>
+
+    <!-- AdTruth Tracking Script -->
+    <script src="dist/adtruth.js"></script>
+    <script>
+        // Initialize AdTruth with debug mode enabled
+        AdTruth.init('test_api_key_12345', {
+            debug: true,  // Enable console logging
+            endpoint: 'http://localhost:8000/track'  // Local backend for testing
+        });
+
+        console.log('%c🔍 AdTruth Test Page Loaded', 'color: #0A2463; font-size: 16px; font-weight: bold;');
+        console.log('%cDebug mode is ON - Watch for tracking events', 'color: #666;');
+        console.log('%cUnload tracking will fire when you close/navigate away from this page', 'color: #666;');
+
+        // Update metrics display every 2 seconds
+        function updateMetrics() {
+            try {
+                const metrics = AdTruth.getMetrics ? AdTruth.getMetrics() : null;
+                const metricsDiv = document.getElementById('metrics');
+
+                if (metrics) {
+                    metricsDiv.innerHTML = `
+                        <strong>Current Behavior Metrics:</strong><br>
+                        Time on Page: ${Math.round(metrics.timeOnPage / 1000)}s<br>
+                        Click Count: ${metrics.clickCount}<br>
+                        Scroll Depth: ${(metrics.scrollDepth * 100).toFixed(1)}%<br>
+                        Mouse Movement: ${metrics.mouseMovementDetected ? 'Yes' : 'No'}<br>
+                        Mouse Patterns: ${metrics.mousePatterns ? 'Detected' : 'None'}<br>
+                        Touch Patterns: ${metrics.touchPatterns && metrics.touchPatterns.tapCount > 0 ? 'Detected' : 'None'}
+                    `;
+                } else {
+                    metricsDiv.innerHTML = '<em>Metrics not available (SDK may not have getMetrics method)</em>';
+                }
+            } catch (e) {
+                console.error('Error updating metrics:', e);
+            }
+        }
+
+        // Update metrics every 2 seconds
+        setInterval(updateMetrics, 2000);
+        updateMetrics();
+
+        // Log when visibility changes
+        document.addEventListener('visibilitychange', () => {
+            console.log(`%cVisibility changed: ${document.hidden ? 'HIDDEN' : 'VISIBLE'}`, 'color: orange;');
+        });
+    </script>
+</body>
+</html>

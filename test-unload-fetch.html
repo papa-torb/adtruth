@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdTruth Unload Test (Fetch Fallback)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 { color: #0A2463; }
+        button {
+            background: #0A2463;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+        }
+        button:hover { background: #0d3380; }
+        .info { background: #e3f2fd; padding: 15px; border-radius: 4px; margin: 20px 0; }
+        .scroll-content { height: 1000px; background: linear-gradient(to bottom, #e3f2fd 0%, #f5f5f5 100%); padding: 20px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 AdTruth Unload Test (Fetch Fallback)</h1>
+
+        <div class="info">
+            <strong>This version uses FETCH instead of sendBeacon for reliable localhost testing.</strong>
+            <ol>
+                <li>Open DevTools Console (F12) and enable "Persist Logs"</li>
+                <li>Interact with the page (click, scroll, move mouse)</li>
+                <li>Wait 10-20 seconds</li>
+                <li>Click "Navigate Away" button</li>
+                <li>Check Console and database</li>
+            </ol>
+        </div>
+
+        <div style="margin: 30px 0;">
+            <button onclick="alert('Clicked!')">Click Me 1</button>
+            <button onclick="alert('Clicked!')">Click Me 2</button>
+            <button onclick="alert('Clicked!')">Click Me 3</button>
+            <button onclick="window.scrollTo(0, 500)">Scroll Down</button>
+        </div>
+
+        <div class="scroll-content">
+            <h3>Scroll Area</h3>
+            <p>Scroll to increase metrics...</p>
+            <p style="margin-top: 800px;">Bottom reached!</p>
+        </div>
+
+        <div style="text-align: center;">
+            <button onclick="window.location.href='https://google.com'">Navigate Away</button>
+        </div>
+    </div>
+
+    <script src="dist/adtruth.js"></script>
+    <script>
+        // Monkey-patch sendBeacon to force fetch fallback
+        const originalSendBeacon = navigator.sendBeacon;
+        navigator.sendBeacon = function() {
+            console.log('%c⚠️  sendBeacon disabled for testing, using fetch', 'color: orange;');
+            return false; // Force fallback to fetch
+        };
+
+        // Initialize AdTruth
+        AdTruth.init('test_api_key_12345', {
+            debug: true,
+            endpoint: 'http://localhost:8000/track'
+        });
+
+        console.log('%c🔍 AdTruth Test (Fetch Fallback) Loaded', 'color: #0A2463; font-size: 16px; font-weight: bold;');
+        console.log('%cThis version uses fetch() for reliable localhost testing', 'color: #666;');
+    </script>
+</body>
+</html>
