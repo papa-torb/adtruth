@@ -744,28 +744,11 @@ var AdTruth = (function () {
           this.log(`AdTruth: Payload size: ${payloadSize} bytes`);
           this.log('AdTruth: Behavior data:', data.behavior);
 
-          // Use sendBeacon for guaranteed delivery
-          if (navigator.sendBeacon) {
-            const blob = new Blob([payload], { type: 'application/json' });
-
-            // SECURITY NOTE: API key in query param is necessary because sendBeacon
-            // doesn't support custom headers. Key is validated server-side and has
-            // limited permissions (write-only to page_views table).
-            const urlWithKey = `${this.apiEndpoint}?apiKey=${encodeURIComponent(this.apiKey)}`;
-
-            const success = navigator.sendBeacon(urlWithKey, blob);
-            this.log(`AdTruth: sendBeacon ${success ? 'succeeded' : 'failed'}`);
-
-            // Fallback if sendBeacon fails (network issue, size limit, etc.)
-            if (!success && payloadSize < 60 * 1024) {
-              this.log('AdTruth: sendBeacon failed, trying fetch fallback');
-              this.sendViaFetch(payload);
-            }
-          } else {
-            // Fallback to fetch with keepalive for older browsers
-            this.log('AdTruth: sendBeacon not available, using fetch');
-            this.sendViaFetch(payload);
-          }
+          // Use fetch with keepalive for reliable page unload tracking
+          // Note: We don't use sendBeacon because it always sends credentials,
+          // which conflicts with wildcard CORS origins. Fetch with keepalive
+          // gives us full control over credentials and works reliably.
+          this.sendViaFetch(payload);
         } catch (error) {
           this.log('AdTruth: Error sending final event', error);
         }
