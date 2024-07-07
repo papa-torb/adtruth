@@ -1,6 +1,6 @@
 {
   "name": "@adtruth/sdk",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Open-source fraud detection SDK for identifying invalid traffic in paid advertising",
   "main": "dist/adtruth.js",
   "module": "dist/adtruth.esm.js",

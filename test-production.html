@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdTruth v0.2.0 Production Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #0A2463;
+            margin-bottom: 10px;
+        }
+        .version {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .test-info {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196F3;
+        }
+        .test-info h3 {
+            margin-top: 0;
+            color: #0A2463;
+        }
+        .test-info ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .test-info li {
+            margin: 8px 0;
+        }
+        .behavior-demo {
+            margin: 30px 0;
+            padding: 25px;
+            background: #f9f9f9;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+        }
+        button {
+            background: #0A2463;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #0d3380;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .metrics {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            border-left: 4px solid #ffc107;
+        }
+        .scroll-content {
+            height: 1200px;
+            background: linear-gradient(to bottom, #e3f2fd 0%, #f5f5f5 100%);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .navigate-section {
+            text-align: center;
+            margin: 30px 0;
+            padding: 25px;
+            background: #f0f0f0;
+            border-radius: 8px;
+        }
+        .navigate-section h3 {
+            color: #0A2463;
+            margin-bottom: 15px;
+        }
+        .success {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        .warning {
+            color: #f57c00;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 AdTruth v0.2.0 Production Test</h1>
+        <div class="version">Testing SDK from jsDelivr CDN (latest version)</div>
+
+        <div class="test-info">
+            <h3>📋 Test Instructions</h3>
+            <ol>
+                <li><strong>Open DevTools Console</strong> (F12) and enable "Persist Logs"</li>
+                <li><strong>Interact with the page:</strong>
+                    <ul>
+                        <li>Click the buttons below multiple times</li>
+                        <li>Scroll down and back up</li>
+                        <li>Move your mouse around the page</li>
+                        <li>Stay on the page for at least 10-15 seconds</li>
+                    </ul>
+                </li>
+                <li><strong>Watch the Live Metrics</strong> update every 2 seconds</li>
+                <li><strong>Navigate Away</strong> using one of the buttons below</li>
+                <li><strong>Check Console</strong> for "Sending final event on page unload" message</li>
+                <li><strong>Verify in Database</strong> that behavior data was saved</li>
+            </ol>
+        </div>
+
+        <div class="behavior-demo">
+            <h3>🎮 Interaction Area</h3>
+            <p>Click these buttons, scroll the page, and move your mouse to generate behavior data:</p>
+
+            <button onclick="handleClick('Button 1')">Click Button 1</button>
+            <button onclick="handleClick('Button 2')">Click Button 2</button>
+            <button onclick="handleClick('Button 3')">Click Button 3</button>
+            <button onclick="window.scrollTo({top: 600, behavior: 'smooth'})">Scroll Down</button>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Scroll Up</button>
+
+            <div class="metrics" id="metrics">
+                <div>Loading metrics...</div>
+            </div>
+        </div>
+
+        <div class="scroll-content">
+            <h3>📜 Scroll Area</h3>
+            <p>Scroll down to increase scroll depth metric...</p>
+            <p style="margin-top: 300px;">🎯 25% scrolled</p>
+            <p style="margin-top: 300px;">🎯 50% scrolled</p>
+            <p style="margin-top: 300px;">🎯 75% scrolled</p>
+            <p style="margin-top: 200px;">🎉 100% - You've reached the bottom!</p>
+        </div>
+
+        <div class="navigate-section">
+            <h3>🚀 Test Navigation (Triggers Unload Tracking)</h3>
+            <p>Click one of these buttons to navigate away and trigger the final data send:</p>
+            <button onclick="window.location.href='https://google.com'">Navigate to Google</button>
+            <button onclick="window.location.href='https://adtruth.io'">Go to AdTruth.io</button>
+            <button onclick="window.location.reload()">Reload Page</button>
+        </div>
+
+        <div class="test-info">
+            <h3>✅ What to Expect</h3>
+            <p class="success">Expected in Console:</p>
+            <ul>
+                <li>"AdTruth: Page unload tracking enabled"</li>
+                <li>"AdTruth: Sending final event on page unload"</li>
+                <li>"AdTruth: Payload size: [X] bytes"</li>
+                <li>"AdTruth: sendBeacon succeeded" (or "Data sent via fetch")</li>
+            </ul>
+            <p class="success">Expected in Database:</p>
+            <ul>
+                <li>timeOnPage: 10,000+ ms (10+ seconds, not 5ms!)</li>
+                <li>clickCount: Number of button clicks</li>
+                <li>scrollDepth: 0.0 to 1.0 (percentage scrolled)</li>
+                <li>mouseMovementDetected: true</li>
+                <li>mousePatterns: velocity, jitter, distance data</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Load AdTruth SDK from jsDelivr CDN (v0.2.0) -->
+    <script src="https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.2.0/dist/adtruth.min.js"></script>
+    <script>
+        // Initialize AdTruth with production endpoint
+        AdTruth.init('test_api_key_12345', {
+            debug: true,  // Enable console logging
+            endpoint: 'https://api.adtruth.io/track'  // Production API
+        });
+
+        console.log('%c🎉 AdTruth v0.2.0 Production Test Loaded', 'color: #0A2463; font-size: 16px; font-weight: bold;');
+        console.log('%c✅ SDK loaded from: https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.2.0/dist/adtruth.min.js', 'color: #2e7d32;');
+        console.log('%c✅ Endpoint: https://api.adtruth.io/track', 'color: #2e7d32;');
+        console.log('%c📊 Debug mode is ON - Watch for tracking events', 'color: #666;');
+
+        // Handle button clicks with feedback
+        function handleClick(buttonName) {
+            const feedback = document.createElement('div');
+            feedback.textContent = `✓ ${buttonName} clicked!`;
+            feedback.style.cssText = 'color: #2e7d32; font-weight: bold; margin: 5px;';
+            document.querySelector('.behavior-demo').appendChild(feedback);
+            setTimeout(() => feedback.remove(), 2000);
+        }
+
+        // Update metrics display every 2 seconds
+        function updateMetrics() {
+            try {
+                const metrics = AdTruth.getMetrics ? AdTruth.getMetrics() : null;
+                const metricsDiv = document.getElementById('metrics');
+
+                if (metrics) {
+                    const timeOnPageSec = Math.round(metrics.timeOnPage / 1000);
+                    const scrollPercent = (metrics.scrollDepth * 100).toFixed(1);
+
+                    metricsDiv.innerHTML = `
+                        <strong>📊 Live Behavior Metrics:</strong><br><br>
+                        ⏱️  Time on Page: <span class="success">${timeOnPageSec}s</span> (${metrics.timeOnPage}ms)<br>
+                        🖱️  Click Count: <span class="success">${metrics.clickCount}</span><br>
+                        📜 Scroll Depth: <span class="success">${scrollPercent}%</span><br>
+                        🎯 Mouse Movement: <span class="${metrics.mouseMovementDetected ? 'success' : 'warning'}">${metrics.mouseMovementDetected ? 'Detected ✓' : 'None yet'}</span><br>
+                        📈 Mouse Patterns: <span class="${metrics.mousePatterns && metrics.mousePatterns.samples > 0 ? 'success' : 'warning'}">${metrics.mousePatterns && metrics.mousePatterns.samples > 0 ? metrics.mousePatterns.samples + ' samples' : 'None yet'}</span><br>
+                        📱 Touch Patterns: <span class="${metrics.touchPatterns && metrics.touchPatterns.tapCount > 0 ? 'success' : 'warning'}">${metrics.touchPatterns && metrics.touchPatterns.tapCount > 0 ? 'Detected ✓' : 'None (desktop)'}</span>
+                    `;
+                } else {
+                    metricsDiv.innerHTML = '<em class="warning">Metrics not available (SDK may not have getMetrics method)</em>';
+                }
+            } catch (e) {
+                console.error('Error updating metrics:', e);
+            }
+        }
+
+        // Update metrics every 2 seconds
+        setInterval(updateMetrics, 2000);
+        updateMetrics();
+
+        // Log when visibility changes
+        document.addEventListener('visibilitychange', () => {
+            console.log(`%c👁️ Visibility changed: ${document.hidden ? 'HIDDEN' : 'VISIBLE'}`, 'color: orange;');
+        });
+
+        // Warn before unload
+        window.addEventListener('beforeunload', () => {
+            console.log('%c⚠️ beforeunload event fired', 'color: orange; font-weight: bold;');
+        });
+    </script>
+</body>
+</html>
