@@ -288,6 +288,7 @@ class Tracker {
       },
       body: payload,
       keepalive: true,
+      credentials: 'omit',  // Don't send cookies (required for CORS wildcard origins)
       signal: controller.signal
     })
       .then(() => {
