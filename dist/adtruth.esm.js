@@ -70,6 +70,7 @@ function getVisitorId() {
     }
   }
 }
+// Note: This project is still under development.
 
 /**
  * Parse URL parameters including UTM parameters
@@ -123,6 +124,7 @@ function getCurrentUrl() {
 function getReferrer() {
   return document.referrer || '';
 }
+// Note: This project is still under development.
 
 /**
  * Browser fingerprinting utilities for fraud detection
@@ -272,6 +274,8 @@ function getCanvasFingerprint() {
     return null;
   }
 }
+
+// Note: This project is still under development.
 
 /**
  * Behavioral tracking utilities for fraud detection
@@ -635,6 +639,8 @@ class BehaviorTracker {
   }
 }
 
+// Note: This project is still under development.
+
 class Tracker {
   constructor() {
     this.apiKey = null;
@@ -643,6 +649,9 @@ class Tracker {
     this.debug = false;
     this.behaviorTracker = null;
     this.fingerprint = null;
+    this.hasUnloadListener = false;
+    this.periodicTimer = null;
+    this.unloadEventSent = false;
   }
 
   /**
@@ -684,11 +693,124 @@ class Tracker {
         this.canvasFingerprint = null;
       }
 
-      // Track the initial pageview
-      this.track();
+      // Set up page unload tracking for accurate behavior data
+      this.setupUnloadTracking();
+
+      // Optional: Enable periodic updates (default: disabled)
+      // Users can enable with: AdTruth.init(apiKey, { periodicUpdates: true })
+      if (options.periodicUpdates) {
+        this.startPeriodicUpdates(options.updateInterval || 30000);
+      }
     } catch (error) {
       // Don't let initialization errors break client sites
       this.log('AdTruth: Initialization error', error);
+    }
+  }
+
+  /**
+   * Set up page unload tracking to capture complete behavior data
+   * Uses sendBeacon for guaranteed delivery even as page unloads
+   */
+  setupUnloadTracking() {
+    if (this.hasUnloadListener) {
+      return; // Already set up
+    }
+
+    const sendFinalEvent = () => {
+      try {
+        if (!this.initialized || !this.behaviorTracker) {
+          return;
+        }
+
+        // Use atomic flag to prevent duplicate sends (both events fire nearly simultaneously)
+        if (this.unloadEventSent) {
+          this.log('AdTruth: Final event already sent');
+          return;
+        }
+        this.unloadEventSent = true;
+
+        // Clean up periodic updates to prevent memory leaks
+        this.stopPeriodicUpdates();
+
+        // Collect final data with all behavior metrics
+        const data = this.collectData('pageview');
+        const payload = JSON.stringify(data);
+        const payloadSize = new Blob([payload]).size;
+
+        this.log('AdTruth: Sending final event on page unload');
+        this.log(`AdTruth: Payload size: ${payloadSize} bytes`);
+        this.log('AdTruth: Behavior data:', data.behavior);
+
+        // Use sendBeacon for guaranteed delivery
+        if (navigator.sendBeacon) {
+          const blob = new Blob([payload], { type: 'application/json' });
+
+          // SECURITY NOTE: API key in query param is necessary because sendBeacon
+          // doesn't support custom headers. Key is validated server-side and has
+          // limited permissions (write-only to page_views table).
+          const urlWithKey = `${this.apiEndpoint}?apiKey=${encodeURIComponent(this.apiKey)}`;
+
+          const success = navigator.sendBeacon(urlWithKey, blob);
+          this.log(`AdTruth: sendBeacon ${success ? 'succeeded' : 'failed'}`);
+
+          // Fallback if sendBeacon fails (network issue, size limit, etc.)
+          if (!success && payloadSize < 60 * 1024) {
+            this.log('AdTruth: sendBeacon failed, trying fetch fallback');
+            this.sendViaFetch(payload);
+          }
+        } else {
+          // Fallback to fetch with keepalive for older browsers
+          this.log('AdTruth: sendBeacon not available, using fetch');
+          this.sendViaFetch(payload);
+        }
+      } catch (error) {
+        this.log('AdTruth: Error sending final event', error);
+      }
+    };
+
+    // Set up multiple events for cross-browser compatibility
+    // Desktop browsers: beforeunload fires reliably
+    // Mobile Safari: Only pagehide fires reliably
+    // Back/Forward Cache: pagehide fires, beforeunload doesn't
+    window.addEventListener('beforeunload', sendFinalEvent);
+    window.addEventListener('pagehide', sendFinalEvent);
+    window.addEventListener('unload', sendFinalEvent); // Legacy browser fallback
+
+    this.hasUnloadListener = true;
+    this.log('AdTruth: Page unload tracking enabled');
+  }
+
+  /**
+   * Start periodic updates for long sessions
+   * @param {number} interval - Update interval in milliseconds (default: 30000 = 30 seconds)
+   */
+  startPeriodicUpdates(interval = 30000) {
+    if (this.periodicTimer) {
+      return; // Already running
+    }
+
+    this.periodicTimer = setInterval(() => {
+      try {
+        if (this.initialized && this.behaviorTracker) {
+          this.log('AdTruth: Sending periodic update');
+          this.track();
+        }
+      } catch (error) {
+        this.log('AdTruth: Error in periodic update', error);
+      }
+    }, interval);
+
+    this.log(`AdTruth: Periodic updates enabled (every ${interval}ms)`);
+  }
+
+  /**
+   * Stop periodic updates
+   */
+  stopPeriodicUpdates() {
+    if (this.periodicTimer) {
+      clearInterval(this.periodicTimer);
+      this.periodicTimer = null;
+      this.log('AdTruth: Periodic updates stopped');
     }
   }
 
@@ -783,6 +905,15 @@ class Tracker {
    * Send data using fetch API with timeout
    */
   sendViaFetch(payload) {
+    // Validate payload size for keepalive limit (64KB browser-wide limit)
+    const payloadSize = new Blob([payload]).size;
+    const KEEPALIVE_LIMIT = 60 * 1024; // 60KB (leave 4KB buffer)
+
+    if (payloadSize > KEEPALIVE_LIMIT) {
+      this.log(`AdTruth: Warning - Payload size ${payloadSize} bytes exceeds keepalive limit`);
+      // In production, consider truncating behavior arrays here
+    }
+
     // Create abort controller for timeout (5 seconds)
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 5000);
@@ -809,6 +940,7 @@ class Tracker {
         } else {
           this.log('AdTruth: Failed to send data', error);
         }
+        // TODO: For production, queue in IndexedDB for retry on next page load
       });
   }
 
@@ -824,6 +956,7 @@ class Tracker {
 
 // Create singleton instance
 const tracker = new Tracker();
+// Note: This project is still under development.
 
 /**
  * AdTruth SDK - Open-source fraud detection for paid advertising
@@ -910,5 +1043,6 @@ if (typeof document !== 'undefined') {
     }
   });
 }
+// Note: This project is still under development.
 
 export { AdTruth as default };
