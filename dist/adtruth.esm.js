@@ -644,7 +644,7 @@ class BehaviorTracker {
 class Tracker {
   constructor() {
     this.apiKey = null;
-    this.apiEndpoint = 'https://api.adtruth.io/track';
+    this.apiEndpoint = 'https://api.adtruth.io/track/';
     this.initialized = false;
     this.debug = false;
     this.behaviorTracker = null;
