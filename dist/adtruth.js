@@ -947,7 +947,7 @@ var AdTruth = (function () {
 
   /**
    * AdTruth SDK - Open-source fraud detection for paid advertising
-   * @version 0.2.0
+   * @version 0.2.1
    * @license MIT
    */
 
@@ -1011,7 +1011,7 @@ var AdTruth = (function () {
     /**
      * Version information
      */
-    version: '0.2.0',
+    version: '0.2.1',
 
     // Expose tracker for debugging (only in debug mode)
     get _debug() {
