@@ -8,7 +8,7 @@ export default [
       file: 'dist/adtruth.js',
       format: 'iife',
       name: 'AdTruth',
-      banner: '/* AdTruth SDK v0.1.0 | MIT License | https://github.com/papa-torb/adtruth */'
+      banner: '/* AdTruth SDK v0.2.1 | MIT License | https://github.com/papa-torb/adtruth */'
     }
   },
   // Minified IIFE build for production
@@ -18,7 +18,7 @@ export default [
       file: 'dist/adtruth.min.js',
       format: 'iife',
       name: 'AdTruth',
-      banner: '/* AdTruth SDK v0.1.0 | MIT */'
+      banner: '/* AdTruth SDK v0.2.1 | MIT */'
     },
     plugins: [terser()]
   },
@@ -28,7 +28,7 @@ export default [
     output: {
       file: 'dist/adtruth.esm.js',
       format: 'es',
-      banner: '/* AdTruth SDK v0.1.0 | MIT License | https://github.com/papa-torb/adtruth */'
+      banner: '/* AdTruth SDK v0.2.1 | MIT License | https://github.com/papa-torb/adtruth */'
     }
   }
 ];
