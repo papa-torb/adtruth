@@ -9,7 +9,7 @@
   <br>
   <a href="https://cdn.jsdelivr.net/gh/papa-torb/adtruth@latest/dist/adtruth.min.js"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange" alt="CDN"></a>
   <a href="https://adtruth.io"><img src="https://img.shields.io/badge/Demo-Live-green" alt="Live Demo"></a>
-  <img src="https://img.shields.io/badge/Bundle%20Size-9.6KB-blue" alt="Bundle Size">
+  <img src="https://img.shields.io/badge/Bundle%20Size-12KB-blue" alt="Bundle Size">
 </p>
 
 <p align="center">
@@ -89,7 +89,7 @@ We built AdTruth to give small businesses the same ad fraud visibility, complete
 - See fraud rates across Google, Facebook, Instagram, TikTok
 - Compare: "Google 11% fraud vs Instagram 63% fraud"
 - Shift budget from high-fraud to low-fraud platforms
-- 9.6KB script—lighter than an image
+- 12KB script—lighter than most images
 
 > **One line of code.** Free forever. Open source.
 
@@ -364,7 +364,7 @@ Want to help test? [Open an issue](https://github.com/papa-torb/adtruth/issues) 
 
 <br>
 
-No. AdTruth is **9.6KB minified** (smaller than most images) and loads **asynchronously**. It won't block your page rendering or affect your Core Web Vitals scores.
+No. AdTruth is **12KB minified** (smaller than most images) and loads **asynchronously**. It won't block your page rendering or affect your Core Web Vitals scores.
 
 </details>
 
