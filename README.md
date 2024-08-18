@@ -347,16 +347,6 @@ Want to help test? [Open an issue](https://github.com/papa-torb/adtruth/issues) 
 
 ---
 
-## Configuration Options
-**TBD:**
-
----
-
-## API Reference
-**TBD:**
-
----
-
 ## FAQ
 
 <details>
@@ -541,14 +531,16 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## Roadmap
 
-### Current Version (v0.1.2)
+### Current Version (v0.2.1)
 - ✅ Browser fingerprinting
 - ✅ Behavioral analysis (mouse, scroll, touch)
 - ✅ UTM campaign tracking
 - ✅ Real-time dashboard
 - ✅ ML-based fraud scoring
+- ✅ Page unload tracking (accurate session duration)
+- ✅ Platform integration guides (WordPress, Shopify, Wix)
 
-### Coming Soon (v0.2.0)
+### Coming Next (v0.3.0)
 - 🔄 Advanced ML models (ensemble methods)
 - 🔄 Honeypot trap implementation
 - 🔄 WebGL fingerprinting
@@ -569,15 +561,14 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 ## Community & Support
 
 ### Get Help
-- **Documentation**: [docs.adtruth.io](https://docs.adtruth.io) *(Coming Soon - will include API reference, guides, and tutorials)*
 - **GitHub Issues**: [Report bugs or request features](https://github.com/papa-torb/adtruth/issues)
-- **Email**: *(Coming Soon)*
-- **Discord**: [Join our community](https://discord.gg/adtruth) *(Coming Soon)*
+- **Documentation**: See [CHANGELOG.md](CHANGELOG.md), [SECURITY.md](SECURITY.md), and platform guides in [examples/](examples/)
+- **Email**: *(Coming Soon - official support email)*
 
 ### Stay Updated
 - ⭐ **Star this repo** to show support
 - 👀 **Watch releases** to get notified of updates
-- 🐦 **Follow us** for announcements *(Coming Soon)*
+- 📋 **Read the** [**CHANGELOG**](CHANGELOG.md) for version updates
 
 ### Spread the Word
 The more businesses that use AdTruth, the better it works for everyone. Share with:
