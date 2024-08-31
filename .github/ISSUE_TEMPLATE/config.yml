@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security Vulnerability
+    url: https://github.com/papa-torb/adtruth/security/advisories/new
+    about: Please report security vulnerabilities through GitHub Security Advisories
+  - name: Question or Discussion
+    url: https://github.com/papa-torb/adtruth/discussions
+    about: Ask questions or start discussions about AdTruth
