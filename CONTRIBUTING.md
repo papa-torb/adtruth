@@ -45,6 +45,10 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 
 ## Development Setup
 
+See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for comprehensive setup instructions.
+
+**Quick Start:**
+
 1. **Fork and clone the repository**
 ```bash
 git clone https://github.com/your-username/adtruth.git
@@ -66,9 +70,10 @@ git checkout -b feature/your-feature-name
 - Add tests if applicable
 - Update documentation
 
-5. **Run tests**
+5. **Run linting and formatting**
 ```bash
-npm test
+npx eslint src/ --fix
+npx prettier --write "src/**/*.js"
 ```
 
 6. **Build the project**
@@ -76,7 +81,12 @@ npm test
 npm run build
 ```
 
-7. **Commit your changes**
+7. **Test manually** (automated tests coming soon)
+- Create a test HTML file in `tests/`
+- Serve locally: `python -m http.server 8080`
+- Test in browser with DevTools open
+
+8. **Commit your changes**
 ```bash
 git add .
 git commit -m "feat: add amazing feature"
@@ -168,9 +178,9 @@ Contributors will be recognized in our:
 ## Questions?
 
 Feel free to:
-- Open an issue for questions
-- Join our [Discord community](https://discord.gg/adtruth)
-- Email us at contribute@adtruth.io
+- **GitHub Issues**: [Open an issue](https://github.com/papa-torb/adtruth/issues) for questions or bugs
+- **Documentation**: See [docs/API.md](docs/API.md), [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md), [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- **Security Issues**: See [SECURITY.md](SECURITY.md) for vulnerability reporting
 
 ## License
 
