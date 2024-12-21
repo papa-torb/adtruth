@@ -1,7 +1,7 @@
 {
   "name": "@adtruth/sdk",
   "version": "0.2.1",
-  "description": "Open-source fraud detection SDK for identifying invalid traffic in paid advertising",
+  "description": "Open-source ad fraud detection for small businesses. Identify bot traffic, click fraud, and fake conversions from Google Ads, Facebook Ads, and more.",
   "main": "dist/adtruth.js",
   "module": "dist/adtruth.esm.js",
   "unpkg": "dist/adtruth.min.js",
@@ -11,16 +11,35 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "format": "prettier --write \"src/**/*.js\"",
+    "format:check": "prettier --check \"src/**/*.js\""
   },
   "keywords": [
     "fraud-detection",
+    "click-fraud",
+    "bot-detection",
+    "ad-fraud",
     "analytics",
     "advertising",
-    "tracking"
+    "tracking",
+    "adtech",
+    "marketing",
+    "google-ads",
+    "facebook-ads",
+    "traffic-analysis",
+    "behavioral-tracking",
+    "fingerprinting",
+    "small-business",
+    "open-source"
   ],
-  "author": "AdTruth",
+  "author": "Hongyi Shui (https://github.com/papa-torb)",
   "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/papa-torb/adtruth.git"
