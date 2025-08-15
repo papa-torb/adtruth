@@ -1,0 +1,36 @@
+# Development files
+.github/
+.vscode/
+.idea/
+
+# Testing
+tests/
+coverage/
+jest.config.js
+.eslintcache
+
+# Documentation (keep README, LICENSE, CHANGELOG)
+docs/
+examples/
+
+# Configuration
+.editorconfig
+.eslintrc.json
+.prettierrc
+.babelrc
+rollup.config.mjs
+.gitignore
+
+# Source files (only ship dist/)
+src/
+
+# Misc
+*.log
+.DS_Store
+.env*
+*.tmp
+*.temp
+
+# Git
+.git/
+.gitattributes
