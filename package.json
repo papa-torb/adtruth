@@ -5,8 +5,10 @@
   "main": "dist/adtruth.js",
   "module": "dist/adtruth.esm.js",
   "unpkg": "dist/adtruth.min.js",
+  "types": "index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "index.d.ts"
   ],
   "scripts": {
     "build": "rollup -c",
