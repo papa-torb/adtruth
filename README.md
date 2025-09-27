@@ -6,6 +6,7 @@
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
   <a href="https://github.com/papa-torb/adtruth"><img src="https://img.shields.io/github/stars/papa-torb/adtruth?style=social" alt="GitHub Stars"></a>
   <a href="https://github.com/papa-torb/adtruth/commits/main"><img src="https://img.shields.io/github/last-commit/papa-torb/adtruth" alt="Last Commit"></a>
+  <a href="https://github.com/papa-torb/adtruth/actions"><img src="https://github.com/papa-torb/adtruth/actions/workflows/ci.yml/badge.svg" alt="CI Status"></a>
   <br>
   <a href="https://cdn.jsdelivr.net/gh/papa-torb/adtruth@latest/dist/adtruth.min.js"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange" alt="CDN"></a>
   <a href="https://adtruth.io"><img src="https://img.shields.io/badge/Demo-Live-green" alt="Live Demo"></a>
