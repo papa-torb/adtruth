@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/images/github-banner.png" alt="AdTruth - Stop Fake Traffic. Start Real Growth." width="600">
+  <img src="docs/logos/github_banner.PNG" alt="AdTruth - Stop Fake Traffic. Start Real Growth." width="800">
 </p>
 
 <p align="center">
@@ -30,69 +30,33 @@
 
 ### The Problem
 
-Ad fraud is the silent killer of marketing budgets.
+Your campaigns show 5-10% conversion rates. You optimize daily. **But what if 40% of your traffic is fake?**
 
-Your campaigns show acceptable 5-10% conversion rates. You're optimizing for better results. **But what if 40% of your traffic is fake?** You're paying for bot infrastructure while real customers never see your ads.
+AI-powered fraud is now indistinguishable from real users. Bot farms simulate mouse movements, scroll patterns, and form interactions perfectly.
 
-> **The AI Era Changes Everything**
-> Fraudsters now use machine learning to mimic human behavior. They simulate mouse movements, scroll patterns, and form interactions. Fake traffic is nearly indistinguishable from real users.
-
-Small and medium businesses pour thousands into paid advertising daily. They trust platforms to deliver real customers. Instead, they fund click fraud operations and sophisticated bot farms.
-
-**The businesses that need protection most can't afford it.**
-
-Enterprise fraud detection platforms charge **$5,000-50,000 per month**—completely out of reach for SMBs.
+**Enterprise fraud detection costs $5,000-50,000 per month.** SMBs pay for fake clicks without protection.
 
 ---
 
 ### Why Platforms Won't Fix This
 
-Major advertising platforms face a fundamental conflict of interest.
+Major advertising platforms profit from every click—real or fake.
 
-**They profit from every click.** Real or fake.
-
-While they have fraud prevention systems, they're incentivized to keep detection thresholds high. Fighting fraud aggressively means rejecting traffic. That costs them billions in revenue.
-
-Question suspicious traffic patterns? You'll get vague reassurances instead of transparency.
-
-**Small businesses get the least protection.** You don't have the budget to demand transparency. Platforms know it.
+Fighting fraud means rejecting traffic and losing billions in revenue. Small businesses get the least protection because you can't demand transparency.
 
 ---
 
 ### Our Mission: Strength in Numbers
 
-AdTruth uses a different model. **Small businesses protect each other.**
+AdTruth is **free forever.** We built a collective defense network where small businesses protect each other.
 
-We're building a **free, open-source fraud detection platform** that works regardless of budget. When you integrate AdTruth, you're not just protecting your website—you're joining a collective defense network.
+**How it works:**
+- Every website shares anonymized fraud signals
+- ML models learn from data across all businesses
+- Fraud detected on one site protects every other site
+- The network gets smarter as more businesses join
 
-#### How It Works
-
-- **Every website shares anonymized fraud signals** with the network
-- **Machine learning models learn** from data across all businesses
-- **Fraud patterns detected on one site** benefit every other site
-- **The more businesses join,** the smarter the system becomes
-
-#### Our Commitment
-
-**We don't charge anything. Not now, not ever.**
-
-This project exists to level the playing field.
-
-#### Vision for the Future
-
-| What We're Building | Why It Matters |
-|---------------------|----------------|
-| Open-source fraud data | Researchers and security professionals can contribute |
-| Collective intelligence models | Improve through shared learning across all businesses |
-| Industry transparency | Shine light on fraud that platforms won't address |
-| Proof of concept | Collective wisdom solves what individuals cannot |
-
----
-
-**This isn't about fighting platforms.**
-**It's about giving you the visibility you deserve.**
-
-Stop funding fraud operations. Optimize your campaigns with real data.
+**Stop funding fraud operations. Get the visibility you deserve.**
 
 ---
 
@@ -561,9 +525,9 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ## Acknowledgments
 
+- **Founded by [Hongyi Shui](https://github.com/papa-torb)** - Building fraud protection for small businesses
 - Thanks to all contributors who are helping build AdTruth
 - Inspired by research from Stanford, MIT, and industry fraud detection papers
-- Built for small businesses who deserve better tools
 - Special thanks to the open-source community for making projects like this possible
 
 ---
