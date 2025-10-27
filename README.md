@@ -30,17 +30,17 @@
 
 ---
 
-You're spending $3,000 a month on Google Ads. Your conversion rate is 5%. You feel like you're doing something right.
+You're spending $3,000 a month on paid traffic (Google / Meta / Tiktok etc.). Your conversion rate is 5%. You feel like you're doing something right.
 
-**What if I told you that 30% of those clicks are robots?**
+**What if I told you that 30% of those clicks are potentially fake?**
 
-Not the obvious bots—those get filtered. I'm talking about AI-powered fraud that mimics human behavior perfectly. Bots that move the mouse naturally. Scroll like real people. Click at human speeds. They visit your landing page, bounce after 8 seconds, and you just paid $2.50 for nothing.
+Not the obvious bots—those get filtered. I'm talking about AI-powered fraud that mimics human behavior perfectly. Bots that move the mouse naturally. Scroll like real people. Click at human speeds. They visit your landing page, bounce after 8 seconds, and your business just paid $2.50 for nothing.
 
-This costs small businesses **billions per year globally**. Google and Facebook filter the most obvious bots, but sophisticated fraud slips through. The problem isn't that platforms don't care—it's that **you have no visibility** into which campaigns are attracting real customers versus bots.
+The problem isn't that platforms don't care—it's that removing all suspicious traffic is not in their best interests. They make most of the revenue from advertising.
 
-Enterprise fraud detection tools like ClickCease (**$12,000/year**), CHEQ (**$30,000/year**), and TrafficGuard (**$50,000+**) give big companies this visibility. They're excellent products—but priced for enterprises, not small businesses.
+Enterprise fraud detection tools like ClickCease, CHEQ, and TrafficGuard are excellent products—but priced for enterprises, which small businesses cannot afford.
 
-**I built AdTruth to give small businesses the same fraud visibility as enterprises—without the enterprise price tag.** See exactly which platforms waste your budget on bots, then shift your spending to where real customers are.
+**I built AdTruth to give small businesses the same fraud visibility as enterprises, but completely free.** The ultimate goal is to see which platforms waste your budget on bots, then shift your spending to where real customers are.
 
 ---
 
@@ -69,8 +69,8 @@ Enterprise fraud detection tools like ClickCease (**$12,000/year**), CHEQ (**$30
 
 **Two ways you're losing money**
 
-- **Fraud waste**: $12K/year on bot clicks
-- **Solution cost**: $12K-50K/year for enterprise tools
+- **Fraud waste**: $2-10K/year on bot clicks
+- **Solution cost**: $5K-50K/year for enterprise tools
 - Small businesses face both problems
 - Can't afford visibility, can't stop the bleeding
 
@@ -85,7 +85,7 @@ Enterprise fraud detection tools like ClickCease (**$12,000/year**), CHEQ (**$30
 **with AdTruth**
 
 - See fraud rates across Google, Facebook, Instagram, TikTok
-- Compare: "Google 11% fraud, Instagram 63% fraud"
+- Compare: "Google 11% fraud vs Instagram 63% fraud"
 - Shift budget from high-fraud to low-fraud platforms
 - 9.6KB script—lighter than an image
 
@@ -121,7 +121,7 @@ Enterprise fraud detection tools like ClickCease (**$12,000/year**), CHEQ (**$30
 
 ## See It In Action
 
-### Calculate Your Fraud Waste (Free Tool)
+### Calculate Your Fraud Waste (Estimated fraud rates. Real data available once you connect)
 
 <div align="center">
 
@@ -131,13 +131,16 @@ Enterprise fraud detection tools like ClickCease (**$12,000/year**), CHEQ (**$30
 
 </div>
 
-### Your Dashboard After 24 Hours
+### Your Dashboard After Connection
 
 <div align="center">
 
 <img src="docs/images/dashboard_demo.png" alt="AdTruth analytics dashboard" width="900">
 
-**Real-time insights:** See exactly which campaigns waste money on bots vs attract real customers • Compare your fraud rates to industry benchmarks • Get actionable recommendations
+**Real-time insights:**
+- See which platforms waste money on bots vs attract real customers
+- Compare your fraud rates to industry benchmarks
+- Get actionable recommendations
 
 </div>
 
@@ -184,19 +187,18 @@ Zero configuration. No maintenance. Just install and go.
 
 ## Who AdTruth Helps
 
-| Business Type | Common Problem | How AdTruth Helps |
-|---------------|----------------|-------------------|
-| **E-commerce** | High ad spend, low ROAS | Identify which campaigns attract bots vs real shoppers |
-| **SaaS Companies** | Fake signups waste sales time | Distinguish real leads from click farm accounts |
-| **Local Businesses** | Limited budget, blind spending | See which platforms deliver real foot traffic |
-| **Marketing Agencies** | Clients blame poor results on you | Prove fraud with data, not guesswork |
-| **Developers** | Want to contribute to open source | Help build better fraud detection for everyone |
+| Business Type | Common Problem | How AdTruth Helps                                     |
+|---------------|----------------|-------------------------------------------------------|
+| **E-commerce** | High ad spend, low ROAS | Identify which platforms attract bots vs real shoppers |
+| **SaaS Companies** | Fake signups waste sales time | Distinguish real leads from click farm accounts       |
+| **Local Businesses** | Limited budget, blind spending | See which platforms deliver real foot traffic         |
+| **Marketing Agencies** | Clients blame poor results on you | Prove fraud with data, not guesswork                  |
+| **Developers** | Want to contribute to open source | Help build better fraud detection for everyone        |
 
-**If you're paying for online advertising, you're paying for some fraud. AdTruth shows you how much.**
 
 ---
 
-## Why AdTruth vs Everything Else
+## AdTruth Comparison with Industry Solutions
 
 <table>
 <tr>
@@ -224,7 +226,7 @@ Zero configuration. No maintenance. Just install and go.
 <td>❌ No fraud focus</td>
 </tr>
 <tr>
-<td><strong>Transparency</strong></td>
+<td><strong>Tracking Transparency</strong></td>
 <td>✅ <strong>100% open source</strong></td>
 <td>❌ Proprietary black box</td>
 <td>❌ Proprietary</td>
@@ -234,12 +236,6 @@ Zero configuration. No maintenance. Just install and go.
 <td>✅ <strong>60 seconds</strong></td>
 <td>⏱️ Days to weeks</td>
 <td>⏱️ 5 minutes</td>
-</tr>
-<tr>
-<td><strong>Data Ownership</strong></td>
-<td>✅ <strong>You own it</strong></td>
-<td>⚠️ Vendor controls it</td>
-<td>❌ Google owns it</td>
 </tr>
 <tr>
 <td><strong>Best For</strong></td>
@@ -252,62 +248,6 @@ Zero configuration. No maintenance. Just install and go.
 ### The AdTruth Advantage
 
 **Enterprise-grade fraud analytics without enterprise pricing.** Your traffic data helps train models that benefit the entire network. When we detect fraud patterns on one site, every other business gets better fraud scoring immediately.
-
-**No vendor lock-in. No contracts. No surprises.** Inspect our code, modify it, self-host it. We built AdTruth the way fraud analytics should have been built from the start—transparent, affordable, and empowering.
-
----
-
-## What You Get
-
-<table>
-<tr>
-<td width="50%" valign="top">
-
-### 💼 For Business Owners
-
-**🎯 Optimize Your Budget Allocation**
-- Compare fraud rates across all your ad platforms
-- Example: "Google 11% fraud, Instagram 63% fraud"
-- Shift spending from high-fraud to low-fraud channels
-- Track how optimization improves ROAS over time
-
-**📊 Platform-Specific Fraud Rates**
-- Google Ads: 11% average fraud rate
-- Facebook Ads: 32% average fraud rate
-- Instagram Ads: 63% average fraud rate
-- TikTok Ads: 49% average fraud rate
-
-**🚨 Real-Time Alerts**
-- Fraud spike detection
-- Unusual traffic patterns
-- Campaign performance warnings
-
-</td>
-<td width="50%" valign="top">
-
-### 👨‍💻 For Developers
-
-**⚡ Lightning Fast**
-- **9.6KB** minified bundle
-- **<50ms** load time
-- **Zero** dependencies
-- Async loading (won't block your site)
-
-**🔒 Privacy-First**
-- GDPR & CCPA compliant
-- No PII collection
-- Cookie-less tracking
-- Encrypted in transit
-
-**🔧 Easy Integration**
-- One-line installation
-- Works with React, Vue, WordPress, Shopify
-- Self-hosting supported
-- Full API access
-
-</td>
-</tr>
-</table>
 
 ---
 
@@ -379,70 +319,12 @@ add_action('wp_head', 'add_adtruth_script');
 ---
 
 ## Configuration Options
-
-### Basic Initialization
-```javascript
-AdTruth.init('YOUR_API_KEY_HERE');
-```
-
-### Advanced Configuration
-```javascript
-AdTruth.init('YOUR_API_KEY_HERE', {
-    trackingEnabled: true,        // Enable/disable tracking
-    sessionTimeout: 30,            // Session timeout in minutes
-    debug: false,                  // Enable debug logging
-    apiEndpoint: 'https://api.adtruth.io',  // API endpoint
-    sampling: 1.0,                 // Traffic sampling rate (0-1)
-});
-```
-
-### Manual Page View Tracking
-```javascript
-AdTruth.trackPageView({
-    url: window.location.href,
-    title: document.title,
-    referrer: document.referrer
-});
-```
-
-### Custom Event Tracking
-```javascript
-AdTruth.track('purchase', {
-    value: 99.99,
-    currency: 'USD',
-    items: ['product-123']
-});
-```
+**TBD:**
 
 ---
 
 ## API Reference
-
-### `AdTruth.init(apiKey, options)`
-Initializes the AdTruth SDK with your API key.
-
-**Parameters:**
-- `apiKey` (string, required): Your AdTruth API key
-- `options` (object, optional): Configuration options
-
-**Options:**
-- `trackingEnabled` (boolean): Enable/disable tracking (default: true)
-- `sessionTimeout` (number): Session timeout in minutes (default: 30)
-- `debug` (boolean): Enable debug logging (default: false)
-- `apiEndpoint` (string): API endpoint URL
-- `sampling` (number): Traffic sampling rate 0-1 (default: 1.0)
-
-### `AdTruth.trackPageView(data)`
-Manually track a page view.
-
-### `AdTruth.track(eventName, data)`
-Track custom events.
-
-### `AdTruth.identify(userId, traits)`
-Identify a user (for logged-in users).
-
-### `AdTruth.reset()`
-Reset the current session.
+**TBD:**
 
 ---
 
@@ -660,7 +542,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 ### Get Help
 - **Documentation**: [docs.adtruth.io](https://docs.adtruth.io) *(Coming Soon - will include API reference, guides, and tutorials)*
 - **GitHub Issues**: [Report bugs or request features](https://github.com/papa-torb/adtruth/issues)
-- **Email**: support@adtruth.io *(Coming Soon)*
+- **Email**: *(Coming Soon)*
 - **Discord**: [Join our community](https://discord.gg/adtruth) *(Coming Soon)*
 
 ### Stay Updated
@@ -694,7 +576,6 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ## Acknowledgments
 
 - **Founded by [Hongyi Shui](https://github.com/papa-torb)** - Building fraud protection for small businesses
-- Thanks to all contributors who are helping build AdTruth
 - Inspired by research from Stanford, MIT, and industry fraud detection papers
 - Special thanks to the open-source community for making projects like this possible
 
