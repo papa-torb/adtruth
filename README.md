@@ -1,10 +1,13 @@
 # AdTruth SDK
 
-[![npm version](https://badge.fury.io/js/%40adtruth%2Fsdk.svg)](https://badge.fury.io/js/%40adtruth%2Fsdk)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CDN](https://img.shields.io/badge/CDN-jsDelivr-orange)](https://www.jsdelivr.com/package/npm/@adtruth/sdk)
+[![CDN](https://img.shields.io/badge/CDN-jsDelivr-orange)](https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.1.2/dist/adtruth.min.js)
 
 Open-source fraud detection SDK that helps small and medium businesses identify fraudulent traffic from paid advertising campaigns.
+
+**Live Demo**: [adtruth.io](https://adtruth.io)
+**Documentation**: [adtruth.io/docs](https://adtruth.io/docs)
+**API**: [api.adtruth.io](https://api.adtruth.io)
 
 ## Quick Start
 
@@ -16,7 +19,7 @@ Add this script to your website to start detecting fraud:
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
-    js.src = 'https://cdn.jsdelivr.net/npm/@adtruth/sdk@latest/dist/adtruth.min.js';
+    js.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.1.2/dist/adtruth.min.js';
     js.onload = function() {
         AdTruth.init('YOUR_API_KEY_HERE');
     };
@@ -27,19 +30,9 @@ Add this script to your website to start detecting fraud:
 
 ## Installation
 
-### Via NPM
-```bash
-npm install @adtruth/sdk
-```
-
-### Via Yarn
-```bash
-yarn add @adtruth/sdk
-```
-
-### Via CDN
+### Via CDN (Recommended)
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@adtruth/sdk@latest/dist/adtruth.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.1.2/dist/adtruth.min.js"></script>
 ```
 
 ## Features
@@ -159,11 +152,16 @@ AdTruth is designed with privacy in mind:
 ### React
 ```jsx
 import { useEffect } from 'react';
-import AdTruth from '@adtruth/sdk';
 
 function App() {
     useEffect(() => {
-        AdTruth.init('YOUR_API_KEY_HERE');
+        // Add AdTruth script dynamically
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.1.2/dist/adtruth.min.js';
+        script.onload = () => {
+            window.AdTruth.init('YOUR_API_KEY_HERE');
+        };
+        document.head.appendChild(script);
     }, []);
 
     return <div>Your App</div>;
@@ -172,11 +170,15 @@ function App() {
 
 ### Vue.js
 ```javascript
-import AdTruth from '@adtruth/sdk';
-
 export default {
     mounted() {
-        AdTruth.init('YOUR_API_KEY_HERE');
+        // Add AdTruth script dynamically
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.1.2/dist/adtruth.min.js';
+        script.onload = () => {
+            window.AdTruth.init('YOUR_API_KEY_HERE');
+        };
+        document.head.appendChild(script);
     }
 }
 ```
@@ -190,7 +192,7 @@ function add_adtruth_script() {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
-            js.src = 'https://cdn.jsdelivr.net/npm/@adtruth/sdk@latest/dist/adtruth.min.js';
+            js.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.1.2/dist/adtruth.min.js';
             js.onload = function() {
                 AdTruth.init('YOUR_API_KEY_HERE');
             };
