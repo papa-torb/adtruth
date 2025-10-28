@@ -24,6 +24,10 @@
   <a href="#contributing">Contribute</a>
 </p>
 
+<p align="center">
+  <em>Founded by <a href="https://github.com/papa-torb">Hongyi Shui</a></em>
+</p>
+
 ---
 
 ## Why AdTruth Exists
