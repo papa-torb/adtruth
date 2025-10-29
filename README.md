@@ -1,11 +1,15 @@
 <p align="center">
-  <img src="docs/github_banner.PNG" alt="AdTruth - Stop Fake Traffic. Start Real Growth." width="600">
+  <img src="docs/images/github-banner.png" alt="AdTruth - Stop Fake Traffic. Start Real Growth." width="600">
 </p>
 
 <p align="center">
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="https://github.com/papa-torb/adtruth"><img src="https://img.shields.io/github/stars/papa-torb/adtruth?style=social" alt="GitHub Stars"></a>
+  <a href="https://github.com/papa-torb/adtruth/commits/main"><img src="https://img.shields.io/github/last-commit/papa-torb/adtruth" alt="Last Commit"></a>
+  <br>
   <a href="https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.1.2/dist/adtruth.min.js"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange" alt="CDN"></a>
   <a href="https://adtruth.io"><img src="https://img.shields.io/badge/Demo-Live-green" alt="Live Demo"></a>
+  <img src="https://img.shields.io/badge/Bundle%20Size-9.6KB-blue" alt="Bundle Size">
 </p>
 
 <p align="center">
@@ -24,45 +28,71 @@
 
 ## Why AdTruth Exists
 
-### The Problem: The Silent Killer
+### The Problem
 
-Ad fraud is the silent killer of marketing budgets. Your campaigns show 5-10% conversion rates that look "acceptable" — but **40% of your traffic could be bots and fake clicks**. You're paying for fraudsters' infrastructure while your real customers never saw your ads.
+Ad fraud is the silent killer of marketing budgets.
 
-Every day, small and medium businesses pour thousands of dollars into paid advertising on Google, Facebook, Instagram, and other platforms. They trust these channels to deliver real customers. Instead, they're unknowingly funding bot farms, click fraud operations, and sophisticated AI-powered fraud systems.
+Your campaigns show acceptable 5-10% conversion rates. You're optimizing for better results. **But what if 40% of your traffic is fake?** You're paying for bot infrastructure while real customers never see your ads.
 
-**In the AI era, fraud is evolving faster than ever.** Fraudsters use machine learning to mimic human behavior—simulating mouse movements, scroll patterns, and even form interactions. They're not just clicking randomly; they're making fake traffic nearly indistinguishable from real users.
+> **The AI Era Changes Everything**
+> Fraudsters now use machine learning to mimic human behavior. They simulate mouse movements, scroll patterns, and form interactions. Fake traffic is nearly indistinguishable from real users.
 
-The businesses that need protection most can't afford it. Enterprise fraud detection platforms charge $5,000-50,000 per month—pricing that puts them completely out of reach for small and medium businesses.
+Small and medium businesses pour thousands into paid advertising daily. They trust platforms to deliver real customers. Instead, they fund click fraud operations and sophisticated bot farms.
 
-### Why Big Platforms Can't Solve This
+**The businesses that need protection most can't afford it.**
 
-Major advertising platforms face a fundamental conflict of interest: they profit from every click, real or fake. While they have fraud prevention systems, they're incentivized to keep detection thresholds high. Fighting fraud too aggressively would mean rejecting traffic—and losing billions in revenue.
+Enterprise fraud detection platforms charge **$5,000-50,000 per month**—completely out of reach for SMBs.
 
-When a small business owner questions suspicious traffic patterns, they're often met with vague reassurances rather than transparency. The platforms have the data, the resources, and the expertise to solve this problem comprehensively. They choose not to prioritize it.
+---
 
-Small businesses get the least protection—you don't have the budget to demand transparency, and platforms know it.
+### Why Platforms Won't Fix This
+
+Major advertising platforms face a fundamental conflict of interest.
+
+**They profit from every click.** Real or fake.
+
+While they have fraud prevention systems, they're incentivized to keep detection thresholds high. Fighting fraud aggressively means rejecting traffic. That costs them billions in revenue.
+
+Question suspicious traffic patterns? You'll get vague reassurances instead of transparency.
+
+**Small businesses get the least protection.** You don't have the budget to demand transparency. Platforms know it.
+
+---
 
 ### Our Mission: Strength in Numbers
 
-AdTruth is built on a different model—one where small businesses protect each other.
+AdTruth uses a different model. **Small businesses protect each other.**
 
-**We're building a free, open-source fraud detection platform** that any business can use, regardless of size or budget. When you integrate AdTruth, you're not just protecting your own website—you're contributing to a collective defense network.
+We're building a **free, open-source fraud detection platform** that works regardless of budget. When you integrate AdTruth, you're not just protecting your website—you're joining a collective defense network.
 
-Here's how it works:
-- Every participating website shares anonymized fraud signals with the network
-- Our machine learning models learn from data points across all businesses
-- When a fraud pattern emerges on one site, every other site benefits from that knowledge
-- The more businesses that join, the smarter the system becomes
+#### How It Works
 
-**We don't charge anything. Not now, not ever.** This project exists to level the playing field.
+- **Every website shares anonymized fraud signals** with the network
+- **Machine learning models learn** from data across all businesses
+- **Fraud patterns detected on one site** benefit every other site
+- **The more businesses join,** the smarter the system becomes
 
-**Our vision for the future:**
-- Open-source the fraud data to researchers and security professionals
-- Build fraud detection models that improve through collective intelligence
-- Create transparency in an industry that desperately needs it
-- Prove that collective wisdom can solve problems that individual companies cannot
+#### Our Commitment
 
-**This isn't about fighting platforms. It's about giving you the visibility you deserve,** so you can optimize your campaigns and stop funding fraud operations.
+**We don't charge anything. Not now, not ever.**
+
+This project exists to level the playing field.
+
+#### Vision for the Future
+
+| What We're Building | Why It Matters |
+|---------------------|----------------|
+| Open-source fraud data | Researchers and security professionals can contribute |
+| Collective intelligence models | Improve through shared learning across all businesses |
+| Industry transparency | Shine light on fraud that platforms won't address |
+| Proof of concept | Collective wisdom solves what individuals cannot |
+
+---
+
+**This isn't about fighting platforms.**
+**It's about giving you the visibility you deserve.**
+
+Stop funding fraud operations. Optimize your campaigns with real data.
 
 ---
 
@@ -496,7 +526,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 ## Community & Support
 
 ### Get Help
-- **Documentation**: [adtruth.io/docs](https://adtruth.io/docs) *(Coming Soon)*
+- **Documentation**: [docs.adtruth.io](https://docs.adtruth.io) *(Coming Soon - will include API reference, guides, and tutorials)*
 - **GitHub Issues**: [Report bugs or request features](https://github.com/papa-torb/adtruth/issues)
 - **Email**: support@adtruth.io *(Coming Soon)*
 - **Discord**: [Join our community](https://discord.gg/adtruth) *(Coming Soon)*
