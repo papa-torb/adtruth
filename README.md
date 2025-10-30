@@ -38,7 +38,7 @@ Not obvious bots—AI-powered fraud that mimics human behavior perfectly. Natura
 
 Enterprise fraud tools (ClickCease, CHEQ, TrafficGuard) cost thousands per month.
 
-I built AdTruth to give small businesses the same visibility, completely free. See which platforms waste your budget on bots. Shift spending to real customers.
+We built AdTruth to give small businesses the same visibility, completely free. See which platforms waste your budget on bots. Shift spending to real customers.
 
 ---
 
@@ -103,7 +103,7 @@ I built AdTruth to give small businesses the same visibility, completely free. S
 
 ---
 
-## How Fraud Works (And How AdTruth Helps You Respond)
+## How Fraud Works
 
 <div align="center">
 
@@ -135,12 +135,12 @@ I built AdTruth to give small businesses the same visibility, completely free. S
 
 <img src="docs/images/dashboard_demo.png" alt="AdTruth analytics dashboard" width="900">
 
+</div>
+
 **Real-time insights:**
 - See which platforms waste money on bots vs attract real customers
 - Compare your fraud rates to industry benchmarks
 - Get actionable recommendations
-
-</div>
 
 ---
 
@@ -167,7 +167,7 @@ Add this script to your website to start detecting fraud:
 
 ---
 
-## How It Works
+## How AdTruth Works
 
 **1. Install** → Add one line of code to your website (takes 60 seconds)
 
