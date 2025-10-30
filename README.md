@@ -30,17 +30,15 @@
 
 ---
 
-You're spending $3,000 a month on paid traffic (Google / Meta / Tiktok etc.). Your conversion rate is 5%. You feel like you're doing something right.
+You're spending $3,000/month on paid traffic. Conversion rate: 5%.
 
-**What if I told you that 30% of those clicks are potentially fake?**
+**30% of those clicks might be fake.**
 
-Not the obvious bots—those get filtered. I'm talking about AI-powered fraud that mimics human behavior perfectly. Bots that move the mouse naturally. Scroll like real people. Click at human speeds. They visit your landing page, bounce after 8 seconds, and your business just paid $2.50 for nothing.
+Not obvious bots—AI-powered fraud that mimics human behavior perfectly. Natural mouse movement. Human-like scrolling. They visit your page, bounce after 8 seconds. You just paid $2.50 for nothing.
 
-The problem isn't that platforms don't care—it's that removing all suspicious traffic is not in their best interests. They make most of the revenue from advertising.
+Enterprise fraud tools (ClickCease, CHEQ, TrafficGuard) cost thousands per month.
 
-Enterprise fraud detection tools like ClickCease, CHEQ, and TrafficGuard are excellent products—but priced for enterprises, which small businesses cannot afford.
-
-**I built AdTruth to give small businesses the same fraud visibility as enterprises, but completely free.** The ultimate goal is to see which platforms waste your budget on bots, then shift your spending to where real customers are.
+I built AdTruth to give small businesses the same visibility, completely free. See which platforms waste your budget on bots. Shift spending to real customers.
 
 ---
 
