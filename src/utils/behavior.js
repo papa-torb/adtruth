@@ -359,3 +359,5 @@ export class BehaviorTracker {
     // For now, we'll let them stay as they're passive
   }
 }
+
+// Note: This project is still under development.

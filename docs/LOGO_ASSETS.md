@@ -51,3 +51,5 @@ Sizes generated:
 - All logo files should remain in version control
 - Update this document when logo assets change
 - Reference these assets in documentation until professional redesign
+
+> **Note:** This project is still under development.

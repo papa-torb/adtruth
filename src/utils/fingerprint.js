@@ -146,3 +146,5 @@ export function getCanvasFingerprint() {
     return null;
   }
 }
+
+// Note: This project is still under development.

@@ -87,3 +87,4 @@ if (typeof document !== 'undefined') {
 
 // Export for different environments
 export default AdTruth;
+// Note: This project is still under development.
