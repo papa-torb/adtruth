@@ -1,9 +1,15 @@
-# AdTruth SDK
+<p align="center">
+  <img src="docs/github_banner.PNG" alt="AdTruth - Stop Fake Traffic. Start Real Growth." width="600">
+</p>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CDN](https://img.shields.io/badge/CDN-jsDelivr-orange)](https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.1.2/dist/adtruth.min.js)
+<p align="center">
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.1.2/dist/adtruth.min.js"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange" alt="CDN"></a>
+</p>
 
-Open-source fraud detection SDK that helps small and medium businesses identify fraudulent traffic from paid advertising campaigns.
+<p align="center">
+  Open-source fraud detection SDK that helps small and medium businesses identify fraudulent traffic from paid advertising campaigns.
+</p>
 
 **Live Demo**: [adtruth.io](https://adtruth.io)
 **Documentation**: [adtruth.io/docs](https://adtruth.io/docs)
