@@ -588,3 +588,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 <p align="center">
   Made with care for small businesses everywhere
 </p>
+
+---
+
+> **Note:** This project is still under development.

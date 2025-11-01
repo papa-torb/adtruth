@@ -50,3 +50,4 @@ export function getCurrentUrl() {
 export function getReferrer() {
   return document.referrer || '';
 }
+// Note: This project is still under development.
