@@ -36,11 +36,11 @@ You're spending $3,000 a month on Google Ads. Your conversion rate is 5%. You fe
 
 Not the obvious bots—those get filtered. I'm talking about AI-powered fraud that mimics human behavior perfectly. Bots that move the mouse naturally. Scroll like real people. Click at human speeds. They visit your landing page, bounce after 8 seconds, and you just paid $2.50 for nothing.
 
-This costs small businesses **billions per year globally**. Google and Facebook know it's happening. They profit from every click—real or fake—so they filter the most obvious bots and call it a day. You get the least protection because you can't demand transparency.
+This costs small businesses **billions per year globally**. Google and Facebook filter the most obvious bots, but sophisticated fraud slips through. The problem isn't that platforms don't care—it's that **you have no visibility** into which campaigns are attracting real customers versus bots.
 
-Enterprise fraud detection tools exist. ClickCease: **$12,000/year**. CHEQ: **$30,000/year**. TrafficGuard: **$50,000+**. Black boxes you can't inspect. Contracts you can't escape. Pricing that assumes you're a Fortune 500 company.
+Enterprise fraud detection tools like ClickCease (**$12,000/year**), CHEQ (**$30,000/year**), and TrafficGuard (**$50,000+**) give big companies this visibility. They're excellent products—but priced for enterprises, not small businesses.
 
-**I built AdTruth because small businesses deserve the same protection as enterprises—without the enterprise price tag.**
+**I built AdTruth to give small businesses the same fraud visibility as enterprises—without the enterprise price tag.** See exactly which platforms waste your budget on bots, then shift your spending to where real customers are.
 
 ---
 
@@ -58,24 +58,23 @@ Enterprise fraud detection tools exist. ClickCease: **$12,000/year**. CHEQ: **$3
 - Bot farms generate fake clicks
 - AI mimics real user behavior perfectly
 - Click fraud costs you $1-3 per $10 spent
-- Platforms have no incentive to fix it
+- Platforms filter obvious bots, but sophisticated fraud slips through
 
 > **Your campaigns look fine.** The fraud is invisible.
 
 </td>
 <td width="33%" valign="top">
 
-### ⚠️ The Cost
+### ⚠️ The Double Cost
 
-**$12K/year**
-**wasted on bots**
+**Two ways you're losing money**
 
-- $1,000/month to fraudsters, not customers
-- Enterprise solutions cost $12K-50K/year
-- Black-box systems with zero transparency
-- Small businesses left defenseless
+- **Fraud waste**: $12K/year on bot clicks
+- **Solution cost**: $12K-50K/year for enterprise tools
+- Small businesses face both problems
+- Can't afford visibility, can't stop the bleeding
 
-> **You can't afford protection.** Fraudsters know this.
+> **Without fraud analytics, you're flying blind.**
 
 </td>
 <td width="33%" valign="top">
@@ -85,9 +84,9 @@ Enterprise fraud detection tools exist. ClickCease: **$12,000/year**. CHEQ: **$3
 **$0 forever**
 **with AdTruth**
 
-- Real-time fraud detection on all traffic
-- See which platforms waste your money
-- Optimize budget to real customers
+- See fraud rates across Google, Facebook, Instagram, TikTok
+- Compare: "Google 11% fraud, Instagram 63% fraud"
+- Shift budget from high-fraud to low-fraud platforms
 - 9.6KB script—lighter than an image
 
 > **One line of code.** Free forever. Open source.
@@ -98,7 +97,7 @@ Enterprise fraud detection tools exist. ClickCease: **$12,000/year**. CHEQ: **$3
 
 <div align="center">
 
-### Stop paying for fake clicks. Join the movement.
+### Know which platforms waste your money. Shift budget to what works.
 
 **[Get Started →](https://adtruth.io/signup)** • **[View Demo](https://adtruth.io)** • **[Read Docs](#installation)**
 
@@ -106,7 +105,7 @@ Enterprise fraud detection tools exist. ClickCease: **$12,000/year**. CHEQ: **$3
 
 ---
 
-## How Fraud Works (And How We Stop It)
+## How Fraud Works (And How AdTruth Helps You Respond)
 
 <div align="center">
 
@@ -114,7 +113,7 @@ Enterprise fraud detection tools exist. ClickCease: **$12,000/year**. CHEQ: **$3
 
 **The fraud economy:** Fake websites generate clicks → Fraudsters profit → Your budget disappears → Real customers never see your ads
 
-AdTruth identifies fraudulent patterns **before** they drain your budget.
+**AdTruth reveals which platforms have higher fraud rates**, so you can shift budget from high-fraud channels to low-fraud ones.
 
 </div>
 
@@ -173,11 +172,11 @@ Add this script to your website to start detecting fraud:
 
 **2. Collect** → AdTruth automatically tracks visitor behavior and fraud signals
 
-**3. Analyze** → Our ML models identify suspicious patterns in real-time
+**3. Analyze** → Our ML models calculate fraud rates for each traffic source
 
-**4. Protect** → View your fraud analytics dashboard and optimize campaigns
+**4. Optimize** → See platform-by-platform fraud rates (e.g., "Google: 11%, Instagram: 63%")
 
-**5. Contribute** → Your anonymized data helps protect the entire network
+**5. Reallocate** → Shift budget from high-fraud platforms to channels with real customers
 
 Zero configuration. No maintenance. Just install and go.
 
@@ -252,9 +251,9 @@ Zero configuration. No maintenance. Just install and go.
 
 ### The AdTruth Advantage
 
-**Enterprise-grade protection without enterprise pricing.** Your traffic data helps train models that protect the entire network. When we detect fraud on one site, every other business benefits immediately.
+**Enterprise-grade fraud analytics without enterprise pricing.** Your traffic data helps train models that benefit the entire network. When we detect fraud patterns on one site, every other business gets better fraud scoring immediately.
 
-**No vendor lock-in. No contracts. No surprises.** Inspect our code, modify it, self-host it. We built AdTruth the way fraud detection should have been built from the start.
+**No vendor lock-in. No contracts. No surprises.** Inspect our code, modify it, self-host it. We built AdTruth the way fraud analytics should have been built from the start—transparent, affordable, and empowering.
 
 ---
 
@@ -266,12 +265,13 @@ Zero configuration. No maintenance. Just install and go.
 
 ### 💼 For Business Owners
 
-**🎯 Stop Wasting Money**
-- See which campaigns attract bots vs real customers
-- Shift budget from fraud to real traffic
-- Track savings month over month
+**🎯 Optimize Your Budget Allocation**
+- Compare fraud rates across all your ad platforms
+- Example: "Google 11% fraud, Instagram 63% fraud"
+- Shift spending from high-fraud to low-fraud channels
+- Track how optimization improves ROAS over time
 
-**📊 Platform-Specific Insights**
+**📊 Platform-Specific Fraud Rates**
 - Google Ads: 11% average fraud rate
 - Facebook Ads: 32% average fraud rate
 - Instagram Ads: 63% average fraud rate
