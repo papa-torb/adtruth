@@ -20,8 +20,8 @@
   <a href="https://adtruth.io">Live Demo</a> •
   <a href="#quick-start">Quick Start</a> •
   <a href="#installation">Installation</a> •
-  <a href="#how-were-different">Why Different</a> •
-  <a href="#contributing">Contribute</a>
+  <a href="#adtruth-comparison-with-industry-solutions">Why Different</a> •
+  <a href="#for-developers">Contribute</a>
 </p>
 
 <p align="center">
