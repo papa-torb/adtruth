@@ -275,9 +275,9 @@
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
-        js.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.1.2/dist/adtruth.min.js';
+        js.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@latest/dist/adtruth.min.js';
         js.onload = function() {
-            AdTruth.init('PLACEHOLDER_API_KEY');
+            AdTruth.init('at_4bf4ededdfd5412f84cdb100f18a6d31');
         };
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'adtruth-js'));
