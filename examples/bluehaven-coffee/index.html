@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Haven Coffee - Artisan Coffee & Fresh Pastries</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(52, 152, 219, 0.7)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%233498db" width="1200" height="600"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 8rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #c0392b;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature h3 {
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+
+        .menu-section {
+            background: #f8f9fa;
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .menu-item h4 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .price {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .location {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .footer {
+            background: #1a252f;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">☕ Blue Haven Coffee</div>
+            <ul class="nav-links">
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#location">Location</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Welcome to Blue Haven Coffee</h1>
+        <p>Artisan coffee, fresh pastries, and a cozy atmosphere in the heart of downtown</p>
+        <a href="#menu" class="cta-button">View Our Menu</a>
+    </section>
+
+    <section class="container">
+        <h2 class="section-title">Why Choose Blue Haven?</h2>
+        <div class="features">
+            <div class="feature">
+                <h3>🌟 Premium Coffee</h3>
+                <p>We source our beans directly from small farms around the world, ensuring the highest quality and ethical practices.</p>
+            </div>
+            <div class="feature">
+                <h3>🥐 Fresh Pastries</h3>
+                <p>All our pastries are baked fresh daily using locally sourced ingredients and traditional recipes.</p>
+            </div>
+            <div class="feature">
+                <h3>🏠 Cozy Atmosphere</h3>
+                <p>Relax in our comfortable seating areas, perfect for meetings, studying, or catching up with friends.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="menu-section">
+        <div class="container">
+            <h2 class="section-title">Our Menu</h2>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <h4>Espresso</h4>
+                    <p>Rich, bold, and perfectly extracted</p>
+                    <div class="price">$3.50</div>
+                </div>
+                <div class="menu-item">
+                    <h4>Cappuccino</h4>
+                    <p>Creamy foam with expertly pulled espresso</p>
+                    <div class="price">$4.75</div>
+                </div>
+                <div class="menu-item">
+                    <h4>Cold Brew</h4>
+                    <p>Smooth, naturally sweet, 16-hour brew</p>
+                    <div class="price">$5.00</div>
+                </div>
+                <div class="menu-item">
+                    <h4>Croissant</h4>
+                    <p>Buttery, flaky, baked fresh daily</p>
+                    <div class="price">$4.00</div>
+                </div>
+                <div class="menu-item">
+                    <h4>Avocado Toast</h4>
+                    <p>Smashed avocado on artisan sourdough</p>
+                    <div class="price">$8.50</div>
+                </div>
+                <div class="menu-item">
+                    <h4>Blueberry Muffin</h4>
+                    <p>Loaded with fresh blueberries</p>
+                    <div class="price">$3.75</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="location" class="location">
+        <div class="container">
+            <h2>Visit Us</h2>
+            <p style="font-size: 1.2rem; margin-top: 1rem;">123 Main Street, Downtown</p>
+            <p style="margin-top: 0.5rem;">Open Daily: 7:00 AM - 7:00 PM</p>
+            <p style="margin-top: 1rem; font-size: 1.1rem;">📞 (555) 123-4567</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 Blue Haven Coffee. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">Follow us on Instagram, Facebook, and Twitter</p>
+    </footer>
+
+    <!-- AdTruth Tracking Script - Placed before </body> -->
+    <script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://cdn.jsdelivr.net/gh/papa-torb/adtruth@v0.1.2/dist/adtruth.min.js';
+        js.onload = function() {
+            AdTruth.init('PLACEHOLDER_API_KEY');
+        };
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'adtruth-js'));
+    </script>
+</body>
+</html>
