@@ -1,4 +1,4 @@
-/* AdTruth SDK v0.1.0 | MIT License | https://github.com/papa-torb/adtruth */
+/* AdTruth SDK v0.2.1 | MIT License | https://github.com/papa-torb/adtruth */
 /**
  * Generate a unique session ID
  * Uses crypto.randomUUID if available, falls back to Math.random

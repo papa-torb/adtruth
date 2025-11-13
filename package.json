@@ -11,13 +11,17 @@
     "index.d.ts"
   ],
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "test": "jest",
-    "lint": "eslint src/",
-    "lint:fix": "eslint src/ --fix",
-    "format": "prettier --write \"src/**/*.js\"",
-    "format:check": "prettier --check \"src/**/*.js\""
+    "build": "rollup -c config/rollup.config.mjs",
+    "dev": "rollup -c config/rollup.config.mjs -w",
+    "test": "jest --config config/jest.config.js",
+    "lint": "eslint src/ --config config/.eslintrc.json",
+    "lint:fix": "eslint src/ --config config/.eslintrc.json --fix",
+    "format": "prettier --write \"src/**/*.js\" --config config/.prettierrc",
+    "format:check": "prettier --check \"src/**/*.js\" --config config/.prettierrc"
+  },
+  "prettier": "./config/.prettierrc",
+  "babel": {
+    "extends": "./config/.babelrc"
   },
   "keywords": [
     "fraud-detection",
