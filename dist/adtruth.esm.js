@@ -352,7 +352,7 @@ class BehaviorTracker {
   /**
    * Handle click events
    */
-  handleClick(e) {
+  handleClick(_e) {
     const now = Date.now();
     this.clickCount++;
     this.clickTimes.push(now);
@@ -555,7 +555,9 @@ class BehaviorTracker {
    * @returns {number} Variance
    */
   calculateVariance(arr) {
-    if (arr.length === 0) return 0;
+    if (arr.length === 0) {
+      return 0;
+    }
 
     const mean = arr.reduce((a, b) => a + b, 0) / arr.length;
     const squareDiffs = arr.map(value => Math.pow(value - mean, 2));
@@ -932,7 +934,9 @@ class Tracker {
    * Log messages if debug mode is enabled
    */
   log(...args) {
+    // eslint-disable-next-line no-console
     if (this.debug && typeof console !== 'undefined' && console.log) {
+      // eslint-disable-next-line no-console
       console.log(...args);
     }
   }
@@ -980,7 +984,7 @@ const AdTruth = {
    * @param {string} eventName - The name of the event
    * @param {object} data - Optional event data
    */
-  track: function(eventName, data) {
+  track: function(eventName, _data) {
     try {
       // For MVP, just track as pageview
       // Future versions will support custom events

@@ -37,7 +37,7 @@ const AdTruth = {
    * @param {string} eventName - The name of the event
    * @param {object} data - Optional event data
    */
-  track: function(eventName, data) {
+  track: function(eventName, _data) {
     try {
       // For MVP, just track as pageview
       // Future versions will support custom events
