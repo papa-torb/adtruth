@@ -3,14 +3,10 @@
 </p>
 
 <p align="center">
-  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
-  <a href="https://github.com/papa-torb/adtruth"><img src="https://img.shields.io/github/stars/papa-torb/adtruth?style=social" alt="GitHub Stars"></a>
-  <a href="https://github.com/papa-torb/adtruth/commits/main"><img src="https://img.shields.io/github/last-commit/papa-torb/adtruth" alt="Last Commit"></a>
-  <a href="https://github.com/papa-torb/adtruth/actions"><img src="https://github.com/papa-torb/adtruth/actions/workflows/ci.yml/badge.svg" alt="CI Status"></a>
-  <br>
-  <a href="https://cdn.jsdelivr.net/gh/papa-torb/adtruth@latest/dist/adtruth.min.js"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange" alt="CDN"></a>
-  <a href="https://adtruth.io"><img src="https://img.shields.io/badge/Demo-Live-green" alt="Live Demo"></a>
-  <img src="https://img.shields.io/badge/Bundle%20Size-12KB-blue" alt="Bundle Size">
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="License: MIT"></a>
+  <a href="https://github.com/papa-torb/adtruth/actions"><img src="https://github.com/papa-torb/adtruth/actions/workflows/ci.yml/badge.svg?style=flat-square" alt="CI Status"></a>
+  <img src="https://img.shields.io/badge/Bundle%20Size-12KB-brightgreen.svg?style=flat-square" alt="Bundle Size">
+  <a href="https://adtruth.io"><img src="https://img.shields.io/badge/Demo-Live%20→-success.svg?style=flat-square" alt="Live Demo"></a>
 </p>
 
 <p align="center">
@@ -31,6 +27,7 @@
 
 ---
 
+
 ## Ad Fraud Detection for Small Businesses
 
 Detect click fraud, bot traffic, and fake conversions from Google Ads, Facebook Ads, Instagram, and TikTok. AdTruth is a free, open-source ad fraud detection tool that helps small businesses identify which advertising platforms waste their budget on fraudulent traffic.
@@ -47,13 +44,14 @@ We built AdTruth to give small businesses the same ad fraud visibility, complete
 
 ---
 
+
 ## The Reality of Ad Fraud and Click Fraud
 
 <table>
 <tr>
 <td width="33%" valign="top">
 
-### 🚨 The Problem
+### The Problem
 
 **30%** of paid traffic
 **is fraudulent**
@@ -63,12 +61,12 @@ We built AdTruth to give small businesses the same ad fraud visibility, complete
 - Click fraud costs you $1-3 per $10 spent
 - Platforms filter obvious bots, but sophisticated fraud slips through
 
-> **Your campaigns look fine.** The fraud is invisible.
+> Your campaigns look fine. The fraud is invisible.
 
 </td>
 <td width="33%" valign="top">
 
-### ⚠️ The Double Cost
+### The Double Cost
 
 **Two ways you're losing money**
 
@@ -77,12 +75,12 @@ We built AdTruth to give small businesses the same ad fraud visibility, complete
 - Small businesses face both problems
 - Can't afford visibility, can't stop the bleeding
 
-> **Without fraud analytics, you're flying blind.**
+> Without fraud analytics, you're flying blind.
 
 </td>
 <td width="33%" valign="top">
 
-### ✅ The Solution
+### The Solution
 
 **$0 forever**
 **with AdTruth**
@@ -92,7 +90,7 @@ We built AdTruth to give small businesses the same ad fraud visibility, complete
 - Shift budget from high-fraud to low-fraud platforms
 - 12KB script—lighter than most images
 
-> **One line of code.** Free forever. Open source.
+> One line of code. Free forever. Open source.
 
 </td>
 </tr>
@@ -108,6 +106,7 @@ We built AdTruth to give small businesses the same ad fraud visibility, complete
 
 ---
 
+
 ## How Fraud Works
 
 <div align="center">
@@ -121,6 +120,7 @@ We built AdTruth to give small businesses the same ad fraud visibility, complete
 </div>
 
 ---
+
 
 ## See It In Action
 
@@ -149,6 +149,7 @@ We built AdTruth to give small businesses the same ad fraud visibility, complete
 
 ---
 
+
 ## Quick Start
 
 Add this script to your website to start detecting fraud:
@@ -172,6 +173,7 @@ Add this script to your website to start detecting fraud:
 
 ---
 
+
 ## How AdTruth Works
 
 **1. Install** → Add one line of code to your website (takes 60 seconds)
@@ -188,6 +190,7 @@ Zero configuration. No maintenance. Just install and go.
 
 ---
 
+
 ## Who AdTruth Helps
 
 | Business Type | Common Problem | How AdTruth Helps                                     |
@@ -200,6 +203,7 @@ Zero configuration. No maintenance. Just install and go.
 
 
 ---
+
 
 ## AdTruth Comparison with Industry Solutions
 
@@ -253,6 +257,7 @@ Zero configuration. No maintenance. Just install and go.
 **Enterprise-grade fraud analytics without enterprise pricing.** Your traffic data helps train models that benefit the entire network. When we detect fraud patterns on one site, every other business gets better fraud scoring immediately.
 
 ---
+
 
 ## Installation
 
