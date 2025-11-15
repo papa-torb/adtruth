@@ -294,7 +294,9 @@ class Tracker {
    * Log messages if debug mode is enabled
    */
   log(...args) {
+    // eslint-disable-next-line no-console
     if (this.debug && typeof console !== 'undefined' && console.log) {
+      // eslint-disable-next-line no-console
       console.log(...args);
     }
   }

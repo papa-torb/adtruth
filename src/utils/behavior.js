@@ -73,7 +73,7 @@ export class BehaviorTracker {
   /**
    * Handle click events
    */
-  handleClick(e) {
+  handleClick(_e) {
     const now = Date.now();
     this.clickCount++;
     this.clickTimes.push(now);
@@ -276,7 +276,9 @@ export class BehaviorTracker {
    * @returns {number} Variance
    */
   calculateVariance(arr) {
-    if (arr.length === 0) return 0;
+    if (arr.length === 0) {
+      return 0;
+    }
 
     const mean = arr.reduce((a, b) => a + b, 0) / arr.length;
     const squareDiffs = arr.map(value => Math.pow(value - mean, 2));
