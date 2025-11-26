@@ -518,7 +518,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 - 🔄 Email/Slack alerts for fraud spikes
 
 ### Future Vision (v1.0+)
-- 📋 Open fraud dataset for researchers
+- 📋 Open fraud dataset for researchers - [Preview documentation](docs/DATASET_DOCUMENTATION.md)
 - 📋 Community-contributed fraud rules
 - 📋 Plugin marketplace (WordPress, Shopify, etc.)
 - 📋 API for third-party integrations
@@ -533,7 +533,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 ### Get Help
 - **GitHub Issues**: [Report bugs or request features](https://github.com/papa-torb/adtruth/issues)
 - **Documentation**: See [CHANGELOG.md](CHANGELOG.md), [SECURITY.md](SECURITY.md), and platform guides in [examples/](examples/)
-- **Email**: *(Coming Soon - official support email)*
+- **Email**: contact@adtruth.io
 
 ### Stay Updated
 - ⭐ **Star this repo** to show support
