@@ -8,6 +8,23 @@
 
 ---
 
+## TL;DR
+
+**Problem:** Existing ad fraud datasets are 8-13 years old with only click timestamps—no behavioral signals.
+
+**Solution:** 3M+ sessions with behavioral biometrics (mouse dynamics, scroll patterns, touch events) at 100ms resolution.
+
+**What's Novel:**
+- First dataset combining behavioral features + fraud labels + adversarial samples at scale
+- Physics-based ground truth (superhuman velocity = bot) with confidence scores
+- Multi-tier labels enabling supervised, semi-supervised, and self-supervised research
+
+**Research Impact:** Enables temporal models (LSTMs, Transformers), adversarial robustness testing, and industry-specific fraud analysis.
+
+**Interested?** Email contact@adtruth.io | **Target Release:** Q3-Q4 2026
+
+---
+
 ## Research Motivation
 
 The ad fraud research community lacks datasets with behavioral biometrics. Existing public datasets (TalkingData 2017, FDMA 2012, Avazu 2014) contain only click logs and timestamps—no mouse movements, scroll patterns, or interaction dynamics. Meanwhile, behavioral biometrics datasets focus on user authentication, not ad fraud.
@@ -25,24 +42,13 @@ To our knowledge, AdTruth is the first large-scale behavioral ad fraud dataset, 
 
 ## Abstract
 
-The AdTruth Ad Fraud Detection Dataset is a large-scale collection of web traffic sessions from small and medium business (SMB) websites, annotated with multi-tier ground truth labels for bot detection research. Unlike existing ad fraud datasets that contain only click timestamps and anonymized IDs, AdTruth captures the full behavioral fingerprint: mouse movement trajectories, scroll velocity patterns, click timing sequences, and touch dynamics—all at 100ms resolution.
+AdTruth is a large-scale ad fraud detection dataset with 3M+ web sessions from SMB websites, featuring 200+ behavioral features at 100ms resolution. Unlike existing datasets (TalkingData, FDMA, Avazu) that contain only click timestamps, AdTruth captures mouse dynamics, scroll patterns, click timing, and touch events.
 
-The dataset introduces a novel **multi-tier labeling methodology**:
-- **Hard labels** (95%+ confidence): Physics-based impossibility detection and CAPTCHA verification
-- **Soft labels** (ensemble scores): IP reputation, behavioral anomaly scores, rule-based signals
-- **Unlabeled pool**: For semi-supervised and self-supervised learning research
-
-Additionally, AdTruth includes **adversarial bot samples**—traffic from sophisticated bots attempting to mimic human behavior—enabling research into detection robustness and adversarial machine learning.
-
-**Dataset Statistics:**
-- Total sessions: 3,000,000+
-- Hard-labeled sessions: 300,000+ (physics impossibilities + CAPTCHA verification)
-- Soft-labeled sessions: 1,800,000+
-- Behavioral feature dimensions: 200+
-- Temporal resolution: 100ms (10 samples/second)
-- Industries represented: 20 SMB categories
-- Time span: 18+ months of longitudinal data
-- Adversarial bot samples: 50,000+ across 6 evasion techniques
+**Key features:**
+- Multi-tier labels: Hard (physics-based + CAPTCHA), Soft (ensemble scores), Unlabeled
+- 300K+ hard-labeled sessions with 90-100% confidence
+- 50K+ adversarial bot samples across 6 evasion techniques
+- 20 SMB industry categories over 18+ months
 
 ---
 
@@ -233,7 +239,7 @@ AdTruth provides three tiers of labels to support diverse research approaches:
 
 | Tier | Confidence | Method | Coverage | Use Case |
 |------|------------|--------|----------|----------|
-| Hard Labels | 95-100% | Physics impossibilities + CAPTCHA | 300K+ sessions | Supervised learning |
+| Hard Labels | 90-100% | Physics impossibilities + CAPTCHA | 300K+ sessions | Supervised learning |
 | Soft Labels | 50-90% | Ensemble scoring | 1.8M+ sessions | Semi-supervised, weak supervision |
 | Unlabeled | N/A | N/A | 900K+ sessions | Self-supervised, unsupervised |
 
@@ -326,8 +332,14 @@ For researchers preferring fully-labeled data, we provide a curated subset:
 
 ### 5.2 Behavioral Features (Nested JSON)
 
+**Example 1: Verified Human Session**
+
 ```json
 {
+  "session_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "hard_label": "human",
+  "hard_label_confidence": 0.95,
+  "label_method": "captcha_pass",
   "mouse": {
     "velocity": {"avg": 450, "max": 1200, "std": 180},
     "acceleration": {"avg": 85, "max": 340},
@@ -353,9 +365,53 @@ For researchers preferring fully-labeled data, we provide a curated subset:
     "idle_time": 9000,
     "pages_viewed": 3,
     "interaction_density": 0.81
-  }
+  },
+  "ip_reputation_score": 0.12,
+  "ip_type": "residential"
 }
 ```
+
+**Example 2: Confirmed Bot Session (Physics Impossibility)**
+
+```json
+{
+  "session_id": "b2c3d4e5-f6a7-8901-bcde-f23456789012",
+  "hard_label": "bot",
+  "hard_label_confidence": 1.00,
+  "label_method": "rapid_fire_clicks",
+  "fraud_taxonomy": ["bot_automated", "behavioral_anomaly"],
+  "mouse": {
+    "velocity": {"avg": 2850, "max": 8500, "std": 45},
+    "acceleration": {"avg": 1450, "max": 4100},
+    "direction": {"angle_changes": 3, "curvature": 0.98},
+    "pauses": {"count": 0, "avg_duration": 0},
+    "trajectory": {"efficiency": 0.99, "straightness": 0.99},
+    "sample_count": 89
+  },
+  "scroll": {
+    "depth": {"max": 0.95, "avg": 0.95},
+    "velocity": {"avg": 8500, "max": 12000},
+    "patterns": {"reversals": 0, "smooth_ratio": 0.02}
+  },
+  "clicks": {
+    "count": 47,
+    "intervals": [85, 82, 88, 84, 86],
+    "time_to_first": 145,
+    "precision_score": 1.00
+  },
+  "session": {
+    "duration": 4200,
+    "active_time": 4200,
+    "idle_time": 0,
+    "pages_viewed": 1,
+    "interaction_density": 0.99
+  },
+  "ip_reputation_score": 0.89,
+  "ip_type": "datacenter"
+}
+```
+
+**Key differences:** The bot session shows superhuman mouse velocity (8500 px/s max), perfectly regular click intervals (~85ms), zero pauses, instant scroll to 95% depth, and datacenter IP. This example represents extreme automated behavior—in practice, bots exhibit varying sophistication levels (e.g., replay bots show realistic movement but unnatural timing).
 
 ### 5.3 Labels
 
@@ -409,7 +465,7 @@ For researchers preferring fully-labeled data, we provide a curated subset:
 
 ### 6.2 Label Distribution
 
-| Label | Hard-Labeled Subset | Full Dataset (Soft) |
+| Label | Hard-Labeled Subset (300K) | Full Dataset (Soft) |
 |-------|--------------------|--------------------|
 | Bot (high confidence) | 40% (~120,000) | 12% |
 | Human (verified) | 40% (~120,000) | 48% |
@@ -521,6 +577,24 @@ Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
 - **Email:** contact@adtruth.io
 - **Website:** https://adtruth.io
 - **GitHub:** https://github.com/papa-torb/adtruth
+
+### 9.6 How to Get Involved
+
+We are seeking research collaborators for early access (beta: April - June 2026):
+
+**Provide Feedback**
+- What additional features or metadata would make this dataset more valuable for your research?
+- Are there specific adversarial techniques you'd like to see included?
+
+**Express Interest in Early Access**
+- Priority given to researchers with publications in ad fraud detection, behavioral biometrics, or adversarial ML
+- Early access partners will receive pre-release data and baseline model results
+
+**Propose Collaboration**
+- Joint research proposals welcome, especially for novel detection methods or semi-supervised approaches
+- Co-authorship opportunities on benchmark papers
+
+**To get involved:** Email contact@adtruth.io with subject line "AdTruth Dataset - [Your Research Area]"
 
 ---
 
