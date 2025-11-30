@@ -578,23 +578,20 @@ Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
 - **Website:** https://adtruth.io
 - **GitHub:** https://github.com/papa-torb/adtruth
 
-### 9.6 How to Get Involved
+### 9.6 Early Access for Academic Research
 
-We are seeking research collaborators for early access (beta: April - June 2026):
+Researchers interested in early access for academic publications can request a representative sample for validation studies. We are particularly interested in collaborations exploring:
 
-**Provide Feedback**
-- What additional features or metadata would make this dataset more valuable for your research?
-- Are there specific adversarial techniques you'd like to see included?
+- Temporal deep learning models (LSTMs, Transformers) for sequence-based detection
+- Graph neural networks for coordinated fraud detection
+- Semi-supervised and weak supervision approaches
+- Cross-industry generalization and transfer learning
 
-**Express Interest in Early Access**
-- Priority given to researchers with publications in ad fraud detection, behavioral biometrics, or adversarial ML
-- Early access partners will receive pre-release data and baseline model results
+**What we offer:** Pre-release sample dataset + co-authorship opportunities
 
-**Propose Collaboration**
-- Joint research proposals welcome, especially for novel detection methods or semi-supervised approaches
-- Co-authorship opportunities on benchmark papers
+**What we need:** Research expertise + publication commitment
 
-**To get involved:** Email contact@adtruth.io with subject line "AdTruth Dataset - [Your Research Area]"
+**To apply:** Email contact@adtruth.io with subject "AdTruth Research Access" including your research focus and relevant publications.
 
 ---
 
